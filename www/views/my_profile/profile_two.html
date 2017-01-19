@@ -1,0 +1,122 @@
+<ion-view title="Profile" cache-view="false">
+    <ion-nav-buttons side="left">
+        <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
+        </button>
+    </ion-nav-buttons>
+    <ion-content ng-controller="ProfileCtrl">
+        <section class="bg-main">
+            <div class="main">
+                <form method="" action="" name="">
+                    <div class="forms_login myprofile_edit_form">
+                        <ul>
+                            <li class="profile_edit_dob">
+                                <label> <strong>Date of Birth</strong> </label>
+                                <span class="one-third">  
+                                     <select ng-model="profileDetails.day">  
+                                        <option ng-repeat="day in dropDownData.dates" value="{{day}}">{{day}}</option>
+                                     </select>
+                                     </span>
+                                <span class="one-third">  
+                                    <select ng-model="profileDetails.month"> 
+                                    <option ng-repeat="month in dropDownData.months"
+                                            value="{{month}}">{{month}}</option>
+                                     </select>
+                                    </span>
+                                <span class="one-third"> 
+                                     <select ng-model="profileDetails.year"> <option
+                                             ng-repeat="year in dropDownData.years" value="{{year}}">{{year}}</option> </select>
+                                     </span>
+                            </li>
+                            <li><input placeholder="Email" required="required" type="text"
+                                       ng-model="profileDetails.email" ng-disabled="true">
+                                <img src="img/email.png" alt="" class="textbox_icons email">
+                                <img src="img/edit-icon.png" alt="" class="edit-icon">
+                            </li>
+                            <li><input placeholder="phone no" required="required" type="text"
+                                       ng-model="profileDetails.mobile"
+                                       id='mobile' ng-disabled="enableInput.mobile">
+                                <img src="img/phone.png" alt="" class="textbox_icons phone">
+                                <img src="img/edit-icon.png" alt="" class="edit-icon">
+                            </li>
+                            <li>
+
+                                <span>  <select ng-init = "profileDetails.make_id" ng-model="profileDetails.make_id" ng-change="loadCarModel()"
+                                                style="padding-left: 30px;">
+                                    <option ng-repeat="carMaker in carMake" value="{{carMaker.vehicle_make_id}}">{{carMaker.vehicle_make_title}}</option>
+                                     </select>
+                                </span>
+                                <img src="img/car.png" alt="" class="textbox_icons phone">
+                            </li>
+                            <li>  <span>  <select ng-init="profileDetails.model_id" ng-model="profileDetails.model_id" style="padding-left: 30px;">
+                                    <option ng-repeat="model in carModel" value="{{model.vehicle_model_id}}">{{model.vehicle_model_title}}</option>
+                                     </select>
+                                </span>
+                                <img src="img/car.png" alt="" class="textbox_icons phone">
+                            </li>
+                            <li><span class="upload_left"> <img src="img/car-photo.png" ng-src="{{car_pic}}"
+                                                                alt=""></span> <span class="upload_right"
+                                                                                     ng-click="showPopup(2)"> Upload Car Photo</span>
+                            </li>
+
+                            <li><input placeholder="Address" required="required" type="text"
+                                       ng-model="profileDetails.address"
+                                       ng-focus="showCurrentIcon = false; clearIcon = true"
+                                       ng-blur="showCurrentIcon = true; clearIcon = false"
+                                       ng-disabled="enableInput.address" id="address"
+                                       ng-change="getPlacePredictions(profileDetails.address)">
+                                <img src="img/address.png" alt="" class="textbox_icons">
+                                <img src="img/cancel_icon.png" ng-hide="showCurrentIcon"
+                                     ng-click="profileDetails.address = ''"
+                                     class="right-txt-icons">
+                                <img src="img/edit-icon.png" alt="" class="edit-icon">
+                                <div ng-show="predictions.length > 0" class="address_bar">
+
+                                    <div class="list location-results-list">
+                                        <a ng-repeat="prediction in predictions"
+                                           class="item item-icon-left location-item"
+                                           ng-click="selectSearchResult(prediction)">
+                                            <i class="icon ion-location"></i>
+                                            <h3 class="location-name">{{prediction.terms[0].value}}</h3>
+                                            <span class="location-desc">{{prediction.description}}</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </li>
+                            <!--<li> <input placeholder="New Jersey" required="required" type="text">
+                                <img src="img/address.png" alt="" class="textbox_icons">
+                                <img src="img/edit-icon.png" alt="" class="edit-icon">
+                            </li>
+
+                            <li> <input placeholder="123456" required="required" type="text">
+                                <img src="img/address.png" alt="" class="textbox_icons">
+                                <img src="img/edit-icon.png" alt="" class="edit-icon">
+                            </li>
+
+                            <li> <input placeholder="USA" required="required" type="text">
+                                <img src="img/address.png" alt="" class="textbox_icons">
+                                <img src="img/edit-icon.png" alt="" class="edit-icon">
+                            </li>-->
+
+
+                        </ul>
+
+
+                    </div>
+
+                    <aside class="gender_edit_sec"><strong>I AM</strong> : <input type="radio" name="i_am" id="Friendly"
+                                                                                  ng-value="'friendly'"
+                                                                                  ng-model="profileDetails.reference_mode"
+                                                                                  ng-checked="profileDetails.reference_mode=='friendly'">
+                        <label for="Friendly"> Friendly </label>
+                        <input type="radio" ng-model="profileDetails.reference_mode" id="mean" name="i_am"
+                               ng-value="'mean'" ng-checked="profileDetails.reference_mode=='mean'"> <label for="mean">
+                            Mean </label></aside>
+
+                    <aside class="btn_set mar0">
+                        <div class="full" ng-click="updateProfile()"><span class="btns pink_btn"> Save </span></div>
+                    </aside>
+                </form>
+            </div>
+        </section>
+    </ion-content>
+</ion-view>

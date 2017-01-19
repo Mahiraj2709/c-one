@@ -1,0 +1,127 @@
+<ion-view title="Register" cache-view="false">
+    <ion-content ng-controller="SignupCtrl">
+
+        <section class="bg-sec register-bg">
+            <div class="main">
+                <form method="" action="" name="signupForm" novalidate>
+                    <div class="forms_login">
+                        <ul>
+
+                            <li>
+
+                                <figure class="profile-img">
+                                    <img alt="" src="img/user_pic.png" ng-click="showPopup(1)" ng-src="{{imgURI}}"
+                                         width="58" height="66" ng-model="signupDetails.profile_pic"
+                                    />
+                                </figure>
+
+                            </li>
+                            <li><input placeholder="First Name" required="required" ng-model="signupDetails.first_name"
+                                       type="text">
+                                <img src="img/user.png" alt="" class="textbox_icons">
+                            </li>
+                            <li><input placeholder="Last Name" required="required" ng-model="signupDetails.last_name"
+                                       type="text">
+                                <img src="img/user.png" alt="" class="textbox_icons">
+                            </li>
+                            <li class="date_list_sec">
+                                <label> Date of Birth </label>
+                                <span>  <select ng-model="signupDetails.day">  
+                                    <option ng-repeat="day in dropDownData.dates" value="{{day}}">{{day}}</option>
+                                     </select> 
+                                </span>
+                                <span>  <select ng-model="signupDetails.month"> 
+                                    <option ng-repeat="month in dropDownData.months"
+                                            value="{{month}}">{{month}}</option>
+                                     </select> </span>
+                                <span>  <select ng-model="signupDetails.year"> <option
+                                        ng-repeat="year in dropDownData.years"
+                                        value="{{year}}">{{year}}</option> </select> </span>
+                                <span class="circle"
+                                      ng-click="showAlert('Date of birth is required!')"> <strong> i </strong>  </span>
+                            </li>
+
+                            <li><input placeholder="Email ID" required="required" ng-model="signupDetails.email"
+                                       type="text">
+                                <img src="img/email.png" alt="" class="textbox_icons email">
+                            </li>
+
+
+                            <li><input placeholder="Phone No" ng-model="signupDetails.mobile" required="required"
+                                       type="text">
+                                <img src="img/phone.png" alt="" class="textbox_icons phone"></li>
+
+
+                            <li>
+                                <span>  <select ng-model="signupDetails.make_id" ng-change="getCarMake('getmodel')"
+                                                style="padding-left: 30px;">
+                                    <option ng-repeat="carMaker in carMake" value="{{carMaker.vehicle_make_id}}">{{carMaker.vehicle_make_title}}</option>
+                                     </select> 
+                                </span>
+                                <img src="img/car.png" alt="" class="textbox_icons car">
+                            </li>
+
+                            <li> 
+                                <span>  <select ng-model="signupDetails.model_id" style="padding-left: 30px;">  
+                                    <option ng-repeat="model in carModel" value="{{model.vehicle_model_id}}">{{model.vehicle_model_title}}</option>
+                                     </select> 
+                                </span>
+                                <img src="img/car.png" alt="" class="textbox_icons car">
+
+                            </li>
+
+
+                            <li><span class="upload_left"> <img src="img/car-photo.png" alt=""
+                                                                ng-src="{{carimgURI}}"></span> <span
+                                    class="upload_right" ng-click="showPopup(2)"> Upload Car Photo</span></li>
+                            <li><input placeholder="Address" ng-model="signupDetails.address" required="required"
+                                       ng-focus="showCurrentIcon = false"
+                                       ng-blur="showCurrentIcon = true" type="text" ng-change="getPlacePredictions(signupDetails.address)">
+                                <img src="img/address.png" alt="" class="textbox_icons">
+                                <img src="img/cancel_icon.png" ng-hide="showCurrentIcon" ng-click="signupDetails.address = ''"
+                                     class="right-txt-icons">
+                                <div ng-show="predictions.length > 0" class="address_bar">
+
+                                    <div class="list location-results-list">
+                                        <a ng-repeat="prediction in predictions"
+                                           class="item item-icon-left location-item"
+                                           ng-click="selectSearchResult(prediction)">
+                                            <i class="icon ion-location"></i>
+                                            <h3 class="location-name">{{prediction.terms[0].value}}</h3>
+                                            <span class="location-desc">{{prediction.description}}</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li><input placeholder="Password" ng-model="signupDetails.password" required="required"
+                                       type="password">
+                                <img src="img/password.png" alt="" class="textbox_icons">
+                            </li>
+                        </ul>
+                    </div>
+
+                    <aside class="gender_sec"><strong>I AM</strong> : <input type="radio"
+                                                                             ng-model="signupDetails.reference_mode"
+                                                                             name="i_am" ng-value="'friendly'"> Friendly
+                        <input type="radio" ng-model="signupDetails.reference_mode" name="i_am" ng-value="'mean'"> Mean
+                    </aside>
+                    <aside class="terms_sec"><input type="checkbox" ng-model="termAndCondition"> By creating an account
+                        you agree to our
+                        <u ng-click="openTnC()"> Terms and Conditions</u>
+                    </aside>
+                    <aside class="btn_set mar0">
+                        <div class="full"><span class="btns pink_btn" ng-click="signupUser()"> Register </span></div>
+                    </aside>
+                    <aside class="forgot-pass-sec"> Already have an account? <a ui-sref="login" class="forgot_login">
+                        Login </a></aside>
+                    <aside class="line-sec"><span> </span> <span> OR</span> <span> </span></aside>
+                    <aside class="social_icons">
+                        <span ng-click="fbLogin()"> <i class="fa fa-facebook" aria-hidden="true"></i> </span>
+                        <span ng-click="twitterLogin()"> <i class="fa fa-twitter"></i> </span>
+                        <span ng-click="instaLogin()"> <i class="fa fa-instagram" aria-hidden="true"></i>  </span>
+                    </aside>
+                </form>
+            </div>
+        </section>
+    </ion-content>
+</ion-view>

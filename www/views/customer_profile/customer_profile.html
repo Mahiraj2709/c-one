@@ -1,0 +1,52 @@
+<ion-view>
+    <ion-content ng-controller="CustomerProfileCtrl" ng-init="getCustomerData()">
+        <section class="bg-main">
+            <div class="main">
+                <aside class="figure-container">
+                    <figure class="profile-pic"> <img alt="" src="img/user-photo.png" ng-src="{{profile_pic}}" width="50" height="50"> </figure>
+                    <figcaption class="user-detail">  {{customerData.first_name}} {{customerData.last_name}} </figcaption>
+                </aside>
+                <aside class="ratings">
+                    <span> <i class="fa fa-star" aria-hidden="true"></i> </span>
+                    <span><i class="fa fa-star" aria-hidden="true"></i></span>
+                    <span> <i class="fa fa-star" aria-hidden="true"></i></span>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+
+                </aside>
+                <aside class="request_sec">
+                    <ul>
+                        <li> <span> 70%</span> requests accepted  </li> <li> <span> 30%</span> cleans canceled </li> <li> <span> 3.0 </span> Current Rating </li>
+                    </ul>
+                </aside>
+
+                <aside class="view_vdo_btn"> <span> View 10 secs introduction video </span>  </aside>
+                <aside class="profile_about">
+                    <h3>About Him</h3>
+                    <p>{{customerData.about_your_description}}</p>
+                </aside>
+                <section class="photos_sec">
+                    <h3>Photos</h3>
+                    <div class="full">
+                        <aside class="half"> <img src="img/scr-7-img1.jpg"  alt="" ng-src="{{profileImages[0]}}" ng-hide="!profileImages[0]"> <span class="up_icon"> <img src="img/upload-icon.png" width="20" height="20" alt=""></span> </aside>
+                        <aside class="half fr"> <img src="img/scr-7-img2.jpg" ng-src="{{profileImages[1]}}" ng-hide="!profileImages[1]" alt="">  <span class="up_icon"> <img src="img/upload-icon.png" width="20" height="20" alt=""></span> </aside>
+                    </div>
+                    <div class="full">
+                        <aside class="half"> <img src="img/scr-7-img3.jpg" ng-src="{{profileImages[2]}}" ng-hide="!profileImages[2]" alt=""> <span class="up_icon"> <img src="img/upload-icon.png" width="20" height="20" alt=""></span> </aside>
+                        <aside class="half fr"> <img src="img/scr-7-img4.jpg" ng-src="{{profileImages[3]}}" ng-hide="!profileImages[3]" alt=""> <span class="up_icon"> <img src="img/upload-icon.png" width="20" height="20" alt=""></span> </aside>
+                    </div>
+                </section>
+                <aside class="profile_details">
+                    <ul>
+                        <li> <strong>Date Of Birth  </strong> - {{customerData.date_of_birth}} </li>
+                        <li><strong>Email  </strong> - {{customerData.email}} </li>
+                        <li><strong> Phone No </strong> - {{customerData.mobile}}</li>
+                        <li> <strong>Address </strong> {{customerData.address}} </li>
+                    </ul>
+                </aside>
+                <aside class="btn_set" ui-sref="home"> <div class="full"> <span class="btns pink_btn">  RAWR!  </span> </div> </aside>
+            </div>
+        </section>
+
+    </ion-content>
+</ion-view>

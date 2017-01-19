@@ -1,0 +1,23 @@
+<ion-view title="Home">
+    <ion-nav-buttons side="left">
+        <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
+</button>
+    </ion-nav-buttons>
+    <ion-content ng-controller="HomeCtrl">
+
+
+        <div id="map" data-tap-disabled="true"></div>
+
+        <div class="row"style="position: absolute; z-index:9;top:44px; left:0; width: 100%; padding:4; background-color: #ffffff">
+
+         <p class="col col-50" align="right">Availability</p>
+         <label class="toggle col col-50">
+             <input type="checkbox" ng-model="availability" ng-click="changeAvailability(availability)">
+             <div class="track">
+                 <div class="handle"></div>
+             </div>
+         </label>
+        </div>
+</ion-content>
+
+</ion-view>

@@ -1,0 +1,44 @@
+<ion-view title="Login">
+    <ion-content ng-controller="LoginCtrl" class="home">
+
+        
+<section class="bg-sec">
+            <div class="main">
+                <aside class="logo_section"> <img src="img/logo.png" alt=""> </aside>
+                <form method="" action="" name="loginForm">
+                    <div class="forms_login">
+                        <ul>
+                            <li> <input type="text" placeholder="User Id" name="userid" ng-model="loginDetails.email" ng-minlength="2" required>
+                                <img src="img/user.png" alt="" class="textbox_icons">
+                                 </li>
+                            <li> <input type="password" placeholder="Password" ng-model="loginDetails.password" required="required">
+                                <img src="img/password.png" alt="" class="textbox_icons">
+                            </li>
+
+                        </ul>
+                    </div>
+                    <aside class="forgot-pass"><a ui-sref="forgot_password">Forgot Password? </a> </aside>
+
+                    <aside class="btn_set"> 
+                        <a >
+                            <div class="half" ng-click="loginUser()"> <span class="btns pink_btn"> Login</span> </div>
+                        </a>
+
+                        <a ui-sref="sign_up">
+                            <div class="half fr"> <span class="btns pink_btn"> Register</span> </div>
+                        </a>
+                    </aside>
+
+                    <aside class="line-sec"> <span> </span> <span> OR</span> <span> </span> </aside>
+                    <aside class="social_icons">
+
+                        <span ng-click="fbLogin()"> <i class="fa fa-facebook" aria-hidden="true" ></i> </span>
+                        <span ng-click="twitterLogin()"> <i class="fa fa-twitter"  ></i> </span>
+                        <span ng-click="instaLogin()"> <i class="fa fa-instagram" aria-hidden="true" ></i>  </span>
+                    </aside>
+                </form>
+            </div>
+        </section>
+
+    </ion-content>
+</ion-view>

@@ -1,0 +1,57 @@
+<ion-view>
+    <ion-content>
+        <section class="overlay_bg" ng-controller="ReqCtrl">
+            <div class="popup-sec" ng-init="loadCustomerData">
+                <span class="close_btn" ng-click="cancelTnC()">  <i class="fa fa-times-circle" aria-hidden="true"></i>   </span>
+                <aside class="figure-container">
+                    <figure class="profile-pic"><img alt="" src="img/user-photo.png" width="50" height="50"
+                                                     ng-src="{{profileImage}}">
+                    </figure>
+                    <figcaption class="user-detail"> {{customerData.customer_name}}</figcaption>
+                </aside>
+                <aside class="ratings">
+                    <span> <i class="fa fa-star" aria-hidden="true"></i> </span>
+                    <span><i class="fa fa-star" aria-hidden="true"></i></span>
+                    <span> <i class="fa fa-star" aria-hidden="true"></i></span>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+
+                </aside>
+                <aside class="view_profile" ng-click="viewCustomer()">
+                    <p><span> View Customer’s Profile </span> <strong>{{customerData.confirm_price | currency
+                        }}</strong></p>
+                </aside>
+
+                <aside class="profile_details">
+                    <ul>
+                        <li><strong>Location</strong>- {{customerData.customer_address}}</li>
+                        <li><strong>Property Type</strong> - {{customerData.property_type}}</li>
+                        <li><strong>Sq Ft</strong>: {{customerData.sq_ft}}</li>
+                        <li><strong>Bedrooms</strong> - {{customerData.bedroom}}</li>
+                        <li><strong>Bathrooms</strong> - {{customerData.bathroom}}</li>
+                        <li><strong>Style</strong> - {{customerData.style}}</li>
+                        <li><strong>How can Cleaner get into home</strong> - {{customerData.entry_type}}</li>
+                        <li><strong>Request details</strong> - {{customerData.work_order_details}}</li>
+                        <li><strong>Time and Date</strong> - {{customerData.booking_date}}</li>
+                    </ul>
+                </aside>
+                <aside class="btn_set" ng-hide="!requestAccepted">
+                    <div class="half" ng-click="acceptRequest()"><span class="btns green_btn"><i class="fa fa-check"
+                                                                                                 aria-hidden="true"></i>  Accept </span>
+                    </div>
+                    <div class="half fr" ng-click="cancelTnC()"><span class="btns orange_btn"><i class="fa fa-times"
+                                                                                                 aria-hidden="true"></i>  Reject </span>
+                    </div>
+                </aside>
+
+                <aside class="request_accepted" ng-hide="requestAccepted">
+                    <p>
+                        <strong>Another Cleanosaur has already accepted.</strong>
+                    </p>
+                </aside>
+            </div>
+        </section>
+
+
+    </ion-content>
+</ion-view>

@@ -1,0 +1,15 @@
+<ion-modal-view>
+    <ion-header-bar class="bar-dark custom-dark">
+        <h1 class="title">Terms and Condition</h1>
+        <div class="buttons">
+            <button class="button button-clear" ng-click="cancelTnC()">Cancel</button>
+        </div>
+    </ion-header-bar>
+    <ion-content class="comments" ng-controller="TermsConditionCtrl" ng-init="loadTermsCondition()">
+        <div class="card" style="margin-top: 55px;">
+            <div class="text-center">
+                <p>{{pageContent}}</p>
+            </div>
+        </div>
+    </ion-content>
+</ion-modal-view>
