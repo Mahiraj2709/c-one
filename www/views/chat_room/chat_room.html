@@ -1,0 +1,44 @@
+<ion-view title="Chatting" hide-back-button="true">
+    <ion-nav-buttons side="primary">
+        <button class="button button-icon ion-android-call" ng-click="logout()"></button>
+    </ion-nav-buttons>
+    <ion-content padding="true" class="has-header">
+        <ion-content class="content-stable"
+                     on-swipe-left="hideTime = false"
+                     on-swipe-right="hideTime = true">
+
+            <section class="chatting_sec">
+                <aside>
+                    <div ng-repeat="message in messages"
+                         ng-class="{other: message.userId != myId}"
+                         class="chat_txt_sec">
+
+                        <div class="chat_img_sec" ng-class="{'slide-right': hideTime, '': !hideTime}">
+                            <img src="img/smith.jpg" alt="" width="120" height="140">
+                        </div>
+                        <p><span> John Smith </span> {{ message.text }} </p>
+
+
+                        <!--<div class="time" ng-class="{'slide-right': hideTime, '': !hideTime}">{{message.time}}</div>-->
+
+
+                    </div>
+                </aside>
+            </section>
+        </ion-content>
+
+        <ion-footer-bar keyboard-attach class="bar-stable item-input-inset">
+            <aside class="chat_footer">
+            <div class="footer_txt_sec">
+                <label class="footer_txt_sec">
+                    <input type="text" placeholder="Type your message" class="footer_input"
+                           on-return="sendMessage();closeKeyboard()"
+                           ng-model="data.message" on-focus="inputUp()" on-blur="inputDown()">
+                    <img src="img/smile.png" width="20" height="20" alt="" class="smile">
+                    <img src="img/send.png" width="22" height="19" alt="" class="send" ng-click="sendMessage()">
+                </label>
+            </div>
+            </aside>
+        </ion-footer-bar>
+    </ion-content>
+</ion-view>

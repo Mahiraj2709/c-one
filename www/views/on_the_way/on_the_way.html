@@ -1,11 +1,16 @@
-<ion-view>
-    <ion-content>
+<ion-view title="Cleanosaur has arrived">
+    <ion-nav-buttons side="left">
+        <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
+        </button>
+    </ion-nav-buttons>
+    <ion-content ng-controller="OnTheWayCtrl">
         <div class="on_way">
-            <img src="img/cleansour_on_the_way_map.jpg" width="320" height="375" alt="">
+            <!--<img src="img/cleansour_on_the_way_map.jpg"  alt="">-->
+            <div id="on_way_map" data-tap-disabled="true" style="height:60vh"></div>
 
             <aside class="on_way_add_sec">
                 <p> <span class="btns gray_btn popup_rwr_btn"> Request ID - 5698 </span> </p>
-                <div class="map_sec_field">
+                <div class="map_sec_field" ng-hide="true">
                     <input placeholder="75 Bennett, NY" required="required" type="text">
                     <img src="img/address.png" alt="" class="left-txt-icons">
                     <img src="img/map-point-con.png" alt="" class="right-txt-icons">
@@ -30,8 +35,8 @@
             </aside>
 
 
-            <aside class="btn_set"> <div class="half"> <span class="btns bdr_btn"> <i class="fa fa-phone" aria-hidden="true"></i>  Call </span> </div>
-                <div class="half fr"> <span class="btns bdr_btn">  <i class="fa fa-commenting-o" aria-hidden="true"></i>  Chat </span> </div>  </aside>
+            <aside class="btn_set"> <div class="half" ng-click="openVideoPlayer()"> <span class="btns bdr_btn"> <i class="fa fa-phone" aria-hidden="true"></i>  Call </span> </div>
+                <div class="half fr" ui-sref="chat_room"> <span class="btns bdr_btn">  <i class="fa fa-commenting-o" aria-hidden="true"></i>  Chat </span> </div>  </aside>
             <div class="full"> <span class="btns pink_btn"> Cancel Request </span> </div>
         </div>
     </ion-content>

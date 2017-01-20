@@ -22,9 +22,9 @@ angular.module('starter')
         $scope.signupDetails = {
             first_name: '',
             last_name: '',
-            day: 'Day',
-            month: 'Month',
-            year: 'Year',
+            day: '01',
+            month: '01',
+            year: '1970',
             email: '',
             password: '',
             device_token: 'ad',
@@ -37,8 +37,8 @@ angular.module('starter')
             address: '',
             reference_mode: '',
             quick_blox_id: '233',
-            make_id: '-1',
-            model_id: '-1',
+            make_id: '1',
+            model_id: '1',
             profile_pic: '',
             car_profile_pic: '',
             login_type: "0",
@@ -370,14 +370,14 @@ angular.module('starter')
         //get make and model Id
         $scope.carMake = [
             {
-                vehicle_make_id: "-1",
+                vehicle_make_id: "1",
                 vehicle_make_title: "Car Maker"
             }
         ]
         $scope.carModel = [
             {
-                vehicle_model_id: "-1",
-                vehicle_make_id: "-1",
+                vehicle_model_id: "1",
+                vehicle_make_id: "1",
                 vehicle_model_title: "Car Model"
             }
         ]
@@ -444,7 +444,7 @@ angular.module('starter')
         };
 
         //call the maker of the car from the server
-        $scope.getCarMake('getmake');
+        //$scope.getCarMake('getmake');
 
         $scope.showCurrentIcon = true;
     });

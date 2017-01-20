@@ -190,10 +190,10 @@ angular.module('starter')
             $rootScope.profileDetails.latitude = '0.0'
             $rootScope.profileDetails.longitude = '0.0'
             $rootScope.profileDetails.profile_pic = undefined
-            $rootScope.profileDetails.address = profile.address
-            $rootScope.profileDetails.day = _day
-            $rootScope.profileDetails.month = _month
-            $rootScope.profileDetails.year = _year
+            $rootScope.profileDetails.address = "na"
+            $rootScope.profileDetails.day = "01"
+            $rootScope.profileDetails.month = "01"
+            $rootScope.profileDetails.year = "1970"
             $rootScope.profileDetails.reference_mode = profile.reference_mode
             $rootScope.profileDetails.quick_blox_id = profile.quick_blox_id
             $rootScope.profileDetails.make_id = profile.make_id

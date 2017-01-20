@@ -27,7 +27,6 @@ angular.module('starter',
                 StatusBar.styleDefault();
             }
         });
-
         $ionicPlatform.registerBackButtonAction(function () {
             if ($location.path() === "/home" || $location.path() === "home") {
                 var confirmPopup = $ionicPopup.confirm({
@@ -89,8 +88,7 @@ angular.module('starter',
             }
         }
     })
-    .config(function ($stateProvider, $urlRouterProvider,$ionicCloudProvider) {
-
+    .config(function ($stateProvider, $urlRouterProvider, $ionicCloudProvider) {
         $ionicCloudProvider.init({
             "core": {
                 "app_id": "bb7068c9"
@@ -173,6 +171,18 @@ angular.module('starter',
                 controller: 'CustomerProfileCtrl'
             })
 
+            //i am on the way
+            .state('on_the_way', {
+                url: '/on_the_way',
+                templateUrl: 'views/on_the_way/on_the_way.html',
+                controller: 'OnTheWayCtrl'
+            })
+            //chat room
+            .state('chat_room', {
+                url: '/chat_room',
+                templateUrl: 'views/chat_room/chat_room.html',
+                controller: 'ChatCtrl'
+            })
             // Each tab has its own nav history stack:
             .state('tab.dash', {
                 url: '/dash',
@@ -209,7 +219,7 @@ angular.module('starter',
                         controller: 'AccountCtrl'
                     }
                 }
-            });
+            })
         // if none of the above states are matched, use this as the fallback
         $urlRouterProvider.otherwise('/splash');
     });

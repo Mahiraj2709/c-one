@@ -54,6 +54,13 @@
     <script src="views/my_profile/profileServices.js"></script>
     <script src="views/customer_profile/customer_profile.js"></script>
     <script src="views/customer_profile/customer_profile_services.js"></script>
+    <!--on the way starts here-->
+    <script src="views/on_the_way/on_the_way.js"></script>
+    <script src="views/on_the_way/on_the_way_service.js"></script>
+    <!--on the way ends here-->
+    <!--chat room starts here-->
+    <script src="views/chat_room/chat_room.js"></script>
+    <!--chat room end here-->
     <script src="views/about/about.js"></script>
 </head>
 
@@ -117,7 +124,7 @@
                     <li>
                         <a> <img src="img/left-nav-help.png" width="32" height="32" alt=""> <span> Help </span> </a>
                     </li>
-                    <li>
+                    <li ui-sref="on_the_way" ng-click="closeSideMenu()">
                         <a> <img src="img/left-nav-customer.png" width="32" height="32" alt="">
                             <span> Become A Customer </span> </a>
                     </li>

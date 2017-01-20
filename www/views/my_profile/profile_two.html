@@ -9,7 +9,7 @@
                 <form method="" action="" name="">
                     <div class="forms_login myprofile_edit_form">
                         <ul>
-                            <li class="profile_edit_dob">
+                            <li class="profile_edit_dob" ng-hide="true">
                                 <label> <strong>Date of Birth</strong> </label>
                                 <span class="one-third">  
                                      <select ng-model="profileDetails.day">  
@@ -58,7 +58,7 @@
                                                                                      ng-click="showPopup(2)"> Upload Car Photo</span>
                             </li>
 
-                            <li><input placeholder="Address" required="required" type="text"
+                            <li ng-hide="true"><input placeholder="Address" required="required" type="text"
                                        ng-model="profileDetails.address"
                                        ng-focus="showCurrentIcon = false; clearIcon = true"
                                        ng-blur="showCurrentIcon = true; clearIcon = false"

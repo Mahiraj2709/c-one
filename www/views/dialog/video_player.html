@@ -1,0 +1,15 @@
+<ion-modal-view>
+    <ion-header-bar class="bar-dark custom-dark">
+        <h1 class="title">Nice to meet you</h1>
+        <div class="buttons">
+            <button class="button button-clear" ng-click="closeVideoPlayer()">Cancel</button>
+        </div>
+    </ion-header-bar>
+    <ion-content>
+
+        <div class="modal transparent fullscreen-player">
+            <!--<iframe ng-src="{{videoLink}}" frameborder="0" width="560" height="315"></iframe>-->
+            <video id="'video' class="centerme" controls="controls" autoplay></video>
+        </div>
+    </ion-content>
+</ion-modal-view>

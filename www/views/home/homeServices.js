@@ -27,6 +27,7 @@ angular.module('starter')
         $http(request)
             .success(function (d) {
                 $ionicLoading.hide();
+                console.log(d)
                 if (d.response_status == "1") {
                     callback()
                 } else {
@@ -36,6 +37,7 @@ angular.module('starter')
                 $ionicLoading.hide();
             });
     }
+
     this.getCustomerProfile = function (payload,callback) {
         $ionicLoading.show({
             template: 'Loading...'

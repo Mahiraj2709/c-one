@@ -24,7 +24,7 @@
                                        type="text">
                                 <img src="img/user.png" alt="" class="textbox_icons">
                             </li>
-                            <li class="date_list_sec">
+                            <li class="date_list_sec" ng-hide="true">
                                 <label> Date of Birth </label>
                                 <span>  <select ng-model="signupDetails.day">  
                                     <option ng-repeat="day in dropDownData.dates" value="{{day}}">{{day}}</option>
@@ -52,7 +52,7 @@
                                 <img src="img/phone.png" alt="" class="textbox_icons phone"></li>
 
 
-                            <li>
+                            <li ng-hide="true">
                                 <span>  <select ng-model="signupDetails.make_id" ng-change="getCarMake('getmodel')"
                                                 style="padding-left: 30px;">
                                     <option ng-repeat="carMaker in carMake" value="{{carMaker.vehicle_make_id}}">{{carMaker.vehicle_make_title}}</option>
@@ -61,7 +61,7 @@
                                 <img src="img/car.png" alt="" class="textbox_icons car">
                             </li>
 
-                            <li> 
+                            <li ng-hide="true">
                                 <span>  <select ng-model="signupDetails.model_id" style="padding-left: 30px;">  
                                     <option ng-repeat="model in carModel" value="{{model.vehicle_model_id}}">{{model.vehicle_model_title}}</option>
                                      </select> 
@@ -69,16 +69,16 @@
                                 <img src="img/car.png" alt="" class="textbox_icons car">
 
                             </li>
-
-
-                            <li><span class="upload_left"> <img src="img/car-photo.png" alt=""
+                            <li ng-hide="true"><span class="upload_left"> <img src="img/car-photo.png" alt=""
                                                                 ng-src="{{carimgURI}}"></span> <span
                                     class="upload_right" ng-click="showPopup(2)"> Upload Car Photo</span></li>
                             <li><input placeholder="Address" ng-model="signupDetails.address" required="required"
                                        ng-focus="showCurrentIcon = false"
-                                       ng-blur="showCurrentIcon = true" type="text" ng-change="getPlacePredictions(signupDetails.address)">
+                                       ng-blur="showCurrentIcon = true" type="text"
+                                       ng-change="getPlacePredictions(signupDetails.address)">
                                 <img src="img/address.png" alt="" class="textbox_icons">
-                                <img src="img/cancel_icon.png" ng-hide="showCurrentIcon" ng-click="signupDetails.address = ''"
+                                <img src="img/cancel_icon.png" ng-hide="showCurrentIcon"
+                                     ng-click="signupDetails.address = ''"
                                      class="right-txt-icons">
                                 <div ng-show="predictions.length > 0" class="address_bar">
 
