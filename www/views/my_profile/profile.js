@@ -1,6 +1,6 @@
 angular.module('starter')
     .controller('ProfileCtrl', function ($scope, $http, $rootScope, $ionicLoading, $ionicPopup, $cordovaCamera,UploadImageService,ImagePickerService,LoadImagesService,GetCarInfo,
-                                         GooglePlacesService, $location, $timeout, $cordovaFileTransfer, $cordovaGeolocation, CONSTANTS) {
+                                         GooglePlacesService, $location, $timeout, $cordovaFileTransfer, $cordovaGeolocation, CONSTANTS,UploadVideo) {
         var posOptions = { timeout: 10000, enableHighAccuracy: false };
 
         $cordovaGeolocation
@@ -201,8 +201,8 @@ angular.module('starter')
             $rootScope.profileDetails.car_profile_pic = ''
 
             //load car make and car model details
-            loadCarMake();
-            loadCarModel();
+            //loadCarMake();
+            //loadCarModel();
         }
         $scope.editField = function (type) {
             //disable all input fields first
@@ -231,44 +231,7 @@ angular.module('starter')
         }
 
         $scope.captureVideo = function () {
-
-            var options = {
-                limit: 1,
-                duration: 10
-            };
-
-            navigator.device.capture.captureVideo(onSuccess, onError, options);
-
-            function onSuccess(mediaFiles) {
-                var i, path, len;
-
-                for (i = 0, len = mediaFiles.length; i < len; i += 1) {
-                    path = mediaFiles[i].fullPath;
-                    console.log(mediaFiles);
-                }
-
-                //upload the video to the server
-                var options = {
-                    fileKey: "avatar",
-                    fileName: "image.png",
-                    chunkedMode: false,
-                    mimeType: "image/png"
-                };
-                $cordovaFileTransfer.upload("http://192.168.56.1:1337/file/upload", "/android_asset/www/img/ionic.png", options).then(function (result) {
-                    console.log("SUCCESS: " + JSON.stringify(result.response));
-                }, function (err) {
-                    console.log("ERROR: " + JSON.stringify(err));
-                }, function (progress) {
-                    $ionicLoading.show({
-                       template:'uploading..'+progress
-                    });
-                });
-            }
-
-            function onError(error) {
-                navigator.notification.alert('Error code: ' + error.code, null, 'Capture Error');
-            }
-
+            UploadVideo.captureVideo();
         };
         //function to move to the next page 
         $scope.moveToNext = function () {
@@ -389,7 +352,7 @@ angular.module('starter')
             }
         ]
 
-        function loadCarMake() {
+        /*function loadCarMake() {
             GetCarInfo.getCarMake(function (carMakeArray) {
                 $scope.carMake = carMakeArray;
                 $scope.carMake.insert(0, {
@@ -417,7 +380,7 @@ angular.module('starter')
                     ]
                 }
             });
-        }
+        }*/
         $scope.clearIcon = false;
         $scope.showCurrentIcon = true;
 

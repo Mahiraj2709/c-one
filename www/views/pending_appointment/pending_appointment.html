@@ -1,0 +1,30 @@
+<ion-view title="My Booking">
+    <ion-nav-buttons side="left">
+        <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
+        </button>
+    </ion-nav-buttons>
+    <ion-content>
+        <section class="bg-main">
+            <div class="main">
+
+                    <aside class="history_section" ng-repeat="appointment in appointmentArray">
+                        <div class="history_left">
+                            <ul>
+                                <li> Request ID - {{appointment.app_appointment_id}}</li>
+                                <li> Clean front home</li>
+                                <li><span> {{appointment.appointment_date}} </span> <span> <!--Clean Time - 1:30 Hr--> </span></li>
+                            </ul>
+                        </div>
+                        <div class="history_right">
+                            <aside class="ratings">
+                                <button ion-button color="danger" ng ng-click="trackAppointment(appointment.app_appointment_id)">TRACK</button>
+                            </aside>
+                            <span class="price">{{getStatus(appointment.status)}}</span>
+                        </div>
+                    </aside>
+            </form>
+            </div>
+
+        </section>
+    </ion-content>
+</ion-view>

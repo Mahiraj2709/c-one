@@ -38,7 +38,7 @@
                                 <img src="img/phone.png" alt="" class="textbox_icons phone">
                                 <img src="img/edit-icon.png" alt="" class="edit-icon">
                             </li>
-                            <li>
+                            <li ng-hide="true">
 
                                 <span>  <select ng-init = "profileDetails.make_id" ng-model="profileDetails.make_id" ng-change="loadCarModel()"
                                                 style="padding-left: 30px;">
@@ -47,13 +47,13 @@
                                 </span>
                                 <img src="img/car.png" alt="" class="textbox_icons phone">
                             </li>
-                            <li>  <span>  <select ng-init="profileDetails.model_id" ng-model="profileDetails.model_id" style="padding-left: 30px;">
+                            <li ng-hide="true">  <span>  <select ng-init="profileDetails.model_id" ng-model="profileDetails.model_id" style="padding-left: 30px;">
                                     <option ng-repeat="model in carModel" value="{{model.vehicle_model_id}}">{{model.vehicle_model_title}}</option>
                                      </select>
                                 </span>
                                 <img src="img/car.png" alt="" class="textbox_icons phone">
                             </li>
-                            <li><span class="upload_left"> <img src="img/car-photo.png" ng-src="{{car_pic}}"
+                            <li ng-hide="true"><span class="upload_left"> <img src="img/car-photo.png" ng-src="{{car_pic}}"
                                                                 alt=""></span> <span class="upload_right"
                                                                                      ng-click="showPopup(2)"> Upload Car Photo</span>
                             </li>

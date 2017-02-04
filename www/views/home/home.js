@@ -1,6 +1,6 @@
 angular.module('starter')
     .controller('HomeCtrl', function ($scope, $rootScope, $ionicPopup, $http, ChangeAvailability,$ionicHistory,
-                                      $ionicLoading, $location, $ionicSideMenuDelegate, $ionicModal,
+                                      $ionicLoading, $location, $ionicSideMenuDelegate, $ionicModal,LocationData,
                                       $ionicViewService, $cordovaGeolocation, CONSTANTS) {
         var formdata = new FormData();
         //Loading in
@@ -53,6 +53,10 @@ angular.module('starter')
         $scope.map = new google.maps.Map(document.getElementById("map"), mapOptions);
         var options = {timeout: 10000, enableHighAccuracy: true};
         $cordovaGeolocation.getCurrentPosition(options).then(function (position) {
+            //my lat lng factory
+            LocationData.latitude = position.coords.latitude
+            LocationData.longitude = position.coords.longitude
+
             var latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
             var mapOptions = {
                 center: latLng,
@@ -219,6 +223,7 @@ angular.module('starter')
             addMarker(centerMarker);
             addCircle(outerCirle);
         }
+
         function addMarker(marker) {
             markers.push(marker);
         }

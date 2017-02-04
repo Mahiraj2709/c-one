@@ -7,7 +7,7 @@
                     <figure class="profile-pic"><img alt="" src="img/user-photo.png" width="50" height="50"
                                                      ng-src="{{profileImage}}">
                     </figure>
-                    <figcaption class="user-detail"> {{customerData.customer_name}}</figcaption>
+                    <figcaption class="user-detail"> {{customerData.customer_first_name}} {{customerData.customer_last_name}}</figcaption>
                 </aside>
                 <aside class="ratings">
                     <span> <i class="fa fa-star" aria-hidden="true"></i> </span>
@@ -22,19 +22,19 @@
                         }}</strong></p>
                 </aside>
 
-                <aside class="view_vdo_btn"><span> Nice to Meet You</span></aside>
+                <aside class="view_vdo_btn" ng-click="openVideoPlayer()"><span> Nice to Meet You</span></aside>
 
                 <aside class="profile_details">
                     <ul>
-                        <li><strong>Name</strong>- {{customerData.customer_address}}</li>
+                        <li><strong>Name</strong>- {{customerData.customer_name}}</li>
                         <li><strong>Location</strong>- {{customerData.customer_address}}</li>
                         <li><strong>Property Type</strong> - {{customerData.property_type}}</li>
-                        <li><strong>Clean Type</strong>: {{customerData.style}}</li>
+                        <li><strong>Clean Type</strong>: {{customerData.clean_style}}</li>
                         <li><strong>Bedroom</strong> - {{customerData.bedroom}}</li>
                         <li><strong>Bathroom</strong> - {{customerData.bathroom}}</li>
-                        <li><strong>Kitchen</strong> - {{customerData.bathroom}}</li>
-                        <li><strong>Living Room</strong> - {{customerData.bathroom}}</li>
-                        <li><strong>Extra Rooms</strong> - {{customerData.bathroom}}</li>
+                        <li><strong>Kitchen</strong> - {{customerData.kitchen}}</li>
+                        <li><strong>Living Room</strong> - {{customerData.living_rooms}}</li>
+                        <li><strong>Extra Rooms</strong> - {{customerData.extra_rooms}}</li>
                         <li><strong>Time and Date</strong> - {{customerData.booking_date}}</li>
                         <li><strong>Details</strong> - {{customerData.work_order_details}}</li>
                     </ul>

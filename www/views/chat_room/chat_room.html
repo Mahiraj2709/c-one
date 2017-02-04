@@ -1,22 +1,22 @@
 <ion-view title="Chatting" hide-back-button="true">
     <ion-nav-buttons side="primary">
-        <button class="button button-icon ion-android-call" ng-click="logout()"></button>
+        <button class="button button-icon ion-android-call" ng-click="call()"></button>
     </ion-nav-buttons>
-    <ion-content padding="true" class="has-header">
+    <ion-content>
         <ion-content class="content-stable"
                      on-swipe-left="hideTime = false"
                      on-swipe-right="hideTime = true">
+            ng-class="{other: message.userId != myId}"
 
             <section class="chatting_sec">
-                <aside>
-                    <div ng-repeat="message in messages"
-                         ng-class="{other: message.userId != myId}"
+                <aside ng-class="{right_comment: message.userId == myId}" ng-repeat="message in messages">
+                    <div
                          class="chat_txt_sec">
 
                         <div class="chat_img_sec" ng-class="{'slide-right': hideTime, '': !hideTime}">
-                            <img src="img/smith.jpg" alt="" width="120" height="140">
+                            <img ng-src="{{message.customer_profile_pic}}" alt="" width="120" height="140">
                         </div>
-                        <p><span> John Smith </span> {{ message.text }} </p>
+                        <p><span> {{message.cleaner_fname}} {{message.cleaner_lname}} </span> {{ message.text }} </p>
 
 
                         <!--<div class="time" ng-class="{'slide-right': hideTime, '': !hideTime}">{{message.time}}</div>-->

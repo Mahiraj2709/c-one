@@ -2,8 +2,14 @@
  * Created by admin on 1/20/2017.
  */
 angular.module('starter')
-    .controller('OnTheWayCtrl', function ($scope, $ionicModal) {
-
+    .controller('OnTheWayCtrl', function ($scope, AppointmentData, LocationData, CONSTANTS, OnTheWayService, $location) {
+            $scope.openChat = function () {
+                $location.url('chat_room/' + AppointmentData.appointment.app_appointment_id);
+            }
+            //console.log(AppointmentData.appointment.customer_latitude);
+            //profile image
+            $scope.profileImage = CONSTANTS.CUSTOMER_PROFILE_IMAGE_URL + AppointmentData.appointment.profile_pic;
+            $scope.request_id = "Reqeust ID-" + AppointmentData.appointment.app_appointment_id;
             //show map
             var mapOptions = {
                 center: new google.maps.LatLng(42.2901715, -89.0730158),
@@ -30,8 +36,8 @@ angular.module('starter')
 
             function calculateAndDisplayRoute(directionsService, directionsDisplay) {
                 directionsService.route({
-                    origin: new google.maps.LatLng(42.2731765, -89.0954501),
-                    destination: new google.maps.LatLng(42.286586, -89.0308908),
+                    origin: new google.maps.LatLng(AppointmentData.appointment.customer_latitude, AppointmentData.appointment.customer_longitude),
+                    destination: new google.maps.LatLng(LocationData.latitude, LocationData.longitude),
                     travelMode: 'DRIVING'
                 }, function (response, status) {
                     if (status === 'OK') {
@@ -54,29 +60,108 @@ angular.module('starter')
             }
 
             onChangeHandler();
-            $scope.CallNumber = function () {
-                var number = '7065257289';
+            $scope.CallCustomer = function () {
+                var number = AppointmentData.appointment.mobile;
                 window.plugins.CallNumber.callNumber(function () {
                     //success logic goes here
                 }, function () {
                     //error logic goes here
                 }, number)
             };
-            //video player modal
-            $scope.videoLink = "http://airshareapp.onsisdev.info/public/media/video/1484900352.mp4";
-
-            $scope.openVideoPlayer = function () {
-                $ionicModal.fromTemplateUrl('views/dialog/video_player.html', {
-                    scope: $scope,
-                    animation: 'slide-in-up'
-                }).then(function (modal) {
-                    $scope.modal = modal;
-                    $scope.modal.show();
-                });
-            };
-
-            $scope.closeVideoPlayer = function () {
-                $scope.modal.hide();
+            $scope.btn_text = "I HAVE ARRIVED";
+            var arrived = false;
+            $scope.iHaveArrived = function () {
+                if (arrived) {
+                    OnTheWayService.completeRide(AppointmentData.appointment, function () {
+                        $location.path('bill');
+                    });
+                } else {
+                    OnTheWayService.iHaveArrived(AppointmentData.appointment, function () {
+                        arrived = true
+                        $scope.btn_text = "COMPLETE"
+                    });
+                }
             }
         }
-    )
+    ).service('OnTheWayService', function (CONSTANTS, $ionicLoading, $http) {
+    this.iHaveArrived = function (appointment_data, callback) {
+        $ionicLoading.show({
+            template: 'Loading...'
+        });
+        var formdata = new FormData();
+        formdata.append("device_type", CONSTANTS.deviceType());
+        formdata.append('session_token', window.localStorage.getItem("sess_tok"));
+        formdata.append("language", "en");
+        formdata.append("app_appointment_id", appointment_data.app_appointment_id);
+        formdata.append("request_date", appointment_data.appointment_date);
+        formdata.append("cleaner_timezone", appointment_data.appointment_timezone);
+        formdata.append("distance", appointment_data.app_appointment_id);
+        formdata.append("customer_address", appointment_data.customer_address);
+        formdata.append("customer_latitude", appointment_data.customer_latitude);
+        formdata.append("customer_longitude", appointment_data.customer_longitude);
+        formdata.append("status", appointment_data.status);
+        var request = {
+            method: 'POST',
+            url: CONSTANTS.BASE_URL + 'cleanosaurhasarrived',
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            },
+            data: formdata,
+            headers: {
+                'Content-Type': undefined
+            }
+        };
+        // SEND THE FILES.
+        $http(request)
+            .success(function (d) {
+                $ionicLoading.hide();
+                console.log(d)
+                if (d.response_status == "1") {
+                    callback()
+                } else {
+                }
+            })
+            .error(function (err) {
+                $ionicLoading.hide();
+            });
+    }
+    this.completeRide = function (appointment_data, callback) {
+        $ionicLoading.show({
+            template: 'Loading...'
+        });
+        var formdata = new FormData();
+        formdata.append("device_type", CONSTANTS.deviceType());
+        formdata.append('session_token', window.localStorage.getItem("sess_tok"));
+        formdata.append("language", "en");
+        formdata.append("app_appointment_id", appointment_data.app_appointment_id);
+        formdata.append("request_date", appointment_data.appointment_date);
+        formdata.append("cleaner_timezone", appointment_data.appointment_timezone);
+        formdata.append("customer_address", appointment_data.customer_address);
+        formdata.append("customer_latitude", appointment_data.customer_latitude);
+        formdata.append("customer_longitude", appointment_data.customer_longitude);
+        var request = {
+            method: 'POST',
+            url: CONSTANTS.BASE_URL + 'cleanosaurrequestcomplete',
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            },
+            data: formdata,
+            headers: {
+                'Content-Type': undefined
+            }
+        };
+        // SEND THE FILES.
+        $http(request)
+            .success(function (d) {
+                $ionicLoading.hide();
+                console.log(d)
+                if (d.response_status == "1") {
+                    callback()
+                } else {
+                }
+            })
+            .error(function (err) {
+                $ionicLoading.hide();
+            });
+    }
+})

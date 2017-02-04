@@ -9,7 +9,6 @@
             <div id="on_way_map" data-tap-disabled="true" style="height:60vh"></div>
 
             <aside class="on_way_add_sec">
-                <p> <span class="btns gray_btn popup_rwr_btn"> Request ID - 5698 </span> </p>
                 <div class="map_sec_field" ng-hide="true">
                     <input placeholder="75 Bennett, NY" required="required" type="text">
                     <img src="img/address.png" alt="" class="left-txt-icons">
@@ -19,11 +18,9 @@
             </aside>
 
         </div>
-
         <div class="call_chat_sec">
             <aside class="figure-container">
-                <figure class="profile-pic"> <img alt="" src="img/smith.jpg" > </figure>
-
+                <figure class="profile-pic"> <img alt="" ng-src="{{profileImage}}" > </figure>
             </aside>
             <aside class="ratings">
                 <span> <i class="fa fa-star" aria-hidden="true"></i> </span>
@@ -31,13 +28,13 @@
                 <span> <i class="fa fa-star" aria-hidden="true"></i></span>
                 <i class="fa fa-star" aria-hidden="true"></i>
                 <i class="fa fa-star" aria-hidden="true"></i>
-
             </aside>
 
+            <p style="text-align: center"> <span class="btns gray_btn popup_rwr_btn">{{request_id}} </span> </p>
 
-            <aside class="btn_set"> <div class="half" ng-click="openVideoPlayer()"> <span class="btns bdr_btn"> <i class="fa fa-phone" aria-hidden="true"></i>  Call </span> </div>
-                <div class="half fr" ui-sref="chat_room"> <span class="btns bdr_btn">  <i class="fa fa-commenting-o" aria-hidden="true"></i>  Chat </span> </div>  </aside>
-            <div class="full"> <span class="btns pink_btn"> Cancel Request </span> </div>
+            <aside class="btn_set"> <div class="half" ng-click="CallCustomer()"> <span class="btns bdr_btn"> <i class="fa fa-phone" aria-hidden="true"></i>  Call </span> </div>
+                <div class="half fr" ng-click="openChat()"> <span class="btns bdr_btn">  <i class="fa fa-commenting-o" aria-hidden="true"></i>  Chat </span> </div>  </aside>
+            <div class="full" ng-click="iHaveArrived()"> <span class="btns pink_btn"> {{btn_text}} </span> </div>
         </div>
     </ion-content>
 </ion-view>

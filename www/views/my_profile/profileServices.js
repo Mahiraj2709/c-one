@@ -38,7 +38,78 @@ angular.module('starter')
                 });
         }
     })
-    .service('UploadVideo', function (CONSTANTS) {
+    .service('UploadVideo',function ($cordovaFileTransfer,CONSTANTS, $ionicLoading) {
+        this.captureVideo = function () {
+            var options = {
+                limit: 1,
+                duration: 10
+            };
+
+            navigator.device.capture.captureVideo(onSuccess, onError, options);
+
+            function onSuccess(mediaFiles) {
+                $ionicLoading.show({
+                    template: 'Loading....'
+                });
+                var i, path, len;
+
+                for (i = 0, len = mediaFiles.length; i < len; i += 1) {
+                    path = mediaFiles[i].fullPath;
+                    console.log(path);
+                }
+
+                //upload the video to the server
+                var options = {
+                    fileKey: "profile_video",
+                    fileName: "profilevide.mp4",
+                    chunkedMode: false,
+                    mimeType: "image/png",
+                    params : {'device_type':CONSTANTS.deviceType(), 'session_token':window.localStorage.getItem('sess_tok')}
+                };
+
+                $cordovaFileTransfer.upload(CONSTANTS.BASE_URL + 'uploadprofilevideo', path, options).then(function (result) {
+                    $ionicLoading.hide();
+                    console.log("SUCCESS: " + JSON.stringify(result.response));
+                }, function (err) {
+                    $ionicLoading.hide();
+                    console.log("ERROR: " + JSON.stringify(err));
+                }, function (progress) {
+                    console.log(progress);
+                    // constant progress updates
+                    if (progress.lengthComputable) {
+                        var perc = Math.floor(progress.loaded / progress.total * 100);
+                        $ionicLoading.show({
+                            template:'Uploading..'+perc+'%'
+                        })
+                    }
+
+                });
+
+                var permissions = cordova.plugins.permissions;
+                permissions.hasPermission(permissions.READ_EXTERNAL_STORAGE, checkPermissionCallback, null);
+                function checkPermissionCallback(status) {
+                    if (!status.hasPermission) {
+                        var errorCallback = function () {
+                            console.warn('Storage permission is not turned on');
+                        }
+                        permissions.requestPermission(
+                            permissions.READ_EXTERNAL_STORAGE,
+                            function (status) {
+                                if (!status.hasPermission) {
+                                    errorCallback();
+                                } else {
+                                    // continue with downloading/ Accessing operation
+                                }
+                            },
+                            errorCallback);
+                    }
+                }
+
+            }
+            function onError(error) {
+                console.log('Error code: ' + error.code, null, 'Capture Error');
+            }
+        }
     })
     .service('GetCarInfo', function (CONSTANTS, $http, $ionicLoading) {
         this.getCarMake = function (callback) {

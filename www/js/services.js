@@ -133,4 +133,62 @@ angular.module('starter.services', [])
                 }
             })
         };
-    });
+    })
+    .factory('AppointmentData',function () {
+        var appointment = {};
+
+        return appointment;
+    })
+    .factory('LocationData',function () {
+        var Location = {
+            longitude:undefined,
+            latitude:undefined
+        };
+
+        return Location;
+    })
+    .service('AppointmentService', function () {
+        this.getRequestValueWithCode = function (requestStatus) {
+            if (requestStatus != undefined) {
+
+                switch(requestStatus) {
+                    case '1':
+                        return 'Finished'
+                        break;
+                    case '2':
+                        return 'Dropped'
+                        break;
+                    case '3':
+                        return 'Started'
+                        break;
+                    case '4':
+                        return 'Arrived'
+                        break;
+                    case '5':
+                        return 'Accepted'
+                        break;
+                    case '6':
+                        return 'Pending'
+                        break;
+                    case '7':
+                        return 'Rejected'
+                        break;
+                    case '8':
+                        return 'Cancelled by Cleaner'
+                        break;
+                    case '9':
+                        return 'Cancelled by Customer'
+                        break;
+                    case '10':
+                        return 'No Response'
+                        break;
+                    case '11':
+                        return 'No Cleaner Found'
+                        break;
+                    default:
+                        return 'NA'
+                }
+            }
+        }
+    })
+;

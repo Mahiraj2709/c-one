@@ -161,7 +161,7 @@ angular.module('starter',
             .state('about', {
                 url: '/about',
                 templateUrl: 'views/about/about.html',
-                controller: 'ProfileCtrl'
+                controller: 'AboutCtrl'
             })
 
             //customer profile
@@ -179,10 +179,66 @@ angular.module('starter',
             })
             //chat room
             .state('chat_room', {
-                url: '/chat_room',
+                url: '/chat_room/:app_appointment_id',
                 templateUrl: 'views/chat_room/chat_room.html',
                 controller: 'ChatCtrl'
             })
+                //your bill
+            .state('bill', {
+                url: '/bill',
+                templateUrl: 'views/bill/bill.html',
+                controller: 'BillCtrl'
+            })
+
+            //payment screens
+            .state('history', {
+                url: '/history',
+                templateUrl: 'views/service_history/service_history.html',
+                controller: 'HistoryCtrl'
+            })
+
+            //payment screens
+            .state('pending_appointment', {
+                url: '/pending_appointment',
+                templateUrl: 'views/pending_appointment/pending_appointment.html',
+                controller: 'PendingAppointmentCtrl'
+            })
+
+            //service history details
+            .state('history_detail', {
+                url: '/history_detail',
+                templateUrl: 'views/service_history/service_history_detail.html',
+                //controller: 'HistoryCtrl'
+            })
+
+            //service history details
+            .state('notification', {
+                url: '/notification',
+                templateUrl: 'views/notification/notification.html',
+                //controller: 'HistoryCtrl'
+            })
+
+            //work as cleaner
+            .state('help', {
+                url: '/help',
+                templateUrl: 'views/help/help.html',
+                //controller: 'HistoryCtrl'
+            })
+
+            //work as cleaner
+            .state('work_as_customer', {
+                url: '/work_as_customer',
+                templateUrl: 'views/sign_as_customer/become_a_customer.html',
+                //controller: 'HistoryCtrl'
+            })
+
+            //settings
+            .state('setting', {
+                url: '/setting',
+                templateUrl: 'views/setting/setting.html',
+                //controller: 'HistoryCtrl'
+            })
+
             // Each tab has its own nav history stack:
             .state('tab.dash', {
                 url: '/dash',

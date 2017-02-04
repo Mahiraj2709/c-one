@@ -8,7 +8,7 @@
     <ion-content class="comments" ng-controller="TermsConditionCtrl" ng-init="loadTermsCondition()">
         <div class="card" style="margin-top: 55px;">
             <div class="text-center">
-                <p>{{pageContent}}</p>
+                <p ng-bind-html="pageContent"></p>
             </div>
         </div>
     </ion-content>
