@@ -16,6 +16,7 @@ aside,section,article{ width:100%; display:block; float:left;}
 .one-third{ width:33%!important; float:left!important;}
 .third-one{ width:75%!important; float:left!important;}
 .fifteen{ width:15%; float:left;}
+.seventy{width:70%; float:left;}
 .fl{ float:left!important;}
 .fr{ float:right!important;}
 .mar0{ margin:0!important;}
@@ -43,13 +44,13 @@ header .icon-right {  position: absolute;  right: 9px;  top: 11px;   font-size: 
 .register-bg{background: #ffffff url("../img/register-screen-bg.jpg") no-repeat fixed center center / cover ;}
 .forgot-pass-bg{background: #ffffff url("../img/forgot-pass-bg.jpg") no-repeat fixed center center / cover ;}
 .main{ margin:10px auto 10px;   padding:0;    width:100%; height:100%;  box-sizing:border-box;}
-input[type="text"],input[type="password"],input[type="tel"],input[type="email"],textarea,select{ border:0; outline:0; background:0 none; text-align:left; width:100%; height:39px; color:#666666; font-size:15px; line-height:26px; font-weight:lighter; background:rgba(255,255,255,0.9); border: 1px solid #c9c9c9; padding: 0 10px;}
+input[type="text"],input[type="number"],input[type="password"],input[type="tel"],input[type="email"],textarea,select{ border:0; outline:0; background:0 none; text-align:left; width:100%; height:39px; color:#666666; font-size:15px; line-height:26px; font-weight:lighter; background:rgba(255,255,255,0.9); border: 1px solid #c9c9c9; padding: 0 10px;}
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */ color: #666666; opacity:1;}::-moz-placeholder { /* Firefox 19+ */  color: #666666;opacity:1;}:-ms-input-placeholder { /* IE 10+ */  color: #666666;opacity:1;}:-moz-placeholder { /* Firefox 18- */  color: #666666; opacity:1;}
 .logo_section{ text-align:center; width:100%; float: left;}
 .logo_section img{  height:auto; display:block; margin:50px auto 55px auto;}
 .forms_login{ width:100%; float:left;}
 .forms_login ul li{ width:100%; margin:0 0 7px 0; position:relative; float:left; display:block;}
-.forms_login ul li input[type="text"],.forms_login ul li input[type="password"],.forms_login ul li input[type="tel"], .forms_login ul li input[type="email"],.forms_login ul li textarea{padding:0 10px 0 35px;}
+.forms_login ul li input[type="text"],.forms_login ul li input[type="number"],.forms_login ul li input[type="password"],.forms_login ul li input[type="tel"], .forms_login ul li input[type="email"],.forms_login ul li textarea{padding:0 10px 0 35px;}
 .forms_login ul li img.textbox_icons { height: auto;left: 12px; position: absolute;  top: 12px;  width: 12px; height:auto;}
 .forms_login ul li img.textbox_icons.email {top: 16px;width: 14px;}
 .forms_login ul li img.textbox_icons.phone {top: 14px;width: 14px;}
@@ -168,7 +169,7 @@ input[type="text"],input[type="password"],input[type="tel"],input[type="email"],
 .popup_rwr_btn{     display: inline-block;padding: 0 30px; width: initial;}
 .request_sent_popup .ratings i {color:#adadad;}
 .request_sent_popup  .ratings span i {color:#fabb0c;}
-.chatting_sec{ width:100%; color:#b1b1b1; float:left;margin: 0px 0 60px;}
+.chatting_sec{ width:100%; color:#b1b1b1; float:left;margin: 48px 0 60px;}
 .chatting_sec aside{ margin:8px 0; width:100%; float:left;}
 .chat_txt_sec{float:left; padding-left:55px;color:#333333; text-align:left; position:relative;font-size:16px; width:100%; }
 .chat_txt_sec span{ display:block; color:#b1b1b1; font-weight:300;font-size:13px; line-height:16px; }
@@ -179,13 +180,13 @@ input[type="text"],input[type="password"],input[type="tel"],input[type="email"],
 .chat-date{color:#b1b1b1; font-size:14px; line-height:35px; text-align:center; width:100%;}
 .chat_footer {background: #f6f6f6 none repeat scroll 0 0; border: 1px solid #eaeaea; bottom: 0; float: left; height:52px; left:0; padding: 5px ; position: fixed; width: 100%;}
 .footer_txt_sec{ position:relative; width:100%; float:left;}
-.footer_txt_sec input[type='text']{ border:0; background:0; color:#a9a9a9; font-size:16px; padding:0 35px;}
+.footer_txt_sec input[type='text']{ border:0; background:0; color:#a9a9a9; font-size:16px; padding:0 5px;}
 input.footer_input::-webkit-input-placeholder { font-size: 16px; color:#a9a9a9;}
 input.footer_input::-moz-placeholder { font-size: 16px; color:#a9a9a9;}
 input.footer_input:-ms-input-placeholder { font-size: 16px; color:#a9a9a9;}
 input.footer_input:-moz-placeholder { font-size: 16px; color:#a9a9a9;}
-.chat_footer img.send{ position:absolute; right:6px; top:10px;}
-.chat_footer img.smile{ position:absolute; left:6px; top:10px;}
+.send{height: 45px;   text-align: center;    padding-top: 12px;}
+.smile{height: 45px;   text-align: center;    padding-top: 12px; }
 .on_way{position:relative; float:left; width:100%; margin:48px 0 0 0; background:#fff;}
 .on_way > img{ width:100%; height:auto;}
 .on_way_add_sec{ position:absolute; top:10px; left:0; width:100%; padding:10px 4%;}
@@ -282,8 +283,15 @@ input.footer_input:-moz-placeholder { font-size: 16px; color:#a9a9a9;}
 .setting_list li span.edit_seting{ position:relative; margin:0;}
 .setting_list li span.edit_seting > input{  border: 0 none;height: 24px;line-height: 24px;padding-right: 20px; padding-left:0;}
 .setting_list li span.edit_seting > img{ height: auto; position: absolute; right: 0px; top:4px; width: 16px;}
-
-
+.my_booking_sec{ border: 1px solid #2edc00;margin: 10px 0 0;padding: 10px;}
+.my_booking_sec.inprocess{ border: 1px solid #eedd1d;}
+.my_booking_sec.cancelled{ border: 1px solid #d11a1a;}
+.my_booking_sec.inprocess .status_text{ color:#eedd1d;}
+.my_booking_sec.cancelled .status_text{ color:#d11a1a;}
+.history_right_track {float: right;text-align: right;width: 28%; text-align:center;}
+.status_text{ color:#2edc00; font-size:12px; text-align:center; margin-top:25px; display:inline-block;}
+.my_booking_sec.inprocess .status_text{ color:#eedd1d;}
+.my_booking_sec.cancelled .status_text{ color:#d11a1a;}
 
 @media screen and (-webkit-min-device-pixel-ratio:0) {
     /* Safari 5+ ONLY */

@@ -1,6 +1,6 @@
 angular.module('starter')
-    .controller('HomeCtrl', function ($scope, $rootScope, $ionicPopup, $http, ChangeAvailability,$ionicHistory,
-                                      $ionicLoading, $location, $ionicSideMenuDelegate, $ionicModal,LocationData,
+    .controller('HomeCtrl', function ($scope, $rootScope, $ionicPopup, $http, ChangeAvailability, $ionicHistory, NotificationFactory,
+                                      $ionicLoading, $location, $ionicSideMenuDelegate, $ionicModal, LocationData,ChatMessages,
                                       $ionicViewService, $cordovaGeolocation, CONSTANTS) {
         var formdata = new FormData();
         //Loading in
@@ -45,7 +45,7 @@ angular.module('starter')
         };
         //related to the home screen
         var mapOptions = {
-            center: new google.maps.LatLng(43.07493, -89.381388),
+            center: new google.maps.LatLng(LocationData.latitude, LocationData.longitude),
             zoom: 15,
             disableDefaultUI: true, // a way to quickly hide all controls
             mapTypeId: google.maps.MapTypeId.ROADMAP
@@ -56,7 +56,6 @@ angular.module('starter')
             //my lat lng factory
             LocationData.latitude = position.coords.latitude
             LocationData.longitude = position.coords.longitude
-
             var latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
             var mapOptions = {
                 center: latLng,
@@ -68,17 +67,15 @@ angular.module('starter')
         }, function (error) {
             console.log("Could not get location");
         });
-
         //add marker and circles to the map
         var markers = [];
         var circles = [];
-
         //add camera idlle listerner to the map to chage the icons and the
-        google.maps.event.addListener($scope.map,'idle',function () {
+        google.maps.event.addListener($scope.map, 'idle', function () {
             console.log("map is idle");
             //clear all marker
             clearMap()
-            if($scope.availability) {
+            if ($scope.availability) {
                 getMapMarkerAndCircle();
             }
         });
@@ -137,13 +134,19 @@ angular.module('starter')
          });
          };*/
         //listen to the notification
-        $scope.$on('cloud:push:notification', function (event, data) {
+        $rootScope.$on('cloud:push:notification', function (event, data) {
             var msg = data.message;
             //$scope.showAlert(msg.title + ': ' + msg.text);
             console.log(msg);
             // When button is clicked, the popup will be shown...
             if (msg.payload != undefined) {
                 if ($scope.payload == undefined) {
+
+                    if(msg.payload.action == '13') {
+                        //ChatMessages.
+
+                        return
+                    }
                     $scope.payload = msg.payload;
                     $scope.openTnC();
                 } else if ($scope.payload.app_appointment_id != msg.payload.app_appointment_id) {
@@ -164,31 +167,25 @@ angular.module('starter')
             }
             ChangeAvailability.changeAvailability(status, function () {
                 $scope.showAlert('Availability changed!');
-
                 //hide all the
-                if(!$scope.availability) {
+                if (!$scope.availability) {
                     clearMap();
-                }else {
+                } else {
                     getMapMarkerAndCircle();
                 }
-
             })
         }
-
-        $scope.$on('$ionicView.enter', function(){
+        $scope.$on('$ionicView.enter', function () {
             // Anything you can think of
             console.log($ionicHistory.viewHistory());
             //load the modal again we come from customer profile view
-            if($ionicHistory.viewHistory().forwardView.stateName == 'customer_profile') {
-            //show the modal agian
+            if ($ionicHistory.viewHistory().forwardView.stateName == 'customer_profile') {
+                //show the modal agian
                 $scope.modal.show();
             }
         });
-
         //map function for
-
         // Adds a marker to the map and push to the array.
-
         function getMapMarkerAndCircle() {
             //add marker for the center of the map
             // Create marker
@@ -200,7 +197,7 @@ angular.module('starter')
                     url: 'img/mapcar-icon.png',
                     size: new google.maps.Size(40, 40),
                     /*origin: new google.maps.Point(0, 0),
-                    anchor: new google.maps.Point(10, 20)*/
+                     anchor: new google.maps.Point(10, 20)*/
                 }
             });
 // Add circle overlay and bind to marker
@@ -251,4 +248,16 @@ angular.module('starter')
             setMapOnAllCircles(null);
         }
 
+        if (NotificationFactory.payload != undefined) {
+            if ($scope.payload == undefined) {
+                $scope.payload = NotificationFactory.payload;
+                $scope.openTnC();
+            } else if ($scope.payload.app_appointment_id != msg.payload.app_appointment_id) {
+                //if(msg.payload.)
+                $scope.payload = NotificationFactory.payload;
+                $scope.openTnC();
+            }
+
+            //clear notifica
+        }
     });

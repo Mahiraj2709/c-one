@@ -2,21 +2,23 @@
  * Created by admin on 1/5/2017.
  */
 angular.module('starter')
-    .controller('ChatCtrl', function ($scope,$rootScope, $timeout, $ionicScrollDelegate,ChatService,$stateParams,CONSTANTS) {
+    .controller('ChatCtrl', function ($scope,$rootScope, $timeout, $ionicScrollDelegate,ChatService,$stateParams,
+                                      ChatMessages,CONSTANTS) {
 
 //        $rootScope.userDetail = JSON.parse(window.localStorage.getItem("profile"));
 //        $rootScope.profile_pic = CONSTANTS.PROFILE_IMAGE_URL + $rootScope.userDetail.profile_pic;
         $scope.hideTime = true;
         var alternate,
             isIOS = ionic.Platform.isWebView() && ionic.Platform.isIOS();
+
         $scope.sendMessage = function () {
             //alternate = !alternate;
             console.log('called')
             var d = new Date();
             d = d.toLocaleTimeString().replace(/:\d+ /, ' ');
 //            ChatService.sendMessage($scope.data.message,$stateParams.app_appointment_id);
-            ChatService.sendMessage($scope.data.message,$stateParams.app_appointment_id);
-            $scope.messages.push({
+            ChatMessages.sendMessage($scope.data.message,$stateParams.app_appointment_id);
+            ChatMessages.pushChat({
                 userId: '12345',
                 text: $scope.data.message,
                 customer_profile_pic: $rootScope.profile_pic,
@@ -27,6 +29,7 @@ angular.module('starter')
             });
             delete $scope.data.message;
             $ionicScrollDelegate.scrollBottom(true);
+            //console.log($scope.messages)
 
         };
         $scope.inputUp = function () {
@@ -44,12 +47,12 @@ angular.module('starter')
         };
         $scope.data = {};
         $scope.myId = '12345';
-        $scope.messages = [];
+        $scope.messages = ChatMessages.messages;
 
         function pushMessage(chat) {
             console.log(chat)
-            console.log($scope.messages)
-            $scope.messages.push({
+            console.log(ChatMessages)
+            ChatMessages.pushChat({
                 userId: '54321',
                 text: chat.message,
                 customer_profile_pic:CONSTANTS.CUSTOMER_PROFILE_IMAGE_URL + chat.cleaner_profile_pic,
@@ -61,9 +64,10 @@ angular.module('starter')
             $timeout(function () {
                 $ionicScrollDelegate.scrollBottom(true);
             }, 100);
+
         }
 
-        $scope.$on('cloud:push:notification', function (event, data) {
+        /*$scope.$on('cloud:push:notification', function (event, data) {
             var msg = data.message;
             //$scope.showAlert(msg.title + ': ' + msg.text);
             console.log(msg);
@@ -84,7 +88,7 @@ angular.module('starter')
                     //$scope.openTnC();
                 }
             }
-        });
+        });*/
 
         //listen to the notification
         /*$scope.$on('cloud:push:notification', function (event, data) {
@@ -142,8 +146,22 @@ angular.module('starter')
             }
         }
     })
-    .service('ChatService',function (CONSTANTS, $http) {
-        this.sendMessage = function (message,appointment_id) {
+
+    .factory('ChatMessages',function ($http,CONSTANTS) {
+        var messages = [];
+        function pushChat(chat) {
+            messages.push({
+                userId: '54321',
+                text: chat.message,
+                customer_profile_pic:CONSTANTS.CUSTOMER_PROFILE_IMAGE_URL + chat.cleaner_profile_pic,
+                cleaner_fname:chat.cleaner_fname,
+                cleaner_lname:chat.cleaner_lname,
+                created_dt:chat.created_dt,
+                time: '323'
+            })
+        }
+
+        function sendChat(message,appointment_id) {
             var formdata = new FormData();
             formdata.append('device_type', CONSTANTS.deviceType());
             formdata.append('session_token', window.localStorage.getItem("sess_tok"));
@@ -180,4 +198,10 @@ angular.module('starter')
 //                    $scope.showAlert(err);
                 });
         }
-    });
+        return {
+            messages:messages,
+            pushChat:pushChat,
+            sendChat:sendChat
+        };
+    })
+;

@@ -83,23 +83,24 @@ angular.module('starter')
                 }
             }
         }
-    ).service('OnTheWayService', function (CONSTANTS, $ionicLoading, $http) {
+    ).service('OnTheWayService', function (CONSTANTS, LocationData,$ionicLoading, $http) {
     this.iHaveArrived = function (appointment_data, callback) {
         $ionicLoading.show({
             template: 'Loading...'
         });
+
         var formdata = new FormData();
         formdata.append("device_type", CONSTANTS.deviceType());
         formdata.append('session_token', window.localStorage.getItem("sess_tok"));
         formdata.append("language", "en");
         formdata.append("app_appointment_id", appointment_data.app_appointment_id);
-        formdata.append("request_date", appointment_data.appointment_date);
+        formdata.append("request_date", new Date().toISOString().split('T')[0]);
         formdata.append("cleaner_timezone", appointment_data.appointment_timezone);
-        formdata.append("distance", appointment_data.app_appointment_id);
-        formdata.append("customer_address", appointment_data.customer_address);
-        formdata.append("customer_latitude", appointment_data.customer_latitude);
-        formdata.append("customer_longitude", appointment_data.customer_longitude);
-        formdata.append("status", appointment_data.status);
+        formdata.append("distance", "34");
+        formdata.append("cleaner_address", appointment_data.customer_address);
+        formdata.append("cleaner_latitude", LocationData.latitude);
+        formdata.append("cleaner_longitude", LocationData.longitude);
+        formdata.append("status", "5");
         var request = {
             method: 'POST',
             url: CONSTANTS.BASE_URL + 'cleanosaurhasarrived',

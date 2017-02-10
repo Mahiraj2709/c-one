@@ -7,19 +7,20 @@
         <section class="bg-main">
             <div class="main">
 
-                    <aside class="history_section" ng-repeat="appointment in appointmentArray">
-                        <div class="history_left">
+                <aside class="my_booking_sec" ng-repeat="appointment in appointmentArray">
+                    <div class="history_left">
                             <ul>
                                 <li> Request ID - {{appointment.app_appointment_id}}</li>
-                                <li> Clean front home</li>
+                                <li> {{appointment.property_type_id | property}}</li>
                                 <li><span> {{appointment.appointment_date}} </span> <span> <!--Clean Time - 1:30 Hr--> </span></li>
                             </ul>
                         </div>
-                        <div class="history_right">
+                        <div class="history_right_track">
                             <aside class="ratings">
-                                <button ion-button color="danger" ng ng-click="trackAppointment(appointment.app_appointment_id)">TRACK</button>
+                                <span class="btns pink_btn track_btn" ng-click="trackAppointment(appointment.app_appointment_id)">  Track  </span>
+                                <!--<button ion-button color="danger" ng ng-click="trackAppointment(appointment.app_appointment_id)">TRACK</button>-->
                             </aside>
-                            <span class="price">{{getStatus(appointment.status)}}</span>
+                            <span class="status_text">{{getStatus(appointment.status)}}</span>
                         </div>
                     </aside>
             </form>

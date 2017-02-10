@@ -18,7 +18,7 @@
 
                 </aside>
                 <aside class="view_profile" ng-click="viewCustomer()">
-                    <p><span> View Customer’s Profile </span> <strong>{{customerData.confirm_price | currency
+                    <p><span> <u>View Customer’s Profile </u> </span> <strong>{{customerData.confirm_price | currency
                         }}</strong></p>
                 </aside>
 
@@ -26,7 +26,7 @@
 
                 <aside class="profile_details">
                     <ul>
-                        <li><strong>Name</strong>- {{customerData.customer_name}}</li>
+                        <li ng-hide="true"><strong>Name</strong>- {{customerData.customer_name}}</li>
                         <li><strong>Location</strong>- {{customerData.customer_address}}</li>
                         <li><strong>Property Type</strong> - {{customerData.property_type}}</li>
                         <li><strong>Clean Type</strong>: {{customerData.clean_style}}</li>
@@ -35,7 +35,7 @@
                         <li><strong>Kitchen</strong> - {{customerData.kitchen}}</li>
                         <li><strong>Living Room</strong> - {{customerData.living_rooms}}</li>
                         <li><strong>Extra Rooms</strong> - {{customerData.extra_rooms}}</li>
-                        <li><strong>Time and Date</strong> - {{customerData.booking_date}}</li>
+                        <li><strong>Time and Date</strong> - {{customerData.appointment_date}}</li>
                         <li><strong>Details</strong> - {{customerData.work_order_details}}</li>
                     </ul>
                 </aside>

@@ -191,4 +191,13 @@ angular.module('starter.services', [])
             }
         }
     })
+    .factory('NotificationFactory',function () {
+       var notification = {
+           payload:undefined
+       };
+        return notification;
+    })
+    .service('NotificationService',function () {
+        
+    })
 ;

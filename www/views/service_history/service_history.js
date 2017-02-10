@@ -29,6 +29,7 @@ angular.module('starter')
             }
         }
         //date formatter   yourDate.toISOString().split('T')[0]
+
     })
     .service('HistoryServices',function ($ionicLoading,$http,CONSTANTS ) {
     this.getHistory = function (startDate,endDate, callback) {
