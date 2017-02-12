@@ -1,7 +1,7 @@
 angular.module('starter')
     .controller('HomeCtrl', function ($scope, $rootScope, $ionicPopup, $http, ChangeAvailability, $ionicHistory, NotificationFactory,
                                       $ionicLoading, $location, $ionicSideMenuDelegate, $ionicModal, LocationData,ChatMessages,
-                                      $ionicViewService, $cordovaGeolocation, CONSTANTS) {
+                                      $ionicViewService, $cordovaGeolocation, CONSTANTS,services) {
         var formdata = new FormData();
         //Loading in
         $scope.showLoading = function () {
@@ -12,44 +12,19 @@ angular.module('starter')
         $scope.hideLoading = function () {
             $ionicLoading.hide();
         };
-        // An alert dialog
-        $scope.showAlert = function (message) {
-            var alertPopup = $ionicPopup.alert({
-                title: 'Attention!',
-                template: message
-            });
-        };
+
         $rootScope.userDetail = JSON.parse(window.localStorage.getItem("profile"));
+        console.log(JSON.stringify($rootScope.userDetail))
         $rootScope.profile_pic = CONSTANTS.PROFILE_IMAGE_URL + $rootScope.userDetail.profile_pic;
-        //show logout popup
-        // A confirm dialog
-        $rootScope.confirmLogout = function () {
-            var confirmPopup = $ionicPopup.confirm({
-                title: 'Logout',
-                template: 'Are you sure you want logout?'
-            });
-            confirmPopup.then(function (res) {
-                if (res) {
-                    formdata.append("device_type", CONSTANTS.deviceType());
-                    formdata.append("session_token", window.localStorage.getItem("sess_tok"))
-                    formdata.append("language", "en")
-                    $ionicSideMenuDelegate.toggleLeft();
-                    logoutRequest();
-                } else {
-                    console.log('You are not sure');
-                }
-            });
-        };
-        $rootScope.closeSideMenu = function () {
-            $ionicSideMenuDelegate.toggleLeft()
-        };
-        //related to the home screen
+
+
         var mapOptions = {
             center: new google.maps.LatLng(LocationData.latitude, LocationData.longitude),
             zoom: 15,
             disableDefaultUI: true, // a way to quickly hide all controls
             mapTypeId: google.maps.MapTypeId.ROADMAP
         };
+
         $scope.map = new google.maps.Map(document.getElementById("map"), mapOptions);
         var options = {timeout: 10000, enableHighAccuracy: true};
         $cordovaGeolocation.getCurrentPosition(options).then(function (position) {
@@ -81,81 +56,10 @@ angular.module('starter')
         });
         //call logout
         var logoutRequest = function () {
-            $scope.showLoading();
-            var request = {
-                method: 'POST',
-                url: CONSTANTS.BASE_URL + 'logout',
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                },
-                data: formdata,
-                headers: {
-                    'Content-Type': undefined
-                }
-            };
-            // SEND THE FILES.
-            $http(request)
-                .success(function (d) {
-                    $scope.hideLoading();
-                    if (d.response_status == "1") {
-                        window.localStorage.removeItem("porfile");
-                        window.localStorage.removeItem("login");
-                        window.localStorage.removeItem("sess_tok");
-                        $location.path('login');
-                    } else {
-                        $scope.showAlert(d.response_msg);
-                    }
-                })
-                .error(function (err) {
-                    $scope.hideLoading();
-                    console.log(err);
-                    $scope.showAlert(err);
-                });
-        };
-        //popup for new request
-        $scope.openTnC = function () {
-            $ionicModal.fromTemplateUrl('views/dialog/new_request.html', {
-                scope: $scope,
-                animation: 'slide-in-up'
-            }).then(function (modal) {
-                $scope.modal = modal;
-                $scope.modal.show();
-            });
-        };
-        $scope.cancelTnC = function () {
-            $scope.modal.hide();
-        }
-        /*$scope.showPopup = function () {
-         $scope.data = {}
-         // Custom popup
-         $scope.myPopup = $ionicPopup.show({
-         templateUrl: 'views/dialog/new_request.html',
-         scope: $scope,
-         });
-         };*/
-        //listen to the notification
-        $rootScope.$on('cloud:push:notification', function (event, data) {
-            var msg = data.message;
-            //$scope.showAlert(msg.title + ': ' + msg.text);
-            console.log(msg);
-            // When button is clicked, the popup will be shown...
-            if (msg.payload != undefined) {
-                if ($scope.payload == undefined) {
 
-                    if(msg.payload.action == '13') {
-                        //ChatMessages.
 
-                        return
-                    }
-                    $scope.payload = msg.payload;
-                    $scope.openTnC();
-                } else if ($scope.payload.app_appointment_id != msg.payload.app_appointment_id) {
-                    //if(msg.payload.)
-                    $scope.payload = msg.payload;
-                    $scope.openTnC();
-                }
-            }
-        });
+        };
+
         $scope.availability = true;
         $scope.changeAvailability = function (available) {
             console.log(available);
@@ -259,5 +163,21 @@ angular.module('starter')
             }
 
             //clear notifica
+        }
+        
+        $scope.confirmLogout = function () {
+          services.logout(function (response) {
+            if (response.response_status == "1") {
+              window.localStorage.removeItem("porfile");
+              window.localStorage.removeItem("login");
+              window.localStorage.removeItem("sess_tok");
+              $ionicHistory.clearHistory();
+              $ionicHistory.clearCache();
+              $location.path('login');
+
+            } else {
+              $scope.showAlert(d.response_msg);
+            }
+          })
         }
     });

@@ -74,8 +74,13 @@
 
     <script src="views/about/about.js"></script>
 
-    <!--fileter -->
-    <script src="js/commonFilter.js"></script>
+  <!--factories-->
+  <script src="js/factories/servicesFactory.js"></script>
+  <script src="js/factories/popupFactory.js"></script>
+  <script src="js/factories/videoFactory.js"></script>
+
+  <!--fileter -->
+  <script src="js/commonFilter.js"></script>
 
 </head>
 
@@ -114,53 +119,53 @@
 
             <section class="nav-menu">
                 <ul>
-                    <li>
-                        <a ui-sref="home" ng-click="closeSideMenu()">
+                    <li menu-close>
+                        <a ui-sref="home" >
                             <img src="img/home_side_icon.png" width="32" height="37" alt=""> <span> Connect </span>
                         </a>
                     </li>
-                    <li>
-                        <a ui-sref="profile_one" ui-sref-opts="{cache: false,reload:true}" ng-click="closeSideMenu()">
+                    <li menu-close>
+                        <a ui-sref="profile_one" ui-sref-opts="{cache: false,reload:true}" >
                             <img src="img/left-nav-profile.png" width="32" height="37" alt=""> <span> Profile </span>
                         </a>
                     </li>
 
-                    <li >
+                    <li menu-close>
                         <a ui-sref="chat_room({ app_appointment_id: '311'})"> <img src="img/left-nav-payment.png" width="32" height="28" alt=""> <span> Payment </span>
                         </a>
                     </li>
-                    <li>
-                        <a ui-sref="history" ng-click="closeSideMenu()"> <img src="img/left-nav-history.png" width="32" height="28" alt=""> <span> History </span>
+                    <li menu-close>
+                        <a ui-sref="history" > <img src="img/left-nav-history.png" width="32" height="28" alt=""> <span> History </span>
                         </a>
                     </li>
 
-                    <li>
-                        <a ui-sref="pending_appointment" ng-click="closeSideMenu()">
+                    <li menu-close>
+                        <a ui-sref="pending_appointment" >
                             <img src="img/left-nav-profile.png" width="32" height="37" alt=""> <span> My Booking </span>
                         </a>
                     </li>
 
-                    <li>
-                        <a ui-sref="notification" ng-click="closeSideMenu()"> <img src="img/left-nav-notification.png" width="32" height="32" alt="">
+                    <li menu-close>
+                        <a ui-sref="notification" > <img src="img/left-nav-notification.png" width="32" height="32" alt="">
                             <span> Notification </span> </a>
                     </li>
-                    <li>
+                    <li menu-close>
                         <a> <img src="img/left-nav-help.png" width="32" height="32" alt=""> <span> Help </span> </a>
                     </li>
-                    <li ui-sref="work_as_customer" ng-click="closeSideMenu()">
+                    <li menu-close ui-sref="work_as_customer" >
                         <a> <img src="img/left-nav-customer.png" width="32" height="32" alt="">
                             <span> Become A Customer </span> </a>
                     </li>
-                    <li>
-                        <a ui-sref="setting" ng-click="closeSideMenu()"> <img src="img/left-nav-settings.png" width="32" height="32" alt=""> <span> Settings </span>
+                    <li menu-close>
+                        <a ui-sref="setting" > <img src="img/left-nav-settings.png" width="32" height="32" alt=""> <span> Settings </span>
                         </a>
                     </li>
-                    <li>
-                        <a ui-sref="about" ng-click="closeSideMenu()"> <img src="img/left-nav-profile.png" width="32"
+                    <li menu-close>
+                        <a ui-sref="about" > <img src="img/left-nav-profile.png" width="32"
                                                                             height="37" alt=""> <span> About </span>
                         </a>
                     </li>
-                    <li ng-click="confirmLogout()">
+                    <li ng-click="confirmLogout()" menu-close>
                         <a> <img src="img/left-nav-logout.png" width="32" height="23" alt=""> <span> Logout </span> </a>
                     </li>
                 </ul>

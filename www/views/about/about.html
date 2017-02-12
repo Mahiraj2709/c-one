@@ -7,36 +7,15 @@
         <section class="bg-main">
             <div class="main">
                 <ul class="list_section">
-                    <li><a class="item" href="#"
-                           onclick="window.open('https://play.google.com/store/apps/details?id=com.app.cleanosaur', '_system', 'location=yes'); return false;">
-                        Rate us in Google Play </a></li>
-                    <li><a class="item" href="#"
-                           onclick="window.open('https://itunes.apple.com/in/genre/ios/id36?mt=8', '_system', 'location=yes'); return false;">
-                        Rate us in Itunes</a></li>
-                    <li><a class="item" href="#"
-                           onclick="window.open('https://www.facebook.com/cleanosaurrawr/', '_system', 'location=yes'); return false;">Like
-                        us on Facebook</a></li>
-                    <li><a class="item" href="#"
-                           onclick="window.open('https://www.youtube.com/channel/UCY_a1vkcYPx5eJTr4k1GrNg', '_system', 'location=yes'); return false;">Watch
-                        us on YouTube</a></li>
-                    <li >
-                        <a class="item" href="#"
-                           onclick="window.open('https://twitter.com/cleanosaur', '_system', 'location=yes'); return false;">Follow
-                            us on Twitter</a></li>
-                    <li ><a class="item" href="#"
-                                                                onclick="window.open('https://www.instagram.com/cleanosaur/?hl=en', '_system', 'location=yes'); return false;">Follow
-                        us on Instagram</a></li>
-                    <li ng-hide="true" >
-                        <a class="item" href="#"
-                           onclick="window.open('https://play.google.com/store/apps/details?id=com.app.cleanosaur', '_system', 'location=yes'); return false;">Follow
-                            us on Snapchat</a></li>
-                    <li ng-click="openTnC()">
-                        <a class="item">Terms
-                            and Conditions</a></li>
-                    <li >
-                        <a class="item" href="#"
-                           onclick="window.open('www.cleanosaur.com', '_system', 'location=yes'); return false;">Visit
-                            Our Website</a></li>
+                    <li ng-click="rateOnGooglePlay()"> Rate us in Google Play </li>
+                    <li ng-click="rateOnITune()"> Rate us in Itunes</li>
+                    <li ng-click="likeOnFacebook()">Like us on Facebook</li>
+                    <li ng-click="watchOnYoutube()">Watch us on YouTube</li>
+                    <li ng-click="followOnTwitter()"> Follow us on Twitter</li>
+                    <li ng-click="followOnInstagram()">Follow us on Instagram</li>
+                    <li ng-hide="true"> Follow us on Snapchat</li>
+                    <li ng-click="openTnC()">Terms and Conditions</li>
+                    <li ng-click="visitOurWebsite()"> Visit Our Website</li>
                 </ul>
             </div>
         </section>

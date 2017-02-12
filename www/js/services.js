@@ -135,7 +135,11 @@ angular.module('starter.services', [])
         };
     })
     .factory('AppointmentData',function () {
-        var appointment = {};
+
+        var appointment = {
+          app_appointment_id:undefined,
+          appointment:undefined
+        };
 
         return appointment;
     })
@@ -198,6 +202,6 @@ angular.module('starter.services', [])
         return notification;
     })
     .service('NotificationService',function () {
-        
+
     })
 ;
