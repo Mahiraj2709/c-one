@@ -2,7 +2,7 @@
  * Created by admin on 1/20/2017.
  */
 angular.module('starter')
-  .controller('OnTheWayCtrl', function ($scope, AppointmentData, LocationData, CONSTANTS, ChatMessages,OnTheWayService, services,$location) {
+  .controller('OnTheWayCtrl', function ($scope, popups,AppointmentData, LocationData, CONSTANTS, ChatMessages,OnTheWayService, services,$location) {
       $scope.openChat = function () {
 
         services.getChatHistory(AppointmentData.appointment.app_appointment_id, function (response) {

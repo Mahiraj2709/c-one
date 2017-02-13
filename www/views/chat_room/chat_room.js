@@ -134,9 +134,9 @@ angular.module('starter')
         var messages = [];
         function pushChat(chat) {
             this.messages.push({
-                userId: '54321',
-                text: (chat.message != undefined)?chat.messages:'not key',
-                customer_profile_pic:CONSTANTS.CUSTOMER_PROFILE_IMAGE_URL + chat.cleaner_profile_pic,
+                userId: chat.userId,
+                text: (chat.text != undefined)?chat.text:'not key',
+                customer_profile_pic:(chat.userId == '12345')?chat.cleaner_profile_pic:CONSTANTS.CUSTOMER_PROFILE_IMAGE_URL + chat.cleaner_profile_pic,
                 cleaner_fname:chat.cleaner_fname,
                 cleaner_lname:chat.cleaner_lname,
                 created_dt:chat.created_dt,
