@@ -18,11 +18,7 @@
 
                 <ul class="list_section">
                     <li ng-repeat="title in titles"> Cleans and Cost Review </li>
-                    <li> A Guide to Cleanosaur </li>
-                    <li> Accessibility </li>
-                    <li> Account and Payment </li>
-                    <li> Clean with Cleanosaur </li>
-                    <li> Events and Inquiries </li>
+                    <li ng-repeat="help in helps" ng-click = "nextPage(help)"> {{help.content}} </li>
                 </ul>
 
 

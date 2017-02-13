@@ -85,7 +85,7 @@ angular.module('starter')
             //load the modal again we come from customer profile view
             if ($ionicHistory.viewHistory().forwardView.stateName == 'customer_profile') {
                 //show the modal agian
-                $scope.modal.show();
+                $rootScope.newRequestModal.show();
             }
         });
         //map function for

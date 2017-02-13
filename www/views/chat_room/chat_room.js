@@ -2,8 +2,8 @@
  * Created by admin on 1/5/2017.
  */
 angular.module('starter')
-    .controller('ChatCtrl', function ($scope,$rootScope, $timeout, $ionicScrollDelegate,$stateParams,services,
-                                      ChatMessages,CONSTANTS) {
+
+    .controller('ChatCtrl', function ($scope,$rootScope, $timeout, $ionicScrollDelegate,$stateParams,services, ChatMessages,CONSTANTS) {
 
 //        $rootScope.userDetail = JSON.parse(window.localStorage.getItem("profile"));
 //        $rootScope.profile_pic = CONSTANTS.PROFILE_IMAGE_URL + $rootScope.userDetail.profile_pic;

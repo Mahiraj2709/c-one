@@ -2,7 +2,7 @@
  * Created by admin on 1/14/2017.
  */
 angular.module('starter')
-    .controller('ReqCtrl',function ($scope,ChangeAvailability,CONSTANTS,$ionicPopup,$location,$ionicModal,$sce, AppointmentData) {
+    .controller('ReqCtrl',function ($scope,$rootScope,ChangeAvailability,CONSTANTS,$ionicPopup,$location,$ionicModal,$sce, AppointmentData) {
         var customer_id = '';
         ChangeAvailability.getCustomerProfile(AppointmentData.app_appointment_id, function (customerData) {
             $scope.profileImage =CONSTANTS.CUSTOMER_PROFILE_IMAGE_URL + customerData.profile_pic;
@@ -24,7 +24,7 @@ angular.module('starter')
             //
             $location.url('customer_profile/'+$scope.customerData.customer_id);
 
-            $scope.cancelTnC();
+            $rootScope.newRequestModal.hide();
         }
 
         $scope.acceptRequest = function () {
