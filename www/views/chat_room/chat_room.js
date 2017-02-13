@@ -2,7 +2,7 @@
  * Created by admin on 1/5/2017.
  */
 angular.module('starter')
-    .controller('ChatCtrl', function ($scope,$rootScope, $timeout, $ionicScrollDelegate,ChatService,$stateParams,
+    .controller('ChatCtrl', function ($scope,$rootScope, $timeout, $ionicScrollDelegate,$stateParams,
                                       ChatMessages,CONSTANTS) {
 
 //        $rootScope.userDetail = JSON.parse(window.localStorage.getItem("profile"));
