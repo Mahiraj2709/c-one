@@ -1,86 +1,90 @@
 <ion-view title="Profile" cache-view="false">
-    <ion-nav-buttons side="left">
-        <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
-        </button>
-    </ion-nav-buttons>
-    <ion-content ng-controller="ProfileCtrl">
-        <section class="bg-main">
-            <div class="main">
-                <aside class="figure-container">
-                    <figure class="profile-pic"><img alt="" ng-click="showPopup(1)" src="img/user_pic.png" width="70"
-                                                     height="70" ng-src="{{profile_pic}}"></figure>
+  <ion-nav-buttons side="left">
+    <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
+    </button>
+  </ion-nav-buttons>
+  <ion-content ng-controller="ProfileCtrl">
+    <section class="bg-main">
+      <div class="main">
+        <aside class="figure-container">
+          <figure class="profile-pic"><img alt="" ng-click="showPopup(1)" src="img/user_pic.png" width="70"
+                                           height="70" ng-src="{{profile_pic}}"></figure>
 
-                </aside>
-                <aside class="ratings">
-                    <span> <i class="fa fa-star" aria-hidden="true"></i> </span>
-                    <span><i class="fa fa-star" aria-hidden="true"></i></span>
-                    <span> <i class="fa fa-star" aria-hidden="true"></i></span>
-                    <i class="fa fa-star" aria-hidden="true"></i>
-                    <i class="fa fa-star" aria-hidden="true"></i>
+        </aside>
+        <aside class="ratings">
+          <span> <i class="fa fa-star" aria-hidden="true"></i> </span>
+          <span><i class="fa fa-star" aria-hidden="true"></i></span>
+          <span> <i class="fa fa-star" aria-hidden="true"></i></span>
+          <i class="fa fa-star" aria-hidden="true"></i>
+          <i class="fa fa-star" aria-hidden="true"></i>
 
-                </aside>
-                <aside class="view_vdo_btn" ng-click="captureVideo()"><span> Nice to Meet You</span></aside>
+        </aside>
+        <aside class="view_vdo_btn" ng-click="videoChooser()"><span> Nice to Meet You</span></aside>
 
-                <aside class="request_sec">
-                    <ul>
-                        <li><span> 0%</span> requests accepted</li>
-                        <li><span> 0%</span> cleans canceled</li>
-                        <li><span> 0.0 </span> Current Rating</li>
-                    </ul>
-                </aside>
+        <aside class="request_sec">
+          <ul>
+            <li><span> 0%</span> requests accepted</li>
+            <li><span> 0%</span> cleans canceled</li>
+            <li><span> 0.0 </span> Current Rating</li>
+          </ul>
+        </aside>
 
-                <div class="forms_login myprofile_edit_form">
-                    <ul>
-                        <li><input placeholder="First Name" required="required" type="text"
-                                   ng-model="profileDetails.first_name">
-                            <img src="img/user.png" alt="" class="textbox_icons"> <img src="img/edit-icon.png" alt=""
-                                                                                       class="edit-icon"
-                                                                                       ng-click="showKeyboard">
-                        </li>
-                        <li><input placeholder="Last Name" required="required" type="text"
-                                   ng-model="profileDetails.last_name">
-                            <img src="img/user.png" alt="" class="textbox_icons"> <img src="img/edit-icon.png" alt=""
-                                                                                       class="edit-icon"
-                                                                                       ng-click="showKeyboard">
-                        </li>
-                        <li class="profile_name"> About you <img src="img/edit-icon.png" alt="" class="edit-icon"
-                                                                 ng-click="showKeyboard"></li>
-                        <li><textarea rows="3" placeholder="Describe yourself"
-                                      ng-model="profileDetails.about_your_description"></textarea></li>
+        <div class="forms_login myprofile_edit_form">
+          <ul>
+            <li><input placeholder="First Name" required="required" type="text"
+                       ng-model="profileDetails.first_name">
+              <img src="img/user.png" alt="" class="textbox_icons"> <img src="img/edit-icon.png" alt=""
+                                                                         class="edit-icon"
+                                                                         ng-click="showKeyboard">
+            </li>
+            <li><input placeholder="Last Name" required="required" type="text"
+                       ng-model="profileDetails.last_name">
+              <img src="img/user.png" alt="" class="textbox_icons"> <img src="img/edit-icon.png" alt=""
+                                                                         class="edit-icon"
+                                                                         ng-click="showKeyboard">
+            </li>
+            <li class="profile_name"> About you <img src="img/edit-icon.png" alt="" class="edit-icon"
+                                                     ng-click="showKeyboard"></li>
+            <li><textarea rows="3" placeholder="Describe yourself"
+                          ng-model="profileDetails.about_your_description"></textarea></li>
 
-                    </ul>
+          </ul>
 
 
-                </div>
+        </div>
 
-                <section class="photos_sec upload_photo">
-                    <h3>Upload Photos</h3>
-                    <div class="full">
-                        <aside class="half" ng-click="showPopup(3)"><img src="img/scr-7-img1.jpg" width="800" ng-src="{{firstImage}}"
-                                                                           height="400" alt=""> <span
-                                class="up_icon"> <img src="img/upload-icon.png" width="20" height="20" alt=""></span>
-                        </aside>
-                        <aside class="half fr" ng-click="showPopup(4)"><img src="img/scr-7-img2.jpg" width="800" ng-src="{{secondImage}}"
-                                                                              height="400" alt=""> <span
-                                class="up_icon"> <img src="img/upload-icon.png" width="20" height="20" alt=""></span>
-                        </aside>
-                    </div>
-                    <div class="full">
-                        <aside class="half" ng-click="showPopup(5)"><img src="img/scr-7-img3.jpg" width="800" ng-src="{{thirdImage}}"
-                                                                           height="400" alt=""> <span
-                                class="up_icon"> <img src="img/upload-icon.png" width="20" height="20" alt=""></span>
-                        </aside>
-                        <aside class="half fr" ng-click="showPopup(6)"><img src="img/scr-7-img4.jpg" width="800" ng-src="{{fourthImage}}"
-                                                                              height="400" alt=""> <span
-                                class="up_icon"> <img src="img/upload-icon.png" width="20" height="20" alt=""></span>
-                        </aside>
-                    </div>
-                </section>
-                <aside class="btn_set">
-                    <div class="full" ng-click='moveToNext()'><span class="btns pink_btn">  Next  </span></div>
-                </aside>
-            </div>
+        <section class="photos_sec upload_photo">
+          <h3>Upload Photos</h3>
+          <div class="full">
+            <aside class="half" ng-click="showPopup(3)"><img src="img/scr-7-img1.jpg" width="800"
+                                                             ng-src="{{firstImage}}"
+                                                             height="400" alt=""> <span
+              class="up_icon"> <img src="img/upload-icon.png" width="20" height="20" alt=""></span>
+            </aside>
+            <aside class="half fr" ng-click="showPopup(4)"><img src="img/scr-7-img2.jpg" width="800"
+                                                                ng-src="{{secondImage}}"
+                                                                height="400" alt=""> <span
+              class="up_icon"> <img src="img/upload-icon.png" width="20" height="20" alt=""></span>
+            </aside>
+          </div>
+          <div class="full">
+            <aside class="half" ng-click="showPopup(5)"><img src="img/scr-7-img3.jpg" width="800"
+                                                             ng-src="{{thirdImage}}"
+                                                             height="400" alt=""> <span
+              class="up_icon"> <img src="img/upload-icon.png" width="20" height="20" alt=""></span>
+            </aside>
+            <aside class="half fr" ng-click="showPopup(6)"><img src="img/scr-7-img4.jpg" width="800"
+                                                                ng-src="{{fourthImage}}"
+                                                                height="400" alt=""> <span
+              class="up_icon"> <img src="img/upload-icon.png" width="20" height="20" alt=""></span>
+            </aside>
+          </div>
         </section>
+        <aside class="btn_set">
+          <div class="full" ng-click='moveToNext()'><span class="btns pink_btn">  Next  </span></div>
+        </aside>
+      </div>
+    </section>
 
-    </ion-content>
+  </ion-content>
 </ion-view>

@@ -2,7 +2,7 @@
  * Created by admin on 2/1/2017.
  */
 angular.module('starter')
-    .controller('HistoryCtrl',function ($scope,HistoryServices,$ionicPopup) {
+    .controller('HistoryCtrl',function ($scope,HistoryServices,$ionicPopup,$location) {
         $scope.startDate = undefined;
         $scope.endDate = undefined;
 // An alert dialog
@@ -28,8 +28,11 @@ angular.module('starter')
                 }
             }
         }
-        //date formatter   yourDate.toISOString().split('T')[0]
 
+        $scope.showHistoryDetail = function(appointmentId) {
+            $location.url('history_detail/'+appointmentId)
+        };
+        //date formatter   yourDate.toISOString().split('T')[0]
     })
     .service('HistoryServices',function ($ionicLoading,$http,CONSTANTS ) {
     this.getHistory = function (startDate,endDate, callback) {

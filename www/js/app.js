@@ -206,9 +206,9 @@ angular.module('starter',
 
             //service history details
             .state('history_detail', {
-                url: '/history_detail',
+                url: '/history_detail/:app_appointment_id',
                 templateUrl: 'views/service_history/service_history_detail.html',
-                //controller: 'HistoryCtrl'
+                controller: 'HistoryDetailCtrl'
             })
 
             //service history details

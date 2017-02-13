@@ -14,7 +14,7 @@
                                 src="img/calender.png" alt="" class="edit-icon"></span>
                     </aside>
 
-                    <aside class="history_section" ng-repeat="appointment in appointmentArray">
+                    <aside class="history_section" ng-repeat="appointment in appointmentArray" ng-click="showHistoryDetail(appointment.app_appointment_id)">
                         <div class="history_left">
                             <ul>
                                 <li> Request ID - {{appointment.app_appointment_id}}</li>

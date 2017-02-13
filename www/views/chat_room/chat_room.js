@@ -2,8 +2,8 @@
  * Created by admin on 1/5/2017.
  */
 angular.module('starter')
-    .controller('ChatCtrl', function ($scope,$rootScope, $timeout, $ionicScrollDelegate,$stateParams,
-                                      ChatMessages,CONSTANTS) {
+
+    .controller('ChatCtrl', function ($scope,$rootScope, $timeout, $ionicScrollDelegate,$stateParams,services, ChatMessages,CONSTANTS) {
 
 //        $rootScope.userDetail = JSON.parse(window.localStorage.getItem("profile"));
 //        $rootScope.profile_pic = CONSTANTS.PROFILE_IMAGE_URL + $rootScope.userDetail.profile_pic;
@@ -14,10 +14,11 @@ angular.module('starter')
         $scope.sendMessage = function () {
             //alternate = !alternate;
             console.log('called')
-            var d = new Date();
+          console.log(ChatMessages.messages)
+          var d = new Date();
             d = d.toLocaleTimeString().replace(/:\d+ /, ' ');
 //            ChatService.sendMessage($scope.data.message,$stateParams.app_appointment_id);
-            ChatMessages.sendMessage($scope.data.message,$stateParams.app_appointment_id);
+            services.sendMessage($scope.data.message,$stateParams.app_appointment_id);
             ChatMessages.pushChat({
                 userId: '12345',
                 text: $scope.data.message,
@@ -48,24 +49,6 @@ angular.module('starter')
         $scope.data = {};
         $scope.myId = '12345';
         $scope.messages = ChatMessages.messages;
-
-        function pushMessage(chat) {
-            console.log(chat)
-            console.log(ChatMessages)
-            ChatMessages.pushChat({
-                userId: '54321',
-                text: chat.message,
-                customer_profile_pic:CONSTANTS.CUSTOMER_PROFILE_IMAGE_URL + chat.cleaner_profile_pic,
-                cleaner_fname:chat.cleaner_fname,
-                cleaner_lname:chat.cleaner_lname,
-                created_dt:chat.created_dt,
-                time: '323'
-            });
-            $timeout(function () {
-                $ionicScrollDelegate.scrollBottom(true);
-            }, 100);
-
-        }
 
         /*$scope.$on('cloud:push:notification', function (event, data) {
             var msg = data.message;
@@ -150,10 +133,10 @@ angular.module('starter')
     .factory('ChatMessages',function ($http,CONSTANTS) {
         var messages = [];
         function pushChat(chat) {
-            messages.push({
-                userId: '54321',
-                text: chat.message,
-                customer_profile_pic:CONSTANTS.CUSTOMER_PROFILE_IMAGE_URL + chat.cleaner_profile_pic,
+            this.messages.push({
+                userId: chat.userId,
+                text: (chat.text != undefined)?chat.text:'not key',
+                customer_profile_pic:(chat.userId == '12345')?chat.cleaner_profile_pic:CONSTANTS.CUSTOMER_PROFILE_IMAGE_URL + chat.cleaner_profile_pic,
                 cleaner_fname:chat.cleaner_fname,
                 cleaner_lname:chat.cleaner_lname,
                 created_dt:chat.created_dt,
@@ -161,47 +144,9 @@ angular.module('starter')
             })
         }
 
-        function sendChat(message,appointment_id) {
-            var formdata = new FormData();
-            formdata.append('device_type', CONSTANTS.deviceType());
-            formdata.append('session_token', window.localStorage.getItem("sess_tok"));
-            formdata.append('chat_message', message);
-            formdata.append('app_appointment_id', appointment_id);
-            formdata.append('language', 'en');
-
-            console.log(formdata)
-
-            var request = {
-                method: 'POST',
-                url: CONSTANTS.BASE_URL + 'appointmentchat',
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                },
-                data: formdata,
-                headers: {
-                    'Content-Type': undefined
-                }
-            };
-            // SEND THE FILES.
-            $http(request)
-                .success(function (d) {
-                    console.log(d)
-                    if (d.response_status == "1") {
-
-                    } else {
-                        //$scope.showAlert(d.response_msg);
-                    }
-                })
-                .error(function (err) {
-                    /*$scope.hideLoading();*/
-                    console.log(err);
-//                    $scope.showAlert(err);
-                });
-        }
         return {
             messages:messages,
-            pushChat:pushChat,
-            sendChat:sendChat
+            pushChat:pushChat
         };
     })
 ;

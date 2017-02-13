@@ -40,25 +40,9 @@ angular.module('starter')
     })
     .service('UploadVideo',function ($cordovaFileTransfer,CONSTANTS, $ionicLoading) {
         this.captureVideo = function () {
-            var options = {
-                limit: 1,
-                duration: 10
-            };
 
-            navigator.device.capture.captureVideo(onSuccess, onError, options);
 
-            function onSuccess(mediaFiles) {
-                $ionicLoading.show({
-                    template: 'Loading....'
-                });
-                var i, path, len;
-
-                for (i = 0, len = mediaFiles.length; i < len; i += 1) {
-                    path = mediaFiles[i].fullPath;
-                    console.log(path);
-                }
-
-                //upload the video to the server
+                /*//upload the video to the server
                 var options = {
                     fileKey: "profile_video",
                     fileName: "profilevide.mp4",
@@ -108,7 +92,7 @@ angular.module('starter')
             }
             function onError(error) {
                 console.log('Error code: ' + error.code, null, 'Capture Error');
-            }
+            }*/
         }
     })
     .service('GetCarInfo', function (CONSTANTS, $http, $ionicLoading) {

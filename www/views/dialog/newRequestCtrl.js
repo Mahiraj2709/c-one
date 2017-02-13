@@ -2,9 +2,9 @@
  * Created by admin on 1/14/2017.
  */
 angular.module('starter')
-    .controller('ReqCtrl',function ($scope,ChangeAvailability,CONSTANTS,$ionicPopup,$location,$ionicModal,$sce, AppointmentData) {
+    .controller('ReqCtrl',function ($scope,$rootScope,ChangeAvailability,CONSTANTS,$ionicPopup,$location,$ionicModal,$sce, AppointmentData) {
         var customer_id = '';
-        ChangeAvailability.getCustomerProfile($scope.payload.app_appointment_id, function (customerData) {
+        ChangeAvailability.getCustomerProfile(AppointmentData.app_appointment_id, function (customerData) {
             $scope.profileImage =CONSTANTS.CUSTOMER_PROFILE_IMAGE_URL + customerData.profile_pic;
             $scope.customerData = customerData;
             customer_id = customerData.customer_id;
@@ -24,9 +24,9 @@ angular.module('starter')
             //
             $location.url('customer_profile/'+$scope.customerData.customer_id);
 
-            $scope.cancelTnC();
+            $rootScope.newRequestModal.hide();
         }
-        
+
         $scope.acceptRequest = function () {
             ChangeAvailability.acceptRequest($scope.customerData,function (response_key) {
                 if(response_key == 101) {
