@@ -1,4 +1,5 @@
-<ion-view title="Cleanosaur has arrived" cache-view="false">
+<ion-view cache-view="false">
+    <ion-nav-title>{{onWayTitle}}</ion-nav-title>
     <ion-nav-buttons side="left">
         <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
         </button>
@@ -6,11 +7,12 @@
     <ion-content ng-controller="OnTheWayCtrl">
         <div class="on_way">
             <!--<img src="img/cleansour_on_the_way_map.jpg"  alt="">-->
-            <div id="on_way_map" data-tap-disabled="true" style="height:60vh"></div>
+            <div id="on_way_map" data-tap-disabled="true" style="height:52vh"></div>
 
             <aside class="on_way_add_sec">
-                <div class="map_sec_field" ng-hide="true">
-                    <input placeholder="75 Bennett, NY" required="required" type="text">
+                <div class="map_sec_field">
+                    <input placeholder="Custemer address" required="required"
+                           ng-model="appointmentDetail.customer_address" type="text">
                     <img src="img/address.png" alt="" class="left-txt-icons">
                     <img src="img/map-point-con.png" alt="" class="right-txt-icons">
                 </div>
@@ -20,7 +22,7 @@
         </div>
         <div class="call_chat_sec">
             <aside class="figure-container">
-                <figure class="profile-pic"> <img alt="" ng-src="{{profileImage}}" > </figure>
+                <figure class="profile-pic"><img alt="" ng-src="{{profileImage}}"></figure>
             </aside>
             <aside class="ratings">
                 <span> <i class="fa fa-star" aria-hidden="true"></i> </span>
@@ -29,12 +31,24 @@
                 <i class="fa fa-star" aria-hidden="true"></i>
                 <i class="fa fa-star" aria-hidden="true"></i>
             </aside>
+            <div class="full">
+                <div class="miles">  <span class="btns gray_btn"> {{distance | miles}} </span>  </div>
+                <div class="milesid" ng-click="showAppointment()">
+                    <p style="text-align: center"> <span class="btns gray_btn ">{{request_id}} </span> </p>
+                </div>
+                <div class="miles_right"> <span class="btns gray_btn width-98"> {{duration | timeFilter}} </span> </div>
 
-            <p style="text-align: center"> <span class="btns gray_btn popup_rwr_btn">{{request_id}} </span> </p>
+            </div>
 
-            <aside class="btn_set"> <div class="half" ng-click="CallCustomer()"> <span class="btns bdr_btn"> <i class="fa fa-phone" aria-hidden="true"></i>  Call </span> </div>
-                <div class="half fr" ng-click="openChat()"> <span class="btns bdr_btn">  <i class="fa fa-commenting-o" aria-hidden="true"></i>  Chat </span> </div>  </aside>
-            <div class="full" ng-click="iHaveArrived()"> <span class="btns pink_btn"> {{btn_text}} </span> </div>
+            <aside class="btn_set">
+                <div class="half" ng-click="CallCustomer()"><span class="btns bdr_btn"> <i class="fa fa-phone"
+                                                                                           aria-hidden="true"></i>  Call </span>
+                </div>
+                <div class="half fr" ng-click="openChat()"><span class="btns bdr_btn">  <i class="fa fa-commenting-o"
+                                                                                           aria-hidden="true"></i>  Chat </span>
+                </div>
+            </aside>
+            <div class="full" ng-click="iHaveArrived()"><span class="btns pink_btn"> {{btn_text}} </span></div>
         </div>
     </ion-content>
 </ion-view>

@@ -19,15 +19,17 @@ angular.module('starter')
             d = d.toLocaleTimeString().replace(/:\d+ /, ' ');
 //            ChatService.sendMessage($scope.data.message,$stateParams.app_appointment_id);
             services.sendMessage($scope.data.message,$stateParams.app_appointment_id);
+
             ChatMessages.pushChat({
-                userId: '12345',
+                userType: '1',
                 text: $scope.data.message,
-                customer_profile_pic: $rootScope.profile_pic,
-                cleaner_fname:$rootScope.userDetail.first_name,
-                cleaner_lname:$rootScope.userDetail.last_name,
+                profile_pic: $rootScope.profile_pic,
+                fname:$rootScope.userDetail.first_name,
+                lname:$rootScope.userDetail.last_name,
                 created_dt:'',
                 time: d
             });
+
             delete $scope.data.message;
             $ionicScrollDelegate.scrollBottom(true);
             //console.log($scope.messages)
@@ -128,25 +130,55 @@ angular.module('starter')
                 });
             }
         }
-    })
+    }).factory('ChatMessages',function ($http,CONSTANTS) {
 
-    .factory('ChatMessages',function ($http,CONSTANTS) {
         var messages = [];
-        function pushChat(chat) {
+
+        function pushMyChat(chat) {
+            this.messages.push(chat)
+        }
+
+        function pushNotificationChat(chat) {
             this.messages.push({
-                userId: chat.userId,
-                text: (chat.text != undefined)?chat.text:'not key',
-                customer_profile_pic:(chat.userId == '12345')?chat.cleaner_profile_pic:CONSTANTS.CUSTOMER_PROFILE_IMAGE_URL + chat.cleaner_profile_pic,
-                cleaner_fname:chat.cleaner_fname,
-                cleaner_lname:chat.cleaner_lname,
-                created_dt:chat.created_dt,
+                userType: '2',
+                text: chat.message,
+                profile_pic: CONSTANTS.CUSTOMER_PROFILE_IMAGE_URL + chat.customer_profile_pic,
+                fname: chat.customer_fname,
+                lname: chat.customer_lname,
+                created_dt: chat.created_dt,
                 time: '323'
             })
         }
 
+        function pushChatHistory(chatArray) {
+
+            for (var i = 0; i < chatArray.length; i++){
+                var userType = '1'
+                var profileImage = CONSTANTS.PROFILE_IMAGE_URL + chatArray[i].customer_profile_pic
+                var fName = chatArray[i].customer_fname;
+                var lName = chatArray[i].customer_lname;
+                if(chatArray[i].sender_user_type == '1'){
+                    userType = '2'
+                    profileImage = CONSTANTS.CUSTOMER_PROFILE_IMAGE_URL + chatArray[i].customer_profile_pic
+                    fName = chatArray[i].customer_fname;
+                    lName = chatArray[i].customer_lname;
+                }
+                this.messages.push({
+                    userType: userType,
+                    text: chatArray[i].chat_message,
+                    profile_pic: profileImage,
+                    fname: fName,
+                    lname: lName,
+                    created_dt: chatArray[i].created_dt,
+                    time: '323'
+                })
+            }
+        }
         return {
-            messages:messages,
-            pushChat:pushChat
+            messages: messages,
+            pushChat: pushMyChat,
+            pushNotificationChat:pushNotificationChat,
+            pushChatHistory:pushChatHistory
         };
     })
 ;

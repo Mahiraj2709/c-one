@@ -156,7 +156,7 @@ angular.module('starter')
                         $scope.loginDetails.email = undefined
                         $scope.loginDetails.password = undefined
 
-                        $scope.showAlert(d.response_msg);
+                        //$scope.showAlert(d.response_msg);
                         window.localStorage.setItem("profile", JSON.stringify(d.response_data.profile));
                         window.localStorage.setItem("login", true);
                         window.localStorage.setItem("sess_tok", d.response_data.session_token);

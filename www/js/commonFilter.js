@@ -24,3 +24,43 @@ angular.module('starter')
             }
         }
     })
+    .filter('cleanStyle', function () {
+        // Create the return function
+        // set the required parameter name to **number**
+        return function (cleanStyle) {
+            switch (cleanStyle) {
+                case '1':
+                    return 'Standard Clean'
+                    break;
+                case '2':
+                    return 'Deep Clean'
+                    break;
+                default:
+                    return 'NA'
+            }
+        }
+    })
+    .filter('miles', function () {
+        // Create the return function
+        // set the required parameter name to **number**
+        return function (distance) {
+            if(distance == undefined) {
+                return 'na'
+            }else{
+                return (distance*0.000621371192).toFixed(1) + ' Mi'
+            }
+
+        }
+    })
+    .filter('timeFilter', function () {
+        // Create the return function
+        // set the required parameter name to **number**
+        return function (duration) {
+            if(duration == undefined) {
+                return 'na'
+            }else{
+                return duration + ' Mins'
+            }
+
+        }
+    });

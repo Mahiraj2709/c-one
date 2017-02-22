@@ -1,7 +1,7 @@
 angular.module('starter')
     .controller('HomeCtrl', function ($scope, $rootScope, $ionicPopup, $http, ChangeAvailability, $ionicHistory, NotificationFactory,
                                       $ionicLoading, $location, $ionicSideMenuDelegate, $ionicModal, LocationData,ChatMessages,
-                                      $ionicViewService, $cordovaGeolocation, CONSTANTS,services) {
+                                      $ionicViewService, $cordovaGeolocation, CONSTANTS,services,popups) {
         var formdata = new FormData();
         //Loading in
         $scope.showLoading = function () {
@@ -165,19 +165,8 @@ angular.module('starter')
             //clear notifica
         }
         
-        $scope.confirmLogout = function () {
-          services.logout(function (response) {
-            if (response.response_status == "1") {
-              window.localStorage.removeItem("porfile");
-              window.localStorage.removeItem("login");
-              window.localStorage.removeItem("sess_tok");
-              $ionicHistory.clearHistory();
-              $ionicHistory.clearCache();
-              $location.path('login');
-
-            } else {
-              $scope.showAlert(d.response_msg);
-            }
-          })
+        $rootScope.confirmLogout = function () {
+            console.log('logout clicked')
+            popups.confirmLogoutPopup();
         }
     });

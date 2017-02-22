@@ -2,7 +2,7 @@
     <ion-content>
         <section class="overlay_bg" ng-controller="ReqCtrl">
             <div class="popup-sec" ng-init="loadCustomerData">
-                <span class="close_btn" ng-click="cancelTnC()">  <i class="fa fa-times-circle" aria-hidden="true"></i>   </span>
+                <span class="close_btn" ng-click="dismissModal()">  <i class="fa fa-times-circle" aria-hidden="true"></i>   </span>
                 <aside class="figure-container">
                     <figure class="profile-pic"><img alt="" src="img/user-photo.png" width="50" height="50"
                                                      ng-src="{{profileImage}}">
@@ -43,7 +43,7 @@
                     <div class="half" ng-click="acceptRequest()"><span class="btns green_btn"><i class="fa fa-check"
                                                                                                  aria-hidden="true"></i>  Accept </span>
                     </div>
-                    <div class="half fr" ng-click="cancelTnC()"><span class="btns orange_btn"><i class="fa fa-times"
+                    <div class="half fr" ng-click="rejectRequest()"><span class="btns orange_btn"><i class="fa fa-times"
                                                                                                  aria-hidden="true"></i>  Reject </span>
                     </div>
                 </aside>

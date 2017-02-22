@@ -14,7 +14,14 @@ angular.module('starter')
             var request = {
                 method: 'POST',
                 url: CONSTANTS.BASE_URL + 'logout',
-                data: formdata
+                data: formdata,
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                },
+                data: formdata,
+                headers: {
+                    'Content-Type': undefined
+                }
             };
             // SEND THE FILES.
             $http(request)
@@ -65,13 +72,12 @@ angular.module('starter')
             var formdata = new FormData();
             formdata.append('device_type', CONSTANTS.deviceType());
             formdata.append('session_token', window.localStorage.getItem("sess_tok"));
-//      formdata.append('session_token', 'Mjk3MjBmZDhlY2IyMDQ0ZTRhZWMyYjdkOGEzYjJkMzI');
             formdata.append('app_appointment_id', appointment_id);
             formdata.append('language', 'en');
             console.log(formdata)
             var request = {
                 method: 'POST',
-                url: 'http://cleanosaurapp.onsisdev.info/customerapi/' + 'chathistory',
+                url: CONSTANTS.BASE_URL + 'chathistory',
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 },
@@ -184,12 +190,126 @@ angular.module('starter')
                 });
         }
 
+        function completeRide(appointment_data, callback) {
+            $ionicLoading.show({
+                template: 'Loading...'
+            });
+            var formdata = new FormData();
+            formdata.append("device_type", CONSTANTS.deviceType());
+            formdata.append('session_token', window.localStorage.getItem("sess_tok"));
+            formdata.append("language", "en");
+            formdata.append("app_appointment_id", appointment_data.app_appointment_id);
+            formdata.append("request_date", appointment_data.appointment_date);
+            formdata.append("cleaner_timezone", appointment_data.appointment_timezone);
+            formdata.append("customer_address", appointment_data.customer_address);
+            formdata.append("customer_latitude", appointment_data.customer_latitude);
+            formdata.append("customer_longitude", appointment_data.customer_longitude);
+            var request = {
+                method: 'POST',
+                url: CONSTANTS.BASE_URL + 'cleanosaurrequestcomplete',
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                },
+                data: formdata,
+                headers: {
+                    'Content-Type': undefined
+                }
+            };
+            // SEND THE FILES.
+            $http(request)
+                .success(function (d) {
+                    $ionicLoading.hide();
+                    console.log(d)
+                    if (d.response_status == "1") {
+                        callback(d)
+                    } else {
+                        popups.showAlert(d.response_msg)
+                    }
+                })
+                .error(function (err) {
+                    $ionicLoading.hide();
+                });
+        }
+        function updateLocation(cleanerData, callback) {
+            var formdata = new FormData();
+            formdata.append("device_type", CONSTANTS.deviceType());
+            formdata.append('session_token', window.localStorage.getItem("sess_tok"));
+            formdata.append("language", "en");
+            formdata.append("app_appointment_id", cleanerData.app_appointment_id);
+            formdata.append("cleaner_address", cleanerData.cleaner_address);
+            formdata.append("cleaner_latitude", cleanerData.cleaner_latitude);
+            formdata.append("cleaner_longitude", cleanerData.cleaner_longitude);
+            var request = {
+                method: 'POST',
+                url: CONSTANTS.BASE_URL + 'getcleanerontheway',
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                },
+                data: formdata,
+                headers: {
+                    'Content-Type': undefined
+                }
+            };
+            // SEND THE FILES.
+            $http(request)
+                .success(function (d) {
+                    $ionicLoading.hide();
+                    console.log(d)
+                    if (d.response_status == "1") {
+                        callback(d)
+                    } else {
+                        //popups.showAlert(d.response_msg)
+                    }
+                })
+                .error(function (err) {
+                    $ionicLoading.hide();
+                });
+        }
+        function sendfeedback(feedbackData, callback) {
+            var formdata = new FormData();
+            formdata.append("device_type", CONSTANTS.deviceType());
+            formdata.append('session_token', window.localStorage.getItem("sess_tok"));
+            formdata.append("language", "en");
+            formdata.append("app_appointment_id", feedbackData.app_appointment_id);
+            formdata.append("review", feedbackData.review);
+            formdata.append("rating", feedbackData.rating);
+            formdata.append("tip", 'na');
+            var request = {
+                method: 'POST',
+                url: CONSTANTS.BASE_URL + 'sendfeedback',
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                },
+                data: formdata,
+                headers: {
+                    'Content-Type': undefined
+                }
+            };
+            // SEND THE FILES.
+            $http(request)
+                .success(function (d) {
+                    $ionicLoading.hide();
+                    console.log(d)
+                    if (d.response_status == "1") {
+                        callback(d)
+                    } else {
+                        //popups.showAlert(d.response_msg)
+                    }
+                })
+                .error(function (err) {
+                    $ionicLoading.hide();
+                });
+        }
+
         return {
             logout: logout,
             sendMessage: sendMessage,
             getChatHistory: getChatHistory,
             petProfileVideo: petProfileVideo,
             getHistoryDetail:getHistoryDetail,
-            getstaticcontent:getstaticcontent
+            getstaticcontent:getstaticcontent,
+            completeRide:completeRide,
+            updateLocation:updateLocation,
+            sendfeedback:sendfeedback
         }
     });

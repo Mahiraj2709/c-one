@@ -222,9 +222,19 @@ angular.module('starter',
             .state('help', {
                 url: '/help',
                 templateUrl: 'views/help/help.html',
-                //controller: 'HistoryCtrl'
+                controller: 'HelpCtrl'
             })
-
+            //work as cleaner
+            .state('help_page_two', {
+                url: '/help_page_two/:parent_id',
+                templateUrl: 'views/help/page_two.html',
+                controller: 'PageTwoCtrl'
+            })//work as cleaner
+            .state('help_content', {
+                url: '/help_content/:content',
+                templateUrl: 'views/help/content_page.html',
+                controller: 'ContentCtrl'
+            })
             //work as cleaner
             .state('work_as_customer', {
                 url: '/work_as_customer',

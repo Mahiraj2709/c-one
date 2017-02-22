@@ -1,0 +1,58 @@
+<section class="overlay_bg">
+
+  <div class="appointment_popup">
+    <div class="popup-sec">
+      <span class="close_btn" ng-click="hideAppointmentPopup()">  <i class="fa fa-times-circle" aria-hidden="true"></i>   </span>
+      <aside class="figure-container" ng-hide="true">
+        <figure class="profile-pic" ng-hide="true"><img alt="" src="img/user-photo.png" width="50" height="50"
+                                                        ng-src="{{profileImage}}">
+        </figure>
+        <figcaption class="user-detail"> {{customerData.customer_first_name}} {{customerData.customer_last_name}}
+        </figcaption>
+      </aside>
+      <aside class="ratings" ng-hide="true">
+        <span> <i class="fa fa-star" aria-hidden="true"></i> </span>
+        <span><i class="fa fa-star" aria-hidden="true"></i></span>
+        <span> <i class="fa fa-star" aria-hidden="true"></i></span>
+        <i class="fa fa-star" aria-hidden="true"></i>
+        <i class="fa fa-star" aria-hidden="true"></i>
+
+      </aside>
+      <aside class="view_profile" ng-click="viewCustomer()">
+        <p><span ng-hide="true"> <u>View Customer’s Profile </u> </span> <strong>{{appointmentDetail.confirm_price | currency}}</strong></p>
+      </aside>
+
+      <aside class="view_vdo_btn" ng-click="openVideoPlayer()" ng-hide="true"><span> Nice to Meet You</span></aside>
+
+      <aside class="profile_details">
+        <ul>
+          <li><strong>Name</strong>- {{appointmentDetail.customer_first_name}} {{appointmentDetail.customer_last_name}}</li>
+          <li><strong>Location</strong>- {{appointmentDetail.customer_address }}</li>
+          <li><strong>Property Type</strong> - {{appointmentDetail.property_type_id | property}}</li>
+          <li><strong>Clean Type</strong>: {{appointmentDetail.clean_style_id | cleanStyle}}</li>
+          <li><strong>Bedroom</strong> - {{appointmentDetail.bedroom}}</li>
+          <li><strong>Bathroom</strong> - {{appointmentDetail.bathroom}}</li>
+          <li><strong>Kitchen</strong> - {{appointmentDetail.kitchen}}</li>
+          <li><strong>Living Room</strong> - {{appointmentDetail.living_rooms}}</li>
+          <li><strong>Extra Rooms</strong> - {{appointmentDetail.extra_rooms}}</li>
+          <li><strong>Time and Date</strong> - {{appointmentDetail.appointment_date}}</li>
+          <li><strong>Details</strong> - {{appointmentDetail.work_order_details}}</li>
+        </ul>
+      </aside>
+      <aside class="btn_set" ng-hide="!requestAccepted" ng-hide="true">
+        <div class="half" ng-click="acceptRequest()"><span class="btns green_btn"><i class="fa fa-check"
+                                                                                     aria-hidden="true"></i>  Accept </span>
+        </div>
+        <div class="half fr" ng-click="cancelTnC()"><span class="btns orange_btn"><i class="fa fa-times"
+                                                                                     aria-hidden="true"></i>  Reject </span>
+        </div>
+      </aside>
+
+      <aside class="request_accepted" ng-hide="true">
+        <p>
+          <strong>Another Cleanosaur has already accepted.</strong>
+        </p>
+      </aside>
+    </div>
+  </div>
+</section>

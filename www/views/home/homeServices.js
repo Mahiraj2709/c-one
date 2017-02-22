@@ -111,7 +111,7 @@ angular.module('starter')
                     $ionicLoading.hide();
                 });
         }
-        this.rejectRequest = function (callback) {
+        this.rejectRequest = function (appointmentId,callback) {
             $ionicLoading.show({
                 template: 'Loading...'
             });
@@ -119,10 +119,12 @@ angular.module('starter')
             formdata.append("device_type", CONSTANTS.deviceType());
             formdata.append('session_token', window.localStorage.getItem("sess_tok"));
             formdata.append("language", "en");
-            formdata.append("app_appointment_id", $rootScope.payload.app_appointment_id);
+            formdata.append("app_appointment_id", appointmentId);
+            formdata.append("request_date", new Date().toISOString().split('T')[0]);
+            formdata.append("cleaner_timezone", 'UTC');
             var request = {
                 method: 'POST',
-                url: CONSTANTS.BASE_URL + 'getappointment',
+                url: CONSTANTS.BASE_URL + 'rejectrequest',
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 },
@@ -135,11 +137,8 @@ angular.module('starter')
             $http(request)
                 .success(function (d) {
                     $ionicLoading.hide();
-                    console.log(d)
-                    if (d.response_status == "1") {
-                        callback(d.response_data)
-                    } else {
-                    }
+                    //console.log(d)
+                    callback(d)
                 })
                 .error(function (err) {
                     $ionicLoading.hide();

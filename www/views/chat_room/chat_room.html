@@ -1,4 +1,4 @@
-<ion-view title="Chatting" hide-back-button="true">
+<ion-view title="Chatting" hide-back-button="true" cache-view="false">
     <ion-nav-buttons side="primary">
         <button class="button button-icon ion-android-call" ng-click="call()"></button>
     </ion-nav-buttons>
@@ -6,13 +6,13 @@
 
         <ion-content class="has-header">
             <section class="chatting_sec">
-                <aside ng-class="{right_comment: message.userId == myId}" ng-repeat="message in messages">
+                <aside ng-class="{right_comment: message.userType == '1'}" ng-repeat="message in messages">
                     <div class="chat_txt_sec">
 
                         <div class="chat_img_sec" ng-class="{'slide-right': hideTime, '': !hideTime}">
-                            <img ng-src="{{message.customer_profile_pic}}" alt="" width="120" height="140">
+                            <img ng-src="{{message.profile_pic}}" alt="" width="120" height="140">
                         </div>
-                        <p><span> {{message.cleaner_fname}} {{message.cleaner_lname}} </span> {{ message.text }} </p>
+                        <p><span> {{message.fname}} {{message.lname}} </span> {{ message.text }} </p>
                         <!--<div class="time" ng-class="{'slide-right': hideTime, '': !hideTime}">{{message.time}}</div>-->
                     </div>
                 </aside>

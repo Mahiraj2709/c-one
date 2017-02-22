@@ -2,7 +2,7 @@
  * Created by admin on 1/14/2017.
  */
 angular.module('starter')
-    .controller('ReqCtrl',function ($scope,$rootScope,ChangeAvailability,CONSTANTS,$ionicPopup,$location,$ionicModal,$sce, AppointmentData) {
+    .controller('ReqCtrl',function ($scope,$rootScope,ChangeAvailability,CONSTANTS,$ionicPopup,$location,$ionicModal,$sce,popups, AppointmentData) {
         var customer_id = '';
         ChangeAvailability.getCustomerProfile(AppointmentData.app_appointment_id, function (customerData) {
             $scope.profileImage =CONSTANTS.CUSTOMER_PROFILE_IMAGE_URL + customerData.profile_pic;
@@ -40,28 +40,41 @@ angular.module('starter')
                         title: 'Success',
                         template: 'You have successfully accepted this request'
                     });*/
-
-
                 }
             });
         }
 
-        $scope.rejectRequest = function () {
-            ChangeAvailability.rejectRequest();
+        $scope.dismissModal = function () {
+            //ChangeAvailability.rejectRequest();
 
-            $scope.modal.hide();
-            $ionicPopup.alert({
-                title: 'Success',
-                template: 'You have rejected this request'
+            $rootScope.newRequestModal.hide();
+        }
+
+        $scope.rejectRequest = function () {
+            ChangeAvailability.rejectRequest(AppointmentData.app_appointment_id,function (resposne) {
+
+                if(resposne.response_status == '1') {
+                    $rootScope.newRequestModal.hide();
+                    $ionicPopup.alert({
+                        title: 'Success',
+                        template: resposne.response_msg
+                    });
+                }
             });
         }
 
         $scope.requestAccepted = true;
 
         //video player modal
-        $scope.videoLink = $sce.trustAsResourceUrl('http://airshareapp.onsisdev.info/public/media/video/1484900352.mp4');
+
+        $scope.videoLink = $sce.trustAsResourceUrl(CONSTANTS.CUSTOMER_PROFILE_IMAGE_URL + AppointmentData.profile_video);
 
         $scope.openVideoPlayer = function () {
+
+            if(AppointmentData.profile_video == undefined) {
+
+                popups.showAlert('profile video does not exit!'); return
+            }
             $ionicModal.fromTemplateUrl('views/dialog/video_player.html', {
                 scope: $scope,
                 animation: 'slide-in-up'
@@ -72,6 +85,9 @@ angular.module('starter')
         };
 
         $scope.closeVideoPlayer = function () {
-            $scope.modal.hide();
+            //$scope.videoLink = undefined
+            $scope.modal.remove();
+
+
         }
     });
