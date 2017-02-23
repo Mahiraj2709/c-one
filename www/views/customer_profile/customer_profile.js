@@ -2,7 +2,14 @@
  * Created by admin on 1/18/2017.
  */
 angular.module('starter')
-    .controller('CustomerProfileCtrl',function ($scope,$stateParams,CustomerData,CONSTANTS,AppointmentData,$sce,$ionicModal,popups) {
+    .controller('CustomerProfileCtrl',function ($scope,$stateParams,CustomerData,CONSTANTS,AppointmentData,$sce,$ionicModal,popups,services) {
+
+        services.getCustomerFeedback($stateParams.customer_id,function (response) {
+            if(response.response_status == '1') {
+                $scope.cleanerFeedback = response.response_data.rating;
+            }
+        })
+
         console.log($stateParams.customer_id);
         $scope.getCustomerData = function () {
             CustomerData.getCustomerProfile($stateParams.customer_id,function (customerData) {

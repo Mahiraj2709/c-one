@@ -3,12 +3,18 @@
  */
 angular.module('starter')
     .controller('OnTheWayCtrl', function ($scope, popups, AppointmentData, $ionicPopup, LocationData, CONSTANTS, ChatMessages, OnTheWayService, services, $location) {
+
+        services.getCustomerFeedback(AppointmentData.appointment.customer_id, function (response) {
+                if (response.response_status == '1') {
+                    $scope.cleanerFeedback = response.response_data.rating;
+                }
+            })
+
             var markerA = new google.maps.MarkerImage('img/mapcar-icon.png',
                 new google.maps.Size(40, 40));
             var markerB = new google.maps.MarkerImage('img/map-marker.png',
                 new google.maps.Size(40, 40));
             $scope.appointmentDetail = AppointmentData.appointment
-
             OnTheWayService.getDistanceMatrix(new google.maps.LatLng(LocationData.latitude, LocationData.longitude),
                 new google.maps.LatLng(AppointmentData.appointment.customer_latitude, AppointmentData.appointment.customer_longitude),
                 function (response) {
@@ -18,7 +24,6 @@ angular.module('starter')
                         $scope.duration = response.rows[0].elements[0].duration.value;
                     }
                 })
-
             if (AppointmentData.appointment.status == '4') {
                 $scope.btn_text = "I HAVE ARRIVED";
                 var arrived = true;
@@ -114,25 +119,7 @@ angular.module('starter')
             };
             $scope.btn_text = "I HAVE ARRIVED";
             var arrived = false;
-            $scope.iHaveArrived = function () {
-                if (arrived) {
-                    services.completeRide(AppointmentData.appointment, function (response) {
-                        if (response.response_status == '1') {
-                            $location.url('/bill');
-                        }
-                        /*
-                         $ionicHistory.clearCache().then(function () {
-                         })
-                         */
-                    })
-                } else {
-                    OnTheWayService.iHaveArrived(AppointmentData.appointment, function () {
-                        arrived = true
-                        $scope.btn_text = "COMPLETE"
-                        $scope.onWayTitle = 'I has arrived'
-                    });
-                }
-            }
+
             function onSuccess(position) {
                 //console.log(position.coords.latitude)
                 //console.log(position.coords.longitude)
@@ -165,8 +152,36 @@ angular.module('starter')
                 timeout: 5000,
                 enableHighAccuracy: false
             });
-//        Stop watching for changes to the device's location referenced by the watchID parameter.
+//          Stop watching for changes to the device's location referenced by the watchID parameter.
             //navigator.geolocation.clearWatch(watchID);
+
+            $scope.$on("$ionicView.beforeLeave", function (event, data) {
+                navigator.geolocation.clearWatch(watchID);
+            });
+
+            $scope.iHaveArrived = function () {
+
+                navigator.geolocation.clearWatch(watchID);
+
+                if (arrived) {
+                    services.completeRide(AppointmentData.appointment, function (response) {
+                        if (response.response_status == '1') {
+                            $location.url('/bill');
+                        }
+                        /*
+                         $ionicHistory.clearCache().then(function () {
+                         })
+                         */
+                    })
+                } else {
+                    OnTheWayService.iHaveArrived(AppointmentData.appointment, function () {
+                        arrived = true
+                        $scope.btn_text = "COMPLETE"
+                        $scope.onWayTitle = 'I has arrived'
+                    });
+                }
+            }
+
             $scope.showAppointment = function () {
                 $scope.appoimentPopup = $ionicPopup.show({
                     templateUrl: 'views/dialog/appointment_popup.html',

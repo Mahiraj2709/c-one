@@ -107,7 +107,7 @@ input[type="text"],input[type="number"],input[type="password"],input[type="tel"]
 .ratings_mech{width:100%; float:left; text-align:center; line-height:15px;}
 .ratings span i{ color:#fabb0c;}
 .ratingYellow {color:#fabb0c}
-.ratings i{ color:#ebebeb;}
+.ratingBrown {color:#666666}
 .view_profile{width:100%; float:left; text-align:center; margin:6px 0;}
 .view_profile span{ color:#ff2f92; display:block; font-size:14px;}
 .view_profile strong{ font-size:18px;}

@@ -4,6 +4,12 @@ angular.module('starter')
                                          ImagePickerService, LoadImagesService, GetCarInfo, $sce, $ionicModal,
                                          GooglePlacesService, $location, $timeout, $cordovaFileTransfer,
                                          $cordovaGeolocation, popups, CONSTANTS, videoFactory, services) {
+
+        services.getRating(function (response) {
+            if(response.response_status == '1') {
+                $rootScope.feedback = response.response_data.rating;
+            }
+        })
         var posOptions = {timeout: 10000, enableHighAccuracy: false};
         $cordovaGeolocation
             .getCurrentPosition(posOptions)

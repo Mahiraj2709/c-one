@@ -16,7 +16,7 @@ angular.module('starter')
                 if(resposne.response_status == '1') {
                     $scope.historyDetail = resposne.response_data.appointment[0];
 
-                    var latLng = new google.maps.LatLng($scope.historyDetail.cleaner_latitude, $scope.historyDetail.cleaner_longitude);
+                    var latLng = new google.maps.LatLng($scope.historyDetail.customer_latitude, $scope.historyDetail.customer_longitude);
                     $scope.map.panTo(latLng);
 
                     var centerMarker = new google.maps.Marker({
@@ -24,10 +24,8 @@ angular.module('starter')
                         position: $scope.map.getCenter(),
                         //title: 'Some location',
                         icon: {
-                            url: 'img/mapcar-icon.png',
-                            size: new google.maps.Size(40, 40),
-                            /*origin: new google.maps.Point(0, 0),
-                             anchor: new google.maps.Point(10, 20)*/
+                            url: 'img/map-marker.png',
+                            size: new google.maps.Size(40, 40)
                         }
                     });
                 }

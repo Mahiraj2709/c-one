@@ -124,6 +124,11 @@ angular.module('starter',
                 templateUrl: 'views/login/login.html'
             })
 
+            .state('reset_password', {
+                url: '/reset_password',
+                templateUrl: 'views/reset_password/reset_password.html',
+                controller:'ResetPasswordCtrl'
+            })
             //sign up router
             .state("sign_up", {
                 url: '/sign_up',
@@ -133,7 +138,7 @@ angular.module('starter',
             //forgot password
             .state('forgot_password', {
                 url: '/forgot_password',
-                templateUrl: 'views/forgot_password/forgot_password.html',
+                templateUrl: 'views/forgot_password/reset_password.html',
                 controller: 'ForgotPasswordCtrl'
             })
             //home router

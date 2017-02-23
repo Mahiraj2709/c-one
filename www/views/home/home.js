@@ -2,6 +2,13 @@ angular.module('starter')
     .controller('HomeCtrl', function ($scope, $rootScope, $ionicPopup, $http, ChangeAvailability, $ionicHistory, NotificationFactory,
                                       $ionicLoading, $location, $ionicSideMenuDelegate, $ionicModal, LocationData,ChatMessages,
                                       $ionicViewService, $cordovaGeolocation, CONSTANTS,services,popups) {
+
+        services.getRating(function (response) {
+            if(response.response_status == '1') {
+                $rootScope.feedback = response.response_data.rating;
+            }
+        })
+
         var formdata = new FormData();
         //Loading in
         $scope.showLoading = function () {

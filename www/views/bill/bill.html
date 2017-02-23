@@ -1,4 +1,4 @@
-<ion-view title="Your Bill">
+<ion-view title="Your Bill" cache-view="false">
     <ion-nav-buttons side="left">
         <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
         </button>
@@ -32,7 +32,7 @@
                     <i ng-click="setRating(5)" class="fa fa-star" ng-class="{'ratingYellow':rateObj.rating >=5}"
                        aria-hidden="true"></i>
                 </aside>
-                <textarea rows="3" ng-model ="rateObj.review" placeholder="Write a Review..."></textarea>
+                <textarea rows="3" ng-model="rateObj.review" placeholder="Write a Review..."></textarea>
 
                 <div class="full" ng-click="generateBill()"><span class="btns pink_btn"> Done </span></div>
             </div>
