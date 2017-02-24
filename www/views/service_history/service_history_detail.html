@@ -26,11 +26,11 @@
                 </aside>
 
                 <aside class="ratings" style="padding-top: 10px">
-                    <span> <i class="fa fa-star" aria-hidden="true"></i> </span>
-                    <span><i class="fa fa-star" aria-hidden="true"></i></span>
-                    <span> <i class="fa fa-star" aria-hidden="true"></i></span>
-                    <i class="fa fa-star" aria-hidden="true"></i>
-                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" ng-class="{'ratingYellow':historyDetail.rating >=1}" aria-hidden="true"></i>
+                    <i class="fa fa-star" ng-class="{'ratingYellow':historyDetail.rating >=2}" aria-hidden="true"></i>
+                    <i class="fa fa-star" ng-class="{'ratingYellow':historyDetail.rating >=3}" aria-hidden="true"></i>
+                    <i class="fa fa-star" ng-class="{'ratingYellow':historyDetail.rating >=4}" aria-hidden="true"></i>
+                    <i class="fa fa-star" ng-class="{'ratingYellow':historyDetail.rating >=5}" aria-hidden="true"></i>
                 </aside>
                 <aside class="his-req-add">
                     <p style="text-align: center; padding-bottom: 12px">Awesome service without any delay.</p>

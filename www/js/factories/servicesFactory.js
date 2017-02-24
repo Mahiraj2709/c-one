@@ -402,8 +402,39 @@ angular.module('starter')
                 });
         }
 
+        function getNearbyCustomer(myData,callback) {
+            var formdata = new FormData();
+            formdata.append("device_type", CONSTANTS.deviceType());
+            formdata.append('session_token', window.localStorage.getItem("sess_tok"));
+            formdata.append("language", "en");
+            formdata.append("latitude", myData.latitude);
+            formdata.append("longitude", myData.longitude);
+            formdata.append("address", myData.address);
+
+            var request = {
+                method: 'POST',
+                url: CONSTANTS.BASE_URL + 'getsearchcustomer',
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                },
+                data: formdata,
+                headers: {
+                    'Content-Type': undefined
+                }
+            };
+            // SEND THE FILES.
+            $http(request)
+                .success(function (d) {
+                    console.log(d)
+                    callback(d)
+                })
+                .error(function (err) {
+                });
+        }
+
         return {
             logout: logout,
+            getNearbyCustomer:getNearbyCustomer,
             resetPassword: resetPassword,
             sendMessage: sendMessage,
             getChatHistory: getChatHistory,

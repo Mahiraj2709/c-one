@@ -28,7 +28,7 @@ angular.module('starter')
                 $scope.btn_text = "I HAVE ARRIVED";
                 var arrived = true;
                 $scope.onWayTitle = 'I have arrived'
-            } else $scope.onWayTitle = 'Cleanosaur on the way'
+            } else $scope.onWayTitle = 'I am on the way'
             $scope.openChat = function () {
                 ChatMessages.messages = []
                 services.getChatHistory(AppointmentData.appointment.app_appointment_id, function (response) {

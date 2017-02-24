@@ -8,7 +8,6 @@
         <div class="on_way">
             <!--<img src="img/cleansour_on_the_way_map.jpg"  alt="">-->
             <div id="on_way_map" data-tap-disabled="true" style="height:52vh"></div>
-
             <aside class="on_way_add_sec">
                 <div class="map_sec_field">
                     <input placeholder="Custemer address" required="required"
@@ -16,10 +15,9 @@
                     <img src="img/address.png" alt="" class="left-txt-icons">
                     <img src="img/map-point-con.png" alt="" class="right-txt-icons">
                 </div>
-
             </aside>
-
         </div>
+
         <div class="call_chat_sec">
             <aside class="figure-container">
                 <figure class="profile-pic"><img alt="" ng-src="{{profileImage}}"></figure>
@@ -32,12 +30,11 @@
                 <i class="fa fa-star" ng-class="{'ratingYellow':cleanerFeedback.avg_rating >=5}" aria-hidden="true"></i>
             </aside>
             <div class="full">
-                <div class="miles">  <span class="btns gray_btn"> {{distance | miles}} </span>  </div>
+                <div class="miles"><span class="btns gray_btn"> {{distance | miles}} </span></div>
                 <div class="milesid" ng-click="showAppointment()">
-                    <p style="text-align: center"> <span class="btns gray_btn ">{{request_id}} </span> </p>
+                    <p style="text-align: center"><span class="btns gray_btn ">{{request_id}} </span></p>
                 </div>
-                <div class="miles_right"> <span class="btns gray_btn width-98"> {{duration | timeFilter}} </span> </div>
-
+                <div class="miles_right"><span class="btns gray_btn width-98"> {{duration | timeFilter}} </span></div>
             </div>
 
             <aside class="btn_set">

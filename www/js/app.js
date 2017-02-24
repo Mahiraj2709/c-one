@@ -138,7 +138,7 @@ angular.module('starter',
             //forgot password
             .state('forgot_password', {
                 url: '/forgot_password',
-                templateUrl: 'views/forgot_password/reset_password.html',
+                templateUrl: 'views/forgot_password/forgot_password.html',
                 controller: 'ForgotPasswordCtrl'
             })
             //home router
