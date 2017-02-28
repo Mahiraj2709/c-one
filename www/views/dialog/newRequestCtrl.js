@@ -1,5 +1,5 @@
 /**
- * Created by admin on 1/14/2017.
+ * Created by Mahiraj Singh on 1/14/2017.
  */
 angular.module('starter')
     .controller('ReqCtrl',function ($scope,$rootScope,ChangeAvailability,CONSTANTS,$ionicPopup,$location,$ionicModal,$sce,popups, AppointmentData) {

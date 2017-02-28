@@ -244,7 +244,7 @@ angular.module('starter',
             .state('work_as_customer', {
                 url: '/work_as_customer',
                 templateUrl: 'views/sign_as_customer/become_a_customer.html',
-                //controller: 'HistoryCtrl'
+                controller: 'SignAsCustomer'
             })
 
             //settings

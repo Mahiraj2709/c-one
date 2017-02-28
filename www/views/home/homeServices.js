@@ -1,5 +1,5 @@
 /**
- * Created by admin on 1/13/2017.
+ * Created by Mahiraj Singh on 1/13/2017.
  */
 angular.module('starter')
     .service('ChangeAvailability', function (CONSTANTS, $http, $ionicLoading, $rootScope) {

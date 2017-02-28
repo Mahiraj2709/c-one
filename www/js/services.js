@@ -193,4 +193,26 @@ angular.module('starter.services', [])
     })
     .service('NotificationService', function () {
     })
+    .service('ImageFactory',function () {
+        this.getBase64FromImageUrl = function(url) {
+
+            return new Promise(function(resolve, reject) {
+                if (url == null) return reject();
+                var img = new Image();
+                img.setAttribute('crossOrigin', 'anonymous');
+                img.onload = function () {
+                    var canvas = document.createElement("canvas");
+                    canvas.width = this.width;
+                    canvas.height = this.height;
+                    var ctx = canvas.getContext("2d");
+                    ctx.drawImage(this, 0, 0);
+                    var dataURL = canvas.toDataURL("image/png");
+                    console.log(dataURL)
+                    resolve(dataURL)
+//                return dataURL;//alert(dataURL.replace(/^data:image\/(png|jpg);base64,/, ""));
+                };
+                img.src = url;
+            });
+        }
+    })
 ;

@@ -36,5 +36,8 @@ angular.module('starter.controllers', [])
             console.log("Could not get location");
         });
     })
-
-;
+    .controller('SignAsCustomer', function ($scope) {
+        $scope.openPlayStore = function () {
+            cordova.InAppBrowser.open('https://play.google.com/store/apps/details?id=com.app.cleanosaur', '_system', 'location=yes');
+        }
+    });

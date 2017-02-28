@@ -1,5 +1,5 @@
 /**
- * Created by admin on 1/20/2017.
+ * Created by Mahiraj Singh on 1/20/2017.
  */
 angular.module('starter')
     .controller('OnTheWayCtrl', function ($scope, popups, AppointmentData, $ionicPopup, LocationData, CONSTANTS, ChatMessages, OnTheWayService, services, $location) {

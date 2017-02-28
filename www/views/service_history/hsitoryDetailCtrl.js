@@ -1,5 +1,5 @@
 /**
- * Created by admin on 2/13/2017.
+ * Created by Mahiraj Singh on 2/13/2017.
  */
 angular.module('starter')
     .controller('HistoryDetailCtrl',function ($scope,popups,services,$stateParams) {

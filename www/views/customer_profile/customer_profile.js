@@ -1,5 +1,5 @@
 /**
- * Created by admin on 1/18/2017.
+ * Created by Mahiraj Singh on 1/18/2017.
  */
 angular.module('starter')
     .controller('CustomerProfileCtrl',function ($scope,$stateParams,CustomerData,CONSTANTS,AppointmentData,$sce,$ionicModal,popups,services) {

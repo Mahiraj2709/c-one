@@ -1,5 +1,5 @@
 /**
- * Created by admin on 2/8/2017.
+ * Created by Mahiraj Singh on 2/8/2017.
  */
 angular.module('starter')
     .filter('property', function () {

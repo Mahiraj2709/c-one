@@ -1,5 +1,5 @@
 angular.module('starter')
-    .controller('SignupCtrl', function ($scope, $rootScope, $ionicModal, $ionicPopup,GooglePlacesService,$ionicPush,$cordovaGeolocation,
+    .controller('SignupCtrl', function ($scope, $rootScope, $ionicModal, $ionicPopup,GooglePlacesService,$ionicPush,$cordovaGeolocation,services,ImageFactory,
                                         $cordovaCamera, $cordovaOauth, $http, $ionicLoading, $cordovaFileTransfer, CONSTANTS) {
 
         //1 for user and 2 for car image default is 0
@@ -136,6 +136,7 @@ angular.module('starter')
             $cordovaCamera.getPicture(options).then(function (imageData) {
                 if (imageType == 1) {
                     $scope.imgURI = "data:image/jpeg;base64," + imageData;
+                    console.log(imageData)
                 } else if (imageType == 2) {
                     $scope.carimgURI = "data:image/jpeg;base64," + imageData;
                 }
@@ -147,34 +148,44 @@ angular.module('starter')
         // facebook(string clientId, array appScope);
         //facebook login
         $scope.fbLogin = function () {
-            if (1 == 1) {
+           /* if (1 == 1) {
                 $scope.showAlert("Comming soon!");
                 return;
-            }
+            }*/
+
             $cordovaOauth.facebook(CONSTANTS.fbAppId, ["email", "public_profile"]).then(function (result) {
 
                 $http.get("https://graph.facebook.com/v2.2/me", { params: { access_token: result.access_token, fields: "id,email,name,gender,picture", format: "json" } }).then(function (result) {
 
+                    console.log(result)
                     $scope.signupDetails.login_type = "1";
-                    $scope.showAlert(JSON.stringify(result.data));
+                    //$scope.showAlert(JSON.stringify(result.data));
                     $scope.signupDetails.name = result.data.name;
-                    $scope.imgURI = result.data.picture.data.url;
+                    ImageFactory.getBase64FromImageUrl(result.data.picture.data.url).then(function (imageData) {
+                        $scope.imgURI = imageData;
+                        console.log($scope.imgURI)
+                        console.log(imageData)
+
+                    });
+
+//                    console.log($scope.imgURI)
                     //$scope.profileData = ;
                 }, function (error) {
                     //alert("There was a problem getting your profile.  Check the logs for details.");
-                    $scope.showAlert(error);
+                    console.log(error);
                 });
             }, function (error) {
-                $scope.showAlert(error);
+//                $scope.showAlert(error);
+                console.log(error)
             });
         };
         //twitter login 
         //twitter(string consumerKey, string consumerSecretKey, object options);
         $scope.twitterLogin = function () {
-            if (1 == 1) {
+            /*if (1 == 1) {
                 $scope.showAlert("Comming soon!");
                 return;
-            }
+            }*/
             $cordovaOauth.twitter("F10TwLSYjuahegNC3T10FB75N", "paCiWQE8TXO9n1gq3jLFIgAmyJP1fj1BtaQsdCuAaAJpyVaZnY").then(function (result) {
                 $scope.showAlert(JSON.stringify(result));
 
@@ -196,10 +207,10 @@ angular.module('starter')
         };
         //instagram login
         $scope.instaLogin = function () {
-            if (1 == 1) {
+            /*if (1 == 1) {
                 $scope.showAlert("Comming soon!");
                 return;
-            }
+            }*/
             $cordovaOauth.instagram("06aa6a6fa2a1492d90cec199676c5420", ["basic", "comments", "relationships"]).then(function (result) {
                 $scope.showAlert(JSON.stringify(result));
                 $scope.signupDetails.login_type = "3";

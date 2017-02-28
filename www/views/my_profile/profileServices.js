@@ -1,5 +1,5 @@
 /**
- * Created by admin on 1/2/2017.
+ * Created by Mahiraj Singh on 1/2/2017.
  */
 angular.module('starter')
     .service('UploadImageService', function (CONSTANTS, ImgFormData, $http) {

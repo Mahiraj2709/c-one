@@ -431,6 +431,42 @@ angular.module('starter')
                 .error(function (err) {
                 });
         }
+        function socialLogin(userData,callback) {
+            var formdata = new FormData();
+            formdata.append("device_type", CONSTANTS.deviceType());
+            formdata.append("language", "en");
+            formdata.append("latitude", userData.latitude);
+            formdata.append("longitude", userData.longitude);
+            formdata.append("email", userData.email);
+            formdata.append("device_id", userData.device_id);
+            formdata.append("device_token", userData.device_token);
+            formdata.append("first_name", userData.first_name);
+            formdata.append("last_name", userData.last_name);
+            formdata.append("login_type", userData.login_type);
+            formdata.append("address", userData.address);
+            formdata.append("quick_blox_id", userData.quick_blox_id);
+            formdata.append("reference_mode", userData.address);
+
+            var request = {
+                method: 'POST',
+                url: CONSTANTS.BASE_URL + 'sociallogin',
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                },
+                data: formdata,
+                headers: {
+                    'Content-Type': undefined
+                }
+            };
+            // SEND THE FILES.
+            $http(request)
+                .success(function (d) {
+                    console.log(d)
+                    callback(d)
+                })
+                .error(function (err) {
+                });
+        }
 
         return {
             logout: logout,
@@ -445,6 +481,7 @@ angular.module('starter')
             updateLocation:updateLocation,
             sendfeedback:sendfeedback,
             getRating:getRating,
-            getCustomerFeedback:getCustomerFeedback
+            getCustomerFeedback:getCustomerFeedback,
+            socialLogin:socialLogin
         }
     });

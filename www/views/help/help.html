@@ -9,15 +9,15 @@
                 <aside class="sugg_cont_list help">
                     <label class="last_clean"><strong>Last Clean</strong></label>
                     <img src="img/user-photo.png" alt="" width="120" height="140">
-                    16/11/2016 at 2 PM
-                    <span> $60 </span>
+                    {{last_clean.appointment_date}}
+                    <span> {{last_clean.total_amount | currency}} </span>
                 </aside>
                 <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d16672.322337245143!2d77.39797644713862!3d28.542003345495804!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x54eab584e432360b%3A0x1c3bb99243deb742!2sUnited+States!5e0!3m2!1sen!2sin!4v1482215968311" width="100%" height="120" frameborder="0" style="border:1px solid #ccc;" allowfullscreen></iframe>
                 <p class="reort_issue"> Report an Issue with this clean <strong> Report an Issue </strong> </p>
 
 
                 <ul class="list_section">
-                    <li ng-repeat="title in titles"> Cleans and Cost Review </li>
+                    <!--<li ng-repeat="title in titles"> Cleans and Cost Review </li>-->
                     <li ng-repeat="help in helps" ng-click = "nextPage(help)"> {{help.name}} </li>
                 </ul>
 

@@ -1,5 +1,5 @@
 /**
- * Created by admin on 1/31/2017.
+ * Created by Mahiraj Singh on 1/31/2017.
  */
 angular.module('starter')
     .controller('BillCtrl', function ($scope, AppointmentData, services, popups, $ionicHistory,$location) {
