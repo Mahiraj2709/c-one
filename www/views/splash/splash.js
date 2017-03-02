@@ -97,8 +97,8 @@ angular.module('starter')
                             if ($ionicHistory.currentView().stateName != 'chat_room') {
                                 //load all messages from the service
                                 services.getChatHistory(msg.payload.response_data.chat[0].app_appointment_id, function (response) {
-                                    console.log(JSON.stringify(msg))
-                                    console.log(JSON.stringify(response))
+                                    //console.log(JSON.stringify(msg))
+                                    //console.log(JSON.stringify(response))
                                     if (response.response_status == '1') {
                                         ChatMessages.pushChatHistory(response.response_data.chat)
                                     }
@@ -106,7 +106,7 @@ angular.module('starter')
                                 })
                             } else {
                                 ChatMessages.pushNotificationChat(msg.payload.response_data.chat[0]);
-                                //$location.url('chat_room/' + msg.payload.response_data.chat[0].app_appointment_id)
+                                $location.url('chat_room/' + msg.payload.response_data.chat[0].app_appointment_id)
                             }
                             break
                     }

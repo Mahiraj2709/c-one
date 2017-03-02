@@ -1,6 +1,6 @@
 angular.module('starter')
     .controller('SignupCtrl', function ($scope, $rootScope, $ionicModal, $ionicPopup,GooglePlacesService,$ionicPush,$cordovaGeolocation,services,ImageFactory,
-                                        $cordovaCamera, $cordovaOauth, $http, $ionicLoading, $cordovaFileTransfer, CONSTANTS) {
+                                        $cordovaCamera, $cordovaOauth, $http, $ionicLoading, $cordovaFileTransfer, CONSTANTS,LocationData) {
 
         //1 for user and 2 for car image default is 0
 
@@ -45,7 +45,24 @@ angular.module('starter')
             fblnig_id: undefined
         };
 
-        //Loading in 
+
+        $scope.socialLogin = {
+            email:undefined,
+            device_id:$ionicPush._token.id,
+            device_token:$ionicPush._token.token,
+            device_type:CONSTANTS.deviceType(),
+            first_name:undefined,
+            last_name:undefined,
+            login_type:undefined,
+            latitude:LocationData.latitude,
+            longitude:LocationData.longitude,
+            language:'en',
+            address:'no address',
+            quick_blox_id:'34',
+            reference_mode:undefined
+        }
+
+        //Loading in
         $scope.showLoading = function () {
             $ionicLoading.show({
                 template: 'Loading...'
@@ -165,8 +182,18 @@ angular.module('starter')
                         $scope.imgURI = imageData;
                         console.log($scope.imgURI)
                         console.log(imageData)
-
                     });
+
+                    $scope.signupDetails.login_type = '1';
+
+                    var name = result.data.name.split(' ');
+                    $scope.signupDetails.first_name = name[0];
+                    if(name[1] != undefined) {
+                        $scope.signupDetails.last_name = name[1];
+                    }else {
+                        //$scope.signupDetails.last_name = 'na';
+                    }
+                    $scope.signupDetails.reference_mode = 'na';
 
 //                    console.log($scope.imgURI)
                     //$scope.profileData = ;
@@ -182,10 +209,10 @@ angular.module('starter')
         //twitter login 
         //twitter(string consumerKey, string consumerSecretKey, object options);
         $scope.twitterLogin = function () {
-            /*if (1 == 1) {
+            if (1 == 1) {
                 $scope.showAlert("Comming soon!");
                 return;
-            }*/
+            }
             $cordovaOauth.twitter("F10TwLSYjuahegNC3T10FB75N", "paCiWQE8TXO9n1gq3jLFIgAmyJP1fj1BtaQsdCuAaAJpyVaZnY").then(function (result) {
                 $scope.showAlert(JSON.stringify(result));
 
@@ -207,10 +234,10 @@ angular.module('starter')
         };
         //instagram login
         $scope.instaLogin = function () {
-            /*if (1 == 1) {
+            if (1 == 1) {
                 $scope.showAlert("Comming soon!");
                 return;
-            }*/
+            }
             $cordovaOauth.instagram("06aa6a6fa2a1492d90cec199676c5420", ["basic", "comments", "relationships"]).then(function (result) {
                 $scope.showAlert(JSON.stringify(result));
                 $scope.signupDetails.login_type = "3";

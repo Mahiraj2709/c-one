@@ -5,6 +5,9 @@ angular.module('starter')
 
     .controller('ChatCtrl', function ($scope,$rootScope, $timeout, $ionicScrollDelegate,$stateParams,services, ChatMessages,CONSTANTS) {
 
+        $scope.$on('$ionicView.beforeEnter', function (event, viewData) {
+            viewData.enableBack = true;
+        });
 //        $rootScope.userDetail = JSON.parse(window.localStorage.getItem("profile"));
 //        $rootScope.profile_pic = CONSTANTS.PROFILE_IMAGE_URL + $rootScope.userDetail.profile_pic;
         $scope.hideTime = true;
@@ -29,7 +32,7 @@ angular.module('starter')
                 created_dt:'',
                 time: d
             });
-
+            $scope.$apply();
             delete $scope.data.message;
             $ionicScrollDelegate.scrollBottom(true);
             //console.log($scope.messages)
@@ -130,7 +133,7 @@ angular.module('starter')
                 });
             }
         }
-    }).factory('ChatMessages',function ($http,CONSTANTS) {
+    }).factory('ChatMessages',function ($http,CONSTANTS,$rootScope) {
 
         var messages = [];
 
@@ -139,6 +142,8 @@ angular.module('starter')
         }
 
         function pushNotificationChat(chat) {
+            //console.log(chat)
+            //console.log(this.messages)
             this.messages.push({
                 userType: '2',
                 text: chat.message,
@@ -154,10 +159,10 @@ angular.module('starter')
 
             for (var i = 0; i < chatArray.length; i++){
                 var userType = '1'
-                var profileImage = CONSTANTS.PROFILE_IMAGE_URL + chatArray[i].customer_profile_pic
+                var profileImage = $rootScope.profile_pic
                 var fName = chatArray[i].customer_fname;
                 var lName = chatArray[i].customer_lname;
-                if(chatArray[i].sender_user_type == '1'){
+                if(chatArray[i].sender_user_type == '2'){
                     userType = '2'
                     profileImage = CONSTANTS.CUSTOMER_PROFILE_IMAGE_URL + chatArray[i].customer_profile_pic
                     fName = chatArray[i].customer_fname;
