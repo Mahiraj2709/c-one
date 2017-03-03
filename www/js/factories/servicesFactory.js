@@ -432,6 +432,9 @@ angular.module('starter')
                 });
         }
         function socialLogin(userData,callback) {
+            $ionicLoading.show({
+             template: 'Loading...'
+             });
             var formdata = new FormData();
             formdata.append("device_type", CONSTANTS.deviceType());
             formdata.append("language", "en");
@@ -440,12 +443,6 @@ angular.module('starter')
             formdata.append("email", userData.email);
             formdata.append("device_id", userData.device_id);
             formdata.append("device_token", userData.device_token);
-            formdata.append("first_name", userData.first_name);
-            formdata.append("last_name", userData.last_name);
-            formdata.append("login_type", userData.login_type);
-            formdata.append("address", userData.address);
-            formdata.append("quick_blox_id", userData.quick_blox_id);
-            formdata.append("reference_mode", userData.address);
 
             var request = {
                 method: 'POST',
@@ -461,10 +458,12 @@ angular.module('starter')
             // SEND THE FILES.
             $http(request)
                 .success(function (d) {
+                    $ionicLoading.hide();
                     console.log(d)
                     callback(d)
                 })
                 .error(function (err) {
+                    $ionicLoading.hide();
                 });
         }
 

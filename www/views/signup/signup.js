@@ -1,6 +1,6 @@
 angular.module('starter')
     .controller('SignupCtrl', function ($scope, $rootScope, $ionicModal, $ionicPopup,GooglePlacesService,$ionicPush,$cordovaGeolocation,services,ImageFactory,
-                                        $cordovaCamera, $cordovaOauth, $http, $ionicLoading, $cordovaFileTransfer, CONSTANTS,LocationData) {
+                                        $cordovaCamera, $cordovaOauth, $http, $ionicLoading,$timeout, $cordovaFileTransfer, CONSTANTS,LocationData) {
 
         //1 for user and 2 for car image default is 0
 
@@ -179,9 +179,7 @@ angular.module('starter')
                     //$scope.showAlert(JSON.stringify(result.data));
                     $scope.signupDetails.name = result.data.name;
                     ImageFactory.getBase64FromImageUrl(result.data.picture.data.url).then(function (imageData) {
-                        $scope.imgURI = imageData;
-                        console.log($scope.imgURI)
-                        console.log(imageData)
+                        $timeout(function () { $scope.imgURI = imageData; },0);
                     });
 
                     $scope.signupDetails.login_type = '1';
@@ -194,6 +192,7 @@ angular.module('starter')
                         //$scope.signupDetails.last_name = 'na';
                     }
                     $scope.signupDetails.reference_mode = 'na';
+                    $scope.signupDetails.email = result.data.email;
 
 //                    console.log($scope.imgURI)
                     //$scope.profileData = ;

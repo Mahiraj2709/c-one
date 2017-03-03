@@ -1,7 +1,7 @@
 angular.module('starter')
 
-    .controller('LoginCtrl', function ($scope,$rootScope, $ionicPopup, $http, $ionicLoading, $cordovaOauth,
-                                       $cordovaGeolocation, $location, $ionicViewService,$ionicPush,
+    .controller('LoginCtrl', function ($scope,$rootScope, $ionicPopup, $http, $ionicLoading, $cordovaOauth,LocationData,popups,
+                                       $cordovaGeolocation, $location, $ionicViewService,$ionicPush,services,$ionicHistory,
                                        $ionicSideMenuDelegate, CONSTANTS) {
         $ionicViewService.clearHistory();
         $ionicSideMenuDelegate.canDragContent(false)
@@ -11,6 +11,8 @@ angular.module('starter')
             .then(function (position) {
                 var lat = position.coords.latitude
                 var long = position.coords.longitude
+                LocationData.latitude = lat
+                LocationData.longitude = long
                 $scope.loginDetails.latitude = lat
                 $scope.loginDetails.longitude = long
 
@@ -51,17 +53,38 @@ angular.module('starter')
         // facebook(string clientId, array appScope);
         //facebook login
         $scope.fbLogin = function () {
-            if (1 == 1) {
-                $scope.showAlert("Comming soon!");
-                return;
-            }
+
             $cordovaOauth.facebook(CONSTANTS.fbAppId, ["email", "public_profile"]).then(function (result) {
 
                 $http.get("https://graph.facebook.com/v2.2/me", { params: { access_token: result.access_token, fields: "id,email,name,gender,picture", format: "json" } }).then(function (result) {
-                    $scope.showAlert(JSON.stringify(result.data));
-                    $scope.signupDetails.name = result.data.name;
-                    $scope.imgURI = result.data.picture.data.url;
+                    //$scope.showAlert(JSON.stringify(result.data));
                     //$scope.profileData = ;
+                    services.socialLogin({
+                        device_token:$ionicPush._token.token,
+                        device_id:$ionicPush._token.id,
+                        email:result.data.email,
+                        latitude:LocationData.latitude,
+                        longitude:LocationData.longitude,
+                    },function (response) {
+
+                        if(response.response_status == '1') {
+                            $ionicHistory.clearCache().then(function () {
+
+                                window.localStorage.setItem("profile", JSON.stringify(d.response_data.user_info));
+                                window.localStorage.setItem("login", true);
+                                window.localStorage.setItem("sess_tok", d.response_data.session_token);
+
+                                $rootScope.userDetail = JSON.parse(window.localStorage.getItem("profile"));
+                                $rootScope.profile_pic = CONSTANTS.PROFILE_IMAGE_URL + $rootScope.userDetail.profile_pic;
+
+                                $location.path('home')
+                            })
+                        }else{
+                            popups.showAlert(response.response_msg)
+                        }
+
+
+                    })
                 }, function (error) {
                     //alert("There was a problem getting your profile.  Check the logs for details.");
                     $scope.showAlert(error);

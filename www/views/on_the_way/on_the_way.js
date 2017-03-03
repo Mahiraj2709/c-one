@@ -177,7 +177,7 @@ angular.module('starter')
                     OnTheWayService.iHaveArrived(AppointmentData.appointment, function () {
                         arrived = true
                         $scope.btn_text = "COMPLETE"
-                        $scope.onWayTitle = 'I has arrived'
+                        $scope.onWayTitle = 'I have arrived'
                     });
                 }
             }

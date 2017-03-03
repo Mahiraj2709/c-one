@@ -19,7 +19,7 @@
                             <ul>
                                 <li> Request ID - {{appointment.app_appointment_id}}</li>
                                 <li> {{appointment.property_type_id | property}}</li>
-                                <li><span> {{appointment.appointment_date}} </span> <span> <!--Clean Time - 1:30 Hr--> </span></li>
+                                <li><span> {{appointment.appointment_date}} </span> <span> Clean Time - {{appointment.duration}} Mins </span></li>
                             </ul>
                         </div>
                         <div class="history_right">
@@ -30,13 +30,14 @@
                                 <i class="fa fa-star" ng-class="{'ratingYellow':appointment.rating >=4}" aria-hidden="true"></i>
                                 <i class="fa fa-star" ng-class="{'ratingYellow':appointment.rating >=5}" aria-hidden="true"></i>
 
+
                             </aside>
                             <span class="price">${{appointment.confirm_price}}</span>
+                            <span class="status_text">{{appointment.status | status}}</span>
                         </div>
                     </aside>
             </form>
             </div>
-
         </section>
     </ion-content>
 </ion-view>
