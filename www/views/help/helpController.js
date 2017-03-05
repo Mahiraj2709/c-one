@@ -15,7 +15,7 @@ angular.module('starter')
       HelpFactory.pageTitle = help.name
 
       if(help.content != undefined && help.content != '') {
-        
+
       }
       $location.url('page_two/' + help.id)
     }
