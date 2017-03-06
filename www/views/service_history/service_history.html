@@ -8,9 +8,9 @@
             <div class="main">
                 <form method="" action="" name="">
                     <aside class="history_top">
-                        <span class="half"><input style="width: 100%" ng-change="getHistory(startDate,endDate)" placeholder="From" ng-model="startDate" required="required" type="date"><img
+                        <span class="half date_li" ><span ng-hide="startDate != undefined" class="date-placeholder">From</span><input style="width: 100%" ng-change="getHistory(startDate,endDate)" placeholder="From" ng-model="startDate" required="required" type="date"><img
                                 src="img/calender.png" alt="" class="edit-icon"></span>
-                        <span class="half fr"><input style="width: 100%" ng-change="getHistory(startDate,endDate)" placeholder="To" required="required"  ng-model="endDate" type="date"><img
+                        <span class="half fr date_li"><span ng-hide="endDate != undefined" class="date-placeholder">To</span><input style="width: 100%" ng-change="getHistory(startDate,endDate)" placeholder="To" required="required"  ng-model="endDate" type="date"><img
                                 src="img/calender.png" alt="" class="edit-icon"></span>
                     </aside>
 
@@ -19,24 +19,25 @@
                             <ul>
                                 <li> Request ID - {{appointment.app_appointment_id}}</li>
                                 <li> {{appointment.property_type_id | property}}</li>
-                                <li><span> {{appointment.appointment_date}} </span> <span> <!--Clean Time - 1:30 Hr--> </span></li>
+                                <li><span> {{appointment.appointment_date}} </span> <span> Clean Time - {{appointment.duration}} Mins </span></li>
                             </ul>
                         </div>
                         <div class="history_right">
                             <aside class="ratings">
-                                <span> <i class="fa fa-star" aria-hidden="true"></i> </span>
-                                <span><i class="fa fa-star" aria-hidden="true"></i></span>
-                                <span> <i class="fa fa-star" aria-hidden="true"></i></span>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
+                                <i class="fa fa-star" ng-class="{'ratingYellow':appointment.rating >=1}" aria-hidden="true"></i>
+                                <i class="fa fa-star" ng-class="{'ratingYellow':appointment.rating >=2}" aria-hidden="true"></i>
+                                <i class="fa fa-star" ng-class="{'ratingYellow':appointment.rating >=3}" aria-hidden="true"></i>
+                                <i class="fa fa-star" ng-class="{'ratingYellow':appointment.rating >=4}" aria-hidden="true"></i>
+                                <i class="fa fa-star" ng-class="{'ratingYellow':appointment.rating >=5}" aria-hidden="true"></i>
+
 
                             </aside>
                             <span class="price">${{appointment.confirm_price}}</span>
+                            <span class="status_text">{{appointment.status | status}}</span>
                         </div>
                     </aside>
             </form>
             </div>
-
         </section>
     </ion-content>
 </ion-view>

@@ -1,5 +1,5 @@
 /**
- * Created by admin on 2/1/2017.
+ * Created by Mahiraj Singh on 2/1/2017.
  */
 angular.module('starter')
     .controller('HistoryCtrl',function ($scope,HistoryServices,$ionicPopup,$location) {

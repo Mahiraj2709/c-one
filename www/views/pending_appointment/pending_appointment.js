@@ -1,5 +1,5 @@
 /**
- * Created by admin on 2/1/2017.
+ * Created by Mahiraj Singh on 2/1/2017.
  */
 angular.module('starter')
     .controller('PendingAppointmentCtrl',function ($scope,PendingAppointmentServices,$ionicPopup,$location,ChangeAvailability,AppointmentData,AppointmentService) {
@@ -10,6 +10,7 @@ angular.module('starter')
 
 
         $scope.trackAppointment = function (appointmentId) {
+
             //track the current appointmnt id
             ChangeAvailability.getCustomerProfile(appointmentId,function (customerData) {
                 AppointmentData.appointment = customerData;

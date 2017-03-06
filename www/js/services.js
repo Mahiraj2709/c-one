@@ -25,8 +25,7 @@ angular.module('starter.services', [])
         }
     })
     .factory('ImagePickerService', function ($cordovaCamera, $ionicPopup) {
-
-       var takePhoto = function () {
+        var takePhoto = function () {
             var options = {
                 quality: 75,
                 destinationType: Camera.DestinationType.DATA_URL,
@@ -44,9 +43,6 @@ angular.module('starter.services', [])
                 // An error occured. Show a message to the user
             });
         };
-
-
-
         var choosePhoto = function () {
             var options = {
                 quality: 75,
@@ -65,20 +61,18 @@ angular.module('starter.services', [])
                 // An error occured. Show a message to the user
             });
         };
-
         var factory = {};
         return factory;
     })
-    .service('TermCondition',function ($http, CONSTANTS,$ionicLoading) {
-
+    .service('TermCondition', function ($http, CONSTANTS, $ionicLoading) {
         this.getTermCondition = function (callback) {
             $ionicLoading.show({
-                template:'Loading Terms and Conditions...'
+                template: 'Loading Terms and Conditions...'
             });
             var formdata = new FormData;
-            formdata.append('session_token',window.localStorage.getItem('session_tok'));
-            formdata.append('language','en');
-            formdata.append('identifier','terms-condition-customer');
+            formdata.append('session_token', window.localStorage.getItem('session_tok'));
+            formdata.append('language', 'en');
+            formdata.append('identifier', 'terms-condition-customer');
             var request = {
                 method: 'POST',
                 url: CONSTANTS.BASE_URL + 'pages',
@@ -107,7 +101,6 @@ angular.module('starter.services', [])
 //                    $scope.showAlert(er
                 });
         }
-
     })
     .service('LocationAlert', function ($ionicPlatform, $ionicPopup) {
         this.isLocationEnabled = function (callback) {
@@ -126,7 +119,7 @@ angular.module('starter.services', [])
                                     cordova.plugins.diagnostic.switchToLocationSettings();
                                 }
                             });
-                        }else {
+                        } else {
                         }
                     }, function (error) {
                     });
@@ -134,28 +127,25 @@ angular.module('starter.services', [])
             })
         };
     })
-    .factory('AppointmentData',function () {
-
+    .factory('AppointmentData', function () {
         var appointment = {
-          app_appointment_id:undefined,
-          appointment:undefined
+            app_appointment_id: undefined,
+            appointment: undefined,
+            profile_video: undefined
         };
-
         return appointment;
     })
-    .factory('LocationData',function () {
+    .factory('LocationData', function () {
         var Location = {
-            longitude:undefined,
-            latitude:undefined
+            longitude: undefined,
+            latitude: undefined
         };
-
         return Location;
     })
     .service('AppointmentService', function () {
         this.getRequestValueWithCode = function (requestStatus) {
             if (requestStatus != undefined) {
-
-                switch(requestStatus) {
+                switch (requestStatus) {
                     case '1':
                         return 'Finished'
                         break;
@@ -195,13 +185,34 @@ angular.module('starter.services', [])
             }
         }
     })
-    .factory('NotificationFactory',function () {
-       var notification = {
-           payload:undefined
-       };
+    .factory('NotificationFactory', function () {
+        var notification = {
+            payload: undefined
+        };
         return notification;
     })
-    .service('NotificationService',function () {
+    .service('NotificationService', function () {
+    })
+    .service('ImageFactory',function () {
+        this.getBase64FromImageUrl = function(url) {
 
+            return new Promise(function(resolve, reject) {
+                if (url == null) return reject();
+                var img = new Image();
+                img.setAttribute('crossOrigin', 'anonymous');
+                img.onload = function () {
+                    var canvas = document.createElement("canvas");
+                    canvas.width = this.width;
+                    canvas.height = this.height;
+                    var ctx = canvas.getContext("2d");
+                    ctx.drawImage(this, 0, 0);
+                    var dataURL = canvas.toDataURL("image/png");
+                    console.log(dataURL)
+                    resolve(dataURL)
+//                return dataURL;//alert(dataURL.replace(/^data:image\/(png|jpg);base64,/, ""));
+                };
+                img.src = url;
+            });
+        }
     })
 ;

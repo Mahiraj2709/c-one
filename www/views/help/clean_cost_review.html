@@ -1,0 +1,26 @@
+<ion-view title="Clean and Cost review">
+  <ion-nav-buttons side="left">
+    <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
+    </button>
+  </ion-nav-buttons>
+  <ion-content>
+    <section class="bg-main">
+      <div class="main">
+        <div class="clean_cost_reivew">
+          <aside class="sugg_cont_list help">
+            <label class="last_clean"><strong>Last Clean</strong></label>
+            <img src="img/user-photo.png" alt="" width="120" height="140">
+            {{last_clean.appointment_date}}
+            <span> {{last_clean.total_amount | currency}} </span>
+          </aside>
+          <div class="map_field_sec">
+            <div id="googlMap" data-tap-disabled="true"></div>
+          </div>
+          <p class="reort_issue"> Report an Issue with this clean <strong> Report an Issue </strong></p>
+        </div>
+      </div>
+    </section>
+
+
+  </ion-content>
+</ion-view>

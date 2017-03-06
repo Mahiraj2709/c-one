@@ -1,6 +1,6 @@
 angular.module('starter')
-    .controller('SignupCtrl', function ($scope, $rootScope, $ionicModal, $ionicPopup,GooglePlacesService,$ionicPush,$cordovaGeolocation,
-                                        $cordovaCamera, $cordovaOauth, $http, $ionicLoading, $cordovaFileTransfer, CONSTANTS) {
+    .controller('SignupCtrl', function ($scope, $rootScope, $ionicModal, $ionicPopup,GooglePlacesService,$ionicPush,$cordovaGeolocation,services,ImageFactory,
+                                        $cordovaCamera, $cordovaOauth, $http, $ionicLoading,$timeout, $cordovaFileTransfer, CONSTANTS,LocationData) {
 
         //1 for user and 2 for car image default is 0
 
@@ -45,7 +45,24 @@ angular.module('starter')
             fblnig_id: undefined
         };
 
-        //Loading in 
+
+        $scope.socialLogin = {
+            email:undefined,
+            device_id:$ionicPush._token.id,
+            device_token:$ionicPush._token.token,
+            device_type:CONSTANTS.deviceType(),
+            first_name:undefined,
+            last_name:undefined,
+            login_type:undefined,
+            latitude:LocationData.latitude,
+            longitude:LocationData.longitude,
+            language:'en',
+            address:'no address',
+            quick_blox_id:'34',
+            reference_mode:undefined
+        }
+
+        //Loading in
         $scope.showLoading = function () {
             $ionicLoading.show({
                 template: 'Loading...'
@@ -136,6 +153,7 @@ angular.module('starter')
             $cordovaCamera.getPicture(options).then(function (imageData) {
                 if (imageType == 1) {
                     $scope.imgURI = "data:image/jpeg;base64," + imageData;
+                    console.log(imageData)
                 } else if (imageType == 2) {
                     $scope.carimgURI = "data:image/jpeg;base64," + imageData;
                 }
@@ -147,25 +165,44 @@ angular.module('starter')
         // facebook(string clientId, array appScope);
         //facebook login
         $scope.fbLogin = function () {
-            if (1 == 1) {
+           /* if (1 == 1) {
                 $scope.showAlert("Comming soon!");
                 return;
-            }
+            }*/
+
             $cordovaOauth.facebook(CONSTANTS.fbAppId, ["email", "public_profile"]).then(function (result) {
 
                 $http.get("https://graph.facebook.com/v2.2/me", { params: { access_token: result.access_token, fields: "id,email,name,gender,picture", format: "json" } }).then(function (result) {
 
+                    console.log(result)
                     $scope.signupDetails.login_type = "1";
-                    $scope.showAlert(JSON.stringify(result.data));
+                    //$scope.showAlert(JSON.stringify(result.data));
                     $scope.signupDetails.name = result.data.name;
-                    $scope.imgURI = result.data.picture.data.url;
+                    ImageFactory.getBase64FromImageUrl(result.data.picture.data.url).then(function (imageData) {
+                        $timeout(function () { $scope.imgURI = imageData; },0);
+                    });
+
+                    $scope.signupDetails.login_type = '1';
+
+                    var name = result.data.name.split(' ');
+                    $scope.signupDetails.first_name = name[0];
+                    if(name[1] != undefined) {
+                        $scope.signupDetails.last_name = name[1];
+                    }else {
+                        //$scope.signupDetails.last_name = 'na';
+                    }
+                    $scope.signupDetails.reference_mode = 'na';
+                    $scope.signupDetails.email = result.data.email;
+
+//                    console.log($scope.imgURI)
                     //$scope.profileData = ;
                 }, function (error) {
                     //alert("There was a problem getting your profile.  Check the logs for details.");
-                    $scope.showAlert(error);
+                    console.log(error);
                 });
             }, function (error) {
-                $scope.showAlert(error);
+//                $scope.showAlert(error);
+                console.log(error)
             });
         };
         //twitter login 

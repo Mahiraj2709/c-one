@@ -86,7 +86,7 @@ angular.module('starter')
         if (progressEvent.lengthComputable) {
 
           $ionicLoading.show({
-            template:'Uploading video ' + (progressEvent.loaded / progressEvent.total * 100) + "%"
+            template:'Uploading video ' + Math.floor(progressEvent.loaded / progressEvent.total * 100) + "%"
           });
         } else {
 

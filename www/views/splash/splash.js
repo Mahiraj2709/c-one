@@ -8,8 +8,8 @@ angular.module('starter')
             return $ionicPush.saveToken(t);
         }).then(function (t) {
         });
-        //MjZhODQ5ZjRmZjVkYWZiMDM1Mzc5NmE4YWRkZmRhYzE   customer  385 appointemnt id  customer id 70
-        //NDIxYjZmMmFkOWU4OWI1NDJkMDBlYjQxMmM4MjkxYWU   cleaner  385 appointemnt id
+        //NjlmYzZmMmEyZWIyZTVjZjc0YTExNWZiNzUzOWUzZTA   customer  385 appointemnt id  customer id 70
+        //ZWFhYmJiZDJmOWIzNDdlYmQwN2QxN2JjZjAzODI3YmI   cleaner  385 appointemnt id
         /*$timeout(function () {
          var loggedIn = localStorage.getItem('login');
          if (!loggedIn) {
@@ -78,12 +78,15 @@ angular.module('starter')
                         case 1:
                             //requst send by custoemr
                             AppointmentData.app_appointment_id = msg.payload.app_appointment_id
-                            $rootScope.newRequestModal = popups.newRequestPopup()
+                            AppointmentData.profile_video = msg.payload.profile_video
+                            popups.newRequestPopup(function (modal) {
+                                $rootScope.newRequestModal = modal
+                            })
                             break
                         case 2:
                             //request canceled by the customer
                             popups.requestCancelled(msg.payload.message)
-                            $ionicHistory.clearCache().then(function(){
+                            $ionicHistory.clearCache().then(function () {
                                 $location.url('/home');
                             });
                             break
@@ -92,18 +95,18 @@ angular.module('starter')
                             console.log($ionicHistory.currentView())
                             if ($ionicHistory.currentView().stateName != 'chat_room') {
                                 //load all messages from the service
-                                services.getChatHistory(msg.payload.response_data.chat[0].app_appointment_id, function (response) {
+                              ChatMessages.messages = []
+                              services.getChatHistory(msg.payload.response_data.chat[0].app_appointment_id, function (response) {
+                                    //console.log(JSON.stringify(msg))
+                                    //console.log(JSON.stringify(response))
                                     if (response.response_status == '1') {
-                                        ChatMessages.messages = []
-                                        for (var i = 0; i < response.response_data.chat.length; i++) {
-                                            ChatMessages.pushChat(response.response_data.chat[i])
-                                        }
+                                        ChatMessages.pushChatHistory(response.response_data.chat)
                                     }
                                     $location.url('chat_room/' + msg.payload.response_data.chat[0].app_appointment_id)
                                 })
                             } else {
-                                ChatMessages.pushChat(response.response_data.chat[i]);
-                                $location.url('chat_room/' + msg.payload.response_data.chat[0].app_appointment_id)
+                                ChatMessages.pushNotificationChat(msg.payload.response_data.chat[0]);
+                                //$location.url('chat_room/' + msg.payload.response_data.chat[0].app_appointment_id)
                             }
                             break
                     }

@@ -1,15 +1,40 @@
-<ion-view>
+<ion-view title="Your Bill" cache-view="false">
+    <ion-nav-buttons side="left">
+        <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
+        </button>
+    </ion-nav-buttons>
     <ion-content>
         <aside class="bill_top">
-            $135
+            {{appointment.confirm_price | currency}}
         </aside>
 
-        <p class="txt-center"> <span class="btns black_btn popup_rwr_btn"> Request ID - 5698 </span> </p>
+        <p class="txt-center"><span class="btns black_btn popup_rwr_btn"> Request ID - {{appointment.app_appointment_id}} </span>
+        </p>
 
         <section class="layout_sec">
-            <aside class="front_home">Clean Front Home <span>  $135 </span> </aside>
-            <div class="btn_set">
+            <aside class="front_home"> {{appointment.property_type_id | property}} <span>  {{appointment.confirm_price | currency}} </span>
+            </aside>
+            <!--<div class="btn_set">
                 <div class="full"> <span class="btns pink_btn"> Done </span> </div>
+            </div>-->
+
+            <div class="rate_us">
+                <h3> Rate Us </h3>
+                <aside class="ratings_mech big_ratings">
+                    <i ng-click="setRating(1)" class="fa fa-star" ng-class="{'ratingYellow':rateObj.rating >=1}"
+                       aria-hidden="true"></i>
+                    <i ng-click="setRating(2)" class="fa fa-star" ng-class="{'ratingYellow':rateObj.rating >=2}"
+                       aria-hidden="true"></i>
+                    <i ng-click="setRating(3)" class="fa fa-star" ng-class="{'ratingYellow':rateObj.rating >=3}"
+                       aria-hidden="true"></i>
+                    <i ng-click="setRating(4)" class="fa fa-star" ng-class="{'ratingYellow':rateObj.rating >=4}"
+                       aria-hidden="true"></i>
+                    <i ng-click="setRating(5)" class="fa fa-star" ng-class="{'ratingYellow':rateObj.rating >=5}"
+                       aria-hidden="true"></i>
+                </aside>
+                <textarea rows="3" ng-model="rateObj.review" placeholder="Write a Review..."></textarea>
+
+                <div class="full" ng-click="generateBill()"><span class="btns pink_btn"> Done </span></div>
             </div>
         </section>
     </ion-content>

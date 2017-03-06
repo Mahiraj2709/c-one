@@ -1,7 +1,12 @@
 angular.module('starter')
     .controller('HomeCtrl', function ($scope, $rootScope, $ionicPopup, $http, ChangeAvailability, $ionicHistory, NotificationFactory,
-                                      $ionicLoading, $location, $ionicSideMenuDelegate, $ionicModal, LocationData,ChatMessages,
-                                      $ionicViewService, $cordovaGeolocation, CONSTANTS,services) {
+                                      $ionicLoading, $location, $ionicSideMenuDelegate, $ionicModal, LocationData, ChatMessages,
+                                      $ionicViewService, $cordovaGeolocation, CONSTANTS, services, popups) {
+        services.getRating(function (response) {
+            if (response.response_status == '1') {
+                $rootScope.feedback = response.response_data.rating;
+            }
+        })
         var formdata = new FormData();
         //Loading in
         $scope.showLoading = function () {
@@ -12,19 +17,15 @@ angular.module('starter')
         $scope.hideLoading = function () {
             $ionicLoading.hide();
         };
-
         $rootScope.userDetail = JSON.parse(window.localStorage.getItem("profile"));
         console.log(JSON.stringify($rootScope.userDetail))
         $rootScope.profile_pic = CONSTANTS.PROFILE_IMAGE_URL + $rootScope.userDetail.profile_pic;
-
-
         var mapOptions = {
             center: new google.maps.LatLng(LocationData.latitude, LocationData.longitude),
             zoom: 15,
             disableDefaultUI: true, // a way to quickly hide all controls
             mapTypeId: google.maps.MapTypeId.ROADMAP
         };
-
         $scope.map = new google.maps.Map(document.getElementById("map"), mapOptions);
         var options = {timeout: 10000, enableHighAccuracy: true};
         $cordovaGeolocation.getCurrentPosition(options).then(function (position) {
@@ -52,14 +53,33 @@ angular.module('starter')
             clearMap()
             if ($scope.availability) {
                 getMapMarkerAndCircle();
+                services.getNearbyCustomer({
+                    latitude: LocationData.latitude,
+                    longitude: LocationData.longitude,
+                    address: 'no address'
+                }, function (response) {
+                    if (response.response_status == '1') {
+                        var customers = response.response_data.customer;
+                        for (var i = 0; i < customers.length; i++) {
+                            var marker = new google.maps.Marker({
+                                map: $scope.map,
+                                // draggable:true,
+                                // animation: google.maps.Animation.DROP,
+                                position: new google.maps.LatLng(customers[i].latitude, customers[i].longitude),
+                                icon: {
+                                    url: 'img/map-marker.png',
+                                    size: new google.maps.Size(40, 40)
+                                }
+                            });
+                            addMarker(marker);
+                        }
+                    }
+                })
             }
         });
         //call logout
         var logoutRequest = function () {
-
-
         };
-
         $scope.availability = true;
         $scope.changeAvailability = function (available) {
             console.log(available);
@@ -161,23 +181,10 @@ angular.module('starter')
                 $scope.payload = NotificationFactory.payload;
                 $scope.openTnC();
             }
-
             //clear notifica
         }
-        
-        $scope.confirmLogout = function () {
-          services.logout(function (response) {
-            if (response.response_status == "1") {
-              window.localStorage.removeItem("porfile");
-              window.localStorage.removeItem("login");
-              window.localStorage.removeItem("sess_tok");
-              $ionicHistory.clearHistory();
-              $ionicHistory.clearCache();
-              $location.path('login');
-
-            } else {
-              $scope.showAlert(d.response_msg);
-            }
-          })
+        $rootScope.confirmLogout = function () {
+            console.log('logout clicked')
+            popups.confirmLogoutPopup();
         }
     });

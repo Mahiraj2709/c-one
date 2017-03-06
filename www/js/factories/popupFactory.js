@@ -21,15 +21,18 @@ angular.module('starter')
         function termAndConditionModal() {
         }
 
-        function newRequestPopup() {
-            return $ionicModal.fromTemplateUrl('views/dialog/new_request.html', {
+        function newRequestPopup(callback) {
+
+             $ionicModal.fromTemplateUrl('views/dialog/new_request.html', {
                 //scope: $scope,
                 animation: 'slide-in-up'
             }).then(function (modal) {
                 /*$scope.modal = modal;
                  modal.show();*/
-                modal.show();
+                 callback(modal)
+                  modal.show();
             });
+
         }
 
         function confirmLogoutPopup() {
@@ -45,7 +48,7 @@ angular.module('starter')
                             window.localStorage.removeItem("sess_tok");
                             $location.path('login');
                         } else {
-                            //$scope.showAlert(d.response_msg);
+                            showAlert(response.response_msg);
                         }
                     });
                 } else {
