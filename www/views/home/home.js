@@ -17,6 +17,7 @@ angular.module('starter')
         $scope.hideLoading = function () {
             $ionicLoading.hide();
         };
+
         $rootScope.userDetail = JSON.parse(window.localStorage.getItem("profile"));
         console.log(JSON.stringify($rootScope.userDetail))
         $rootScope.profile_pic = CONSTANTS.PROFILE_IMAGE_URL + $rootScope.userDetail.profile_pic;

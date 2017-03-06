@@ -1,5 +1,5 @@
 angular.module('starter')
-  .controller('AboutCtrl', function ($scope, $ionicPopup) {
+  .controller('AboutCtrl', function ($scope, $ionicPopup,$ionicModal) {
     // An alert dialog
     $scope.showAlert = function (message) {
       var alertPopup = $ionicPopup.alert({
@@ -40,6 +40,6 @@ angular.module('starter')
       cordova.InAppBrowser.open('https://www.instagram.com/cleanosaur/?hl=en', '_blank', 'location=yes');
     }
     $scope.visitOurWebsite = function () {
-      cordova.InAppBrowser.open('cleanosuarapp.onsisdev.info', '_blank', 'location=yes');
+      cordova.InAppBrowser.open('https://www.cleanosaur.com', '_blank', 'location=yes');
     }
   })

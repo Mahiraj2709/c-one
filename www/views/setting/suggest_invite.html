@@ -1,0 +1,17 @@
+<ion-view title="Suggest Invites">
+    <ion-nav-buttons side="left">
+        <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
+        </button>
+    </ion-nav-buttons>
+    <ion-content ng-controller="AboutCtrl">
+        <section class="bg-main">
+            <div class="main">
+                <ul class="list_section">
+                    <li ui-sref="contact_list"> Invite from phone Contacts </li>
+                    <li ng-click="facebookInvite()"> Invite from Facebook</li>
+                </ul>
+            </div>
+        </section>
+
+    </ion-content>
+</ion-view>

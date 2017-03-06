@@ -5,20 +5,20 @@
     </ion-nav-buttons>
     <ion-content>
         <aside class="setting_sec_figure_container">
-            <figure class="setting_pic"><img alt="" src="img/mark.jpg" height="70" width="70"></figure>
+            <figure class="setting_pic"><img alt="" ng-src="{{profile_pic}}" src="img/mark.jpg" height="70" width="70"></figure>
         </aside>
 
 
         <div class="layout_sec">
 
             <aside class="setting_sec">
-                <div class="half"><span class="full"> <strong>First Name </strong> </span> <span> Mark </span></div>
-                <div class="half"><span class="full"> <strong>Last Name</strong> </span> <span> Allan </span></div>
+                <div class="half"><span class="full"> <strong>First Name </strong> </span> <span> {{userDetail.first_name}} </span></div>
+                <div class="half"><span class="full"> <strong>Last Name</strong> </span> <span> {{userDetail.last_name}} </span></div>
             </aside>
             <aside class="setting_sec">
                 <ul class="setting_list">
-                    <li><span>Email</span> mark@gmail.com</li>
-                    <li><span>Mobile</span> 51651656516</li>
+                    <li><span>Email</span> {{userDetail.email}}</li>
+                    <li><span>Mobile</span> {{userDetail.mobile}}</li>
                 </ul>
             </aside>
 
@@ -46,8 +46,8 @@
 
 
             <ul class="list_section">
-                <li> Suggest Invites</li>
-                <li>Edit Notifications</li>
+                <li ui-sref="suggest_invite"> Suggest Invites</li>
+                <li ui-sref="edit_notification">Edit Notifications</li>
             </ul>
         </div>
     </ion-content>

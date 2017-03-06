@@ -32,7 +32,7 @@ angular.module('starter')
                 $scope.onWayTitle = 'I have arrived'
             } else $scope.onWayTitle = 'I am on the way'
             $scope.openChat = function () {
-                ChatMessages.messages = []
+                ChatMessages.mobileNumber = AppointmentData.appointment.mobile
                 services.getChatHistory(AppointmentData.appointment.app_appointment_id, function (response) {
                     if (response.response_status == '1') {
                         ChatMessages.pushChatHistory(response.response_data.chat)

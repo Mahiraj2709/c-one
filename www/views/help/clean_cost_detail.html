@@ -1,4 +1,4 @@
-<ion-view title="Clean and Cost review">
+<ion-view title="Select Issue">
     <ion-nav-buttons side="left">
         <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
         </button>
@@ -6,7 +6,7 @@
     <ion-content>
         <section class="bg-main">
             <div class="main">
-                <div class="clean_cost_reivew" ng-repeat="appointment in appointmentArray" ng-click="lauchNextPage(appointment)">
+                <div class="clean_cost_reivew">
                     <aside class="sugg_cont_list help">
                         <label class="last_clean"><strong>Last Clean</strong></label>
                         <img src="img/user-photo.png" ng-src="{{getProfileImage(appointment.customer_pic)}}" alt=""
@@ -17,7 +17,13 @@
                     <div class="map_field_sec">
                         <div id="googlMap" class="help_map" data-tap-disabled="true"></div>
                     </div>
-                    <p class="reort_issue"> Report an Issue with this clean <strong> Report an Issue </strong></p>
+                    <p class="reort_issue"> <strong> Report an Issue with this clean section</strong> </p>
+
+
+                    <ul class="list_section">
+                        <!--<li ng-repeat="title in titles"> Cleans and Cost Review </li>-->
+                        <li ng-repeat="help in helps" ng-click = "nextPage(help)"> {{help.name}} </li>
+                    </ul>
                 </div>
             </div>
         </section>

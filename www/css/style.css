@@ -103,7 +103,7 @@ input[type="text"],input[type="number"],input[type="password"],input[type="tel"]
 .profile-pic {background:#E8E8E8 none repeat scroll 0 0; border-radius: 50%; height: 70px; margin: 10px auto; padding: 2px; width: 70px; }
 .profile-pic img {border-radius: 50%; display: block; height: 70px; margin: 0 auto; max-width: 100%; width: 70px; }
 .user-detail { color:#666666; text-align:center; font-size:16px;}
-.ratings{width:100%; float:left; text-align:center; line-height:15px;}
+.ratings{width:100%; float:left; text-align:center; line-height:15px;margin: 10px 0 8px 0;}
 .ratings_mech{width:100%; float:left; text-align:center; line-height:15px;}
 .ratings span i{ color:#fabb0c;}
 .ratingYellow {color:#fabb0c}
@@ -192,7 +192,7 @@ input.footer_input:-moz-placeholder { font-size: 16px; color:#a9a9a9;}
 .smile{height: 45px;   text-align: center;    padding-top: 12px; }
 .on_way{position:relative; float:left; width:100%; margin:48px 0 0 0; background:#fff;}
 .on_way > img{ width:100%; height:auto;}
-.on_way_add_sec{ position:absolute; top:10px; left:0; width:100%; padding:10px 4%;}
+.on_way_add_sec{ position:absolute; top:10px; left:0; width:100%; padding: 4px 4% 10px 4%;}
 .on_way_add_sec > p{ text-align:center;}
 .map_sec_field{ position: relative;}
 .map_sec_field input[type="text"]{ padding:0 35px;}
@@ -279,7 +279,7 @@ input.footer_input:-moz-placeholder { font-size: 16px; color:#a9a9a9;}
 .setting_sec {border-bottom: 1px solid #d8d8d8; float: left; margin-bottom: 10px; padding-bottom: 10px; text-align: left; width: 100%; }
 .setting_sec_figure_container {background: #ff2f92 none repeat scroll 0 0; float: left; height: 60px; margin-bottom: 40px; margin-top: 48px;  width: 100%;}
 .setting_pic{background: #e8e8e8 none repeat scroll 0 0; border-radius: 50%; height: 70px; margin:20px auto 0 auto;width: 70px; }
-.setting_pic img {border-radius: 50%; display: block; height: auto; margin: 0 auto; max-width: 100%; width: 70px;}
+.setting_pic img {border-radius: 50%; display: block; height: 65px; margin: 0 auto; max-width: 100%; width: 65px;}
 .setting_sec strong{ color:#000;}
 .setting_list li{ margin:6px 0; width:100%; float:left;}
 .setting_list li span{  margin-right:10px; display:inline-block; font-weight:600; color:#000;}

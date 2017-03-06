@@ -28,7 +28,9 @@
     "cordova-plugin-inappbrowser",
     "cordova-plugin-media-capture",
     "cordova-plugin-camera",
-    "cordova-plugin-file-transfer"
+    "cordova-plugin-file-transfer",
+    "cordova-plugin-contacts",
+    "cordova-plugin-facebook4"
   ],
   "cordovaPlatforms": []
 }

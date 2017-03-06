@@ -10,7 +10,7 @@ angular.module('starter')
             disableDefaultUI: true, // a way to quickly hide all controls
             mapTypeId: google.maps.MapTypeId.ROADMAP
         };
-        $scope.map = new google.maps.Map(document.getElementById("googlMap"), mapOptions);
+        $scope.map = new google.maps.Map(document.getElementById("googleMap"), mapOptions);
 
         services.getHistoryDetail($stateParams.app_appointment_id,function (resposne) {
                 if(resposne.response_status == '1') {

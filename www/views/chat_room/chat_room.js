@@ -2,9 +2,7 @@
  * Created by Mahiraj Singh on 1/5/2017.
  */
 angular.module('starter')
-
-    .controller('ChatCtrl', function ($scope,$rootScope, $timeout, $ionicScrollDelegate,$stateParams,services, ChatMessages,CONSTANTS) {
-
+    .controller('ChatCtrl', function ($scope, $rootScope, $timeout, $ionicScrollDelegate, $stateParams, services, ChatMessages, CONSTANTS) {
         $scope.$on('$ionicView.beforeEnter', function (event, viewData) {
             viewData.enableBack = true;
         });
@@ -13,30 +11,26 @@ angular.module('starter')
         $scope.hideTime = true;
         var alternate,
             isIOS = ionic.Platform.isWebView() && ionic.Platform.isIOS();
-
         $scope.sendMessage = function () {
             //alternate = !alternate;
             console.log('called')
-          console.log(ChatMessages.messages)
-          var d = new Date();
+            console.log(ChatMessages.messages)
+            var d = new Date();
             d = d.toLocaleTimeString().replace(/:\d+ /, ' ');
 //            ChatService.sendMessage($scope.data.message,$stateParams.app_appointment_id);
-            services.sendMessage($scope.data.message,$stateParams.app_appointment_id);
-
+            services.sendMessage($scope.data.message, $stateParams.app_appointment_id);
             ChatMessages.pushChat({
                 userType: '1',
                 text: $scope.data.message,
                 profile_pic: $rootScope.profile_pic,
-                fname:$rootScope.userDetail.first_name,
-                lname:$rootScope.userDetail.last_name,
-                created_dt:'',
+                fname: $rootScope.userDetail.first_name,
+                lname: $rootScope.userDetail.last_name,
+                created_dt: '',
                 time: d
             });
-
             delete $scope.data.message;
             $ionicScrollDelegate.scrollBottom(true);
             //console.log($scope.messages)
-
         };
         $scope.inputUp = function () {
             if (isIOS) $scope.data.keyboardHeight = 216;
@@ -49,55 +43,28 @@ angular.module('starter')
             $ionicScrollDelegate.resize();
         };
         $scope.closeKeyboard = function () {
-             cordova.plugins.Keyboard.close();
+            cordova.plugins.Keyboard.close();
         };
         $scope.data = {};
         $scope.myId = '12345';
-        $scope.messages = ChatMessages.messages;
-
-        /*$scope.$on('cloud:push:notification', function (event, data) {
-            var msg = data.message;
-            //$scope.showAlert(msg.title + ': ' + msg.text);
-            console.log(msg);
-            // When button is clicked, the popup will be shown...
-            if (msg.payload != undefined) {
-                pushMessage(msg.payload.response_data.chat[0]);
-                //pushMessage(msg.payload.response_data.chat[0]);
-                if ($scope.payload == undefined) {
-                    $scope.payload = msg.payload;
-                    //$scope.openTnC();
-                } else if ($scope.payload.response_data.chat[0].app_appointment_id != msg.payload.response_data.chat[0].app_appointment_id) {
-                    //if(msg.payload.)
-                    $scope.payload = msg.payload;
-                    if(msg.paload.action != undefined && msg.paload.action == '13') {
-                        pushMessage(msg.payload.response_data.chat[0]);
+        $scope.messages = $rootScope.messages;
+        $scope.CallCustomer = function () {
+            var number = ChatMessages.mobileNumber;
+            if (number == undefined) {
+                for(var i=0; i< $rootScope.messages.length;i++) {
+                    if($rootScope.messages[i].userType == 2) {
+                        number = $rootScope.messages[i].mobile; break;
                     }
-
-                    //$scope.openTnC();
                 }
             }
-        });*/
-
-        //listen to the notification
-        /*$scope.$on('cloud:push:notification', function (event, data) {
-            var msg = data.message;
-            //$scope.showAlert(msg.title + ': ' + msg.text);
-            console.log(msg);
-            // When button is clicked, the popup will be shown...
-            if (msg.payload != undefined) {
-                if ($scope.payload == undefined) {
-                    $scope.payload = msg.payload;
-                    $scope.openTnC();
-                } else if ($scope.payload.app_appointment_id != msg.payload.app_appointment_id) {
-                    //if(msg.payload.)
-                    $scope.payload = msg.payload;
-                    $scope.openTnC();
-                }
-            }
-        });*/
-
+            window.plugins.CallNumber.callNumber(function () {
+                //success logic goes here
+            }, function () {
+                //error logic goes here
+            }, number)
+        };
     })
-    .directive('input', function($timeout) {
+    .directive('input', function ($timeout) {
         return {
             restrict: 'E',
             scope: {
@@ -106,26 +73,26 @@ angular.module('starter')
                 'onFocus': '&',
                 'onBlur': '&'
             },
-            link: function(scope, element, attr) {
-                element.bind('focus', function(e) {
+            link: function (scope, element, attr) {
+                element.bind('focus', function (e) {
                     if (scope.onFocus) {
-                        $timeout(function() {
+                        $timeout(function () {
                             scope.onFocus();
                         });
                     }
                 });
-                element.bind('blur', function(e) {
+                element.bind('blur', function (e) {
                     if (scope.onBlur) {
-                        $timeout(function() {
+                        $timeout(function () {
                             scope.onBlur();
                         });
                     }
                 });
-                element.bind('keydown', function(e) {
+                element.bind('keydown', function (e) {
                     if (e.which == 13) {
                         if (scope.returnClose) element[0].blur();
                         if (scope.onReturn) {
-                            $timeout(function() {
+                            $timeout(function () {
                                 scope.onReturn();
                             });
                         }
@@ -133,58 +100,59 @@ angular.module('starter')
                 });
             }
         }
-    }).factory('ChatMessages',function ($http,CONSTANTS,$rootScope) {
+    }).factory('ChatMessages', function ($http, CONSTANTS, $rootScope) {
+    function pushMyChat(chat) {
+        $rootScope.messages.push(chat)
+    }
 
-        var messages = [];
+    function pushNotificationChat(chat) {
+        console.log(chat)
+        console.log(this.messages)
+        $rootScope.messages.push({
+            userType: '2',
+            text: chat.message,
+            profile_pic: CONSTANTS.CUSTOMER_PROFILE_IMAGE_URL + chat.cleaner_profile_pic,
+            fname: chat.cleaner_fname,
+            lname: chat.cleaner_lname,
+            created_dt: chat.created_dt,
+            mobile: chat.cleaner_mobile,
+            time: '323'
+        })
+        $rootScope.$apply()
+    }
 
-        function pushMyChat(chat) {
-            this.messages.push(chat)
-        }
-
-        function pushNotificationChat(chat) {
-            console.log(chat)
-            console.log(this.messages)
-            this.messages.push({
-              userType: '2',
-              text: chat.message,
-              profile_pic: CONSTANTS.CUSTOMER_PROFILE_IMAGE_URL + chat.cleaner_profile_pic,
-              fname: chat.cleaner_fname,
-              lname: chat.cleaner_lname,
-              created_dt: chat.created_dt,
-              time: '323'
-            })
-
-        }
-
-        function pushChatHistory(chatArray) {
-
-            for (var i = 0; i < chatArray.length; i++){
-                var userType = '1'
-                var profileImage = $rootScope.profile_pic
-                var fName = chatArray[i].customer_fname;
-                var lName = chatArray[i].customer_lname;
-                if(chatArray[i].sender_user_type == '2'){
-                    userType = '2'
-                    profileImage = CONSTANTS.CUSTOMER_PROFILE_IMAGE_URL + chatArray[i].customer_profile_pic
-                    fName = chatArray[i].customer_fname;
-                    lName = chatArray[i].customer_lname;
-                }
-                this.messages.push({
-                    userType: userType,
-                    text: chatArray[i].chat_message,
-                    profile_pic: profileImage,
-                    fname: fName,
-                    lname: lName,
-                    created_dt: chatArray[i].created_dt,
-                    time: '323'
-                })
+    function pushChatHistory(chatArray) {
+        //reverser the array
+        chatArray.reverse()
+        for (var i = 0; i < chatArray.length; i++) {
+            var userType = '1'
+            var profileImage = $rootScope.profile_pic
+            var fName = chatArray[i].customer_fname;
+            var lName = chatArray[i].customer_lname;
+            var mobile = undefined
+            if (chatArray[i].sender_user_type == '2') {
+                userType = '2'
+                profileImage = CONSTANTS.CUSTOMER_PROFILE_IMAGE_URL + chatArray[i].customer_profile_pic
+                fName = chatArray[i].customer_fname;
+                lName = chatArray[i].customer_lname;
+                mobile = chatArray[i].customer_mobile
             }
+            $rootScope.messages.push({
+                userType: userType,
+                text: chatArray[i].chat_message,
+                profile_pic: profileImage,
+                fname: fName,
+                lname: lName,
+                created_dt: chatArray[i].created_dt,
+                mobile:mobile,
+                time: '323'
+            })
         }
-        return {
-            messages: messages,
-            pushChat: pushMyChat,
-            pushNotificationChat:pushNotificationChat,
-            pushChatHistory:pushChatHistory
-        };
-    })
-;
+    }
+    return {
+        mobileNumber: undefined,
+        pushChat: pushMyChat,
+        pushNotificationChat: pushNotificationChat,
+        pushChatHistory: pushChatHistory
+    };
+});

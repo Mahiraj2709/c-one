@@ -123,11 +123,10 @@ angular.module('starter',
                 url: '/login',
                 templateUrl: 'views/login/login.html'
             })
-
             .state('reset_password', {
                 url: '/reset_password',
                 templateUrl: 'views/reset_password/reset_password.html',
-                controller:'ResetPasswordCtrl'
+                controller: 'ResetPasswordCtrl'
             })
             //sign up router
             .state("sign_up", {
@@ -188,7 +187,7 @@ angular.module('starter',
                 templateUrl: 'views/chat_room/chat_room.html',
                 controller: 'ChatCtrl'
             })
-                //your bill
+            //your bill
             .state('bill', {
                 url: '/bill',
                 templateUrl: 'views/bill/bill.html',
@@ -240,18 +239,46 @@ angular.module('starter',
                 templateUrl: 'views/help/content_page.html',
                 controller: 'ContentCtrl'
             })
+            .state('clean_cost_review', {
+                url: '/clean_cost_review',
+                templateUrl: 'views/help/clean_cost_review.html',
+                controller: 'CleanReviewCtrl'
+            })
+
+            .state('clean_cost_review_detail', {
+                url: '/clean_cost_review_detail',
+                templateUrl: 'views/help/clean_cost_detail.html',
+                controller: 'CleanReviewDetailCtrl'
+            })
+
             //work as cleaner
             .state('work_as_customer', {
                 url: '/work_as_customer',
                 templateUrl: 'views/sign_as_customer/become_a_customer.html',
                 controller: 'SignAsCustomer'
             })
+            //work as cleaner
+            .state('suggest_invite', {
+                url: '/suggest_invite',
+                templateUrl: 'views/setting/suggest_invite.html',
+                controller: 'SuggestInvite'
+            })
+            .state('contact_list', {
+                url: '/contact_list',
+                templateUrl: 'views/setting/contact_list.html',
+                controller: 'ContactCtrl'
+            })
+            .state('edit_notification', {
+                url: '/edit_notification',
+                templateUrl: 'views/setting/edit_notification.html',
+                controller: 'SettingCtrl'
+            })
 
             //settings
             .state('setting', {
                 url: '/setting',
                 templateUrl: 'views/setting/setting.html',
-                //controller: 'HistoryCtrl'
+                controller: 'SettingCtrl'
             })
 
             // Each tab has its own nav history stack:

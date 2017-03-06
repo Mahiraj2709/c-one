@@ -1,7 +1,7 @@
 angular.module('starter')
     .controller('SplashCtrl', function ($scope, $timeout, $ionicSideMenuDelegate, $location, NotificationFactory,
                                         $ionicPush, LocationAlert, $ionicPlatform, LocationData, $rootScope,
-                                        $cordovaGeolocation, $ionicLoading, popups, AppointmentData,
+                                        $cordovaGeolocation, $ionicLoading, popups, AppointmentData,$ionicModal,
                                         $ionicHistory, services, ChatMessages) {
         $ionicSideMenuDelegate.canDragContent(false);
         $ionicPush.register().then(function (t) {
@@ -95,7 +95,8 @@ angular.module('starter')
                             console.log($ionicHistory.currentView())
                             if ($ionicHistory.currentView().stateName != 'chat_room') {
                                 //load all messages from the service
-                              ChatMessages.messages = []
+                                $rootScope.messages = []
+                                ChatMessages.mobileNumber = undefined
                               services.getChatHistory(msg.payload.response_data.chat[0].app_appointment_id, function (response) {
                                     //console.log(JSON.stringify(msg))
                                     //console.log(JSON.stringify(response))
@@ -113,6 +114,25 @@ angular.module('starter')
                 }
             }
         });
+
+/*
+
+        //modal for chat
+        $ionicModal.fromTemplateUrl('views/chat_room/chat_room.html', {
+            scope: $rootScope,
+            animation: 'slide-in-up'
+        }).then(function(modal) {
+            $rootScope.chat_modal = modal;
+        });
+        $rootScope.openModal = function() {
+            $rootScope.chat_modal.show();
+        };
+        $rootScope.closeModal = function() {
+            $rootScope.chat_modal.hide();
+        };
+*/
+
+        $rootScope.messages = [];
     });
 /*
  if ($scope.payload == undefined) {
