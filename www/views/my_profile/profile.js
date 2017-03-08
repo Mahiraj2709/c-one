@@ -423,7 +423,6 @@ angular.module('starter')
             })
         }
         $scope.closeVideoPlayer = function () {
-
             $scope.modal.remove();
         }
     });

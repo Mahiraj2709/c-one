@@ -10,7 +10,6 @@ angular.module('starter')
 
 
         $scope.trackAppointment = function (appointmentId) {
-
             //track the current appointmnt id
             ChangeAvailability.getCustomerProfile(appointmentId,function (customerData) {
                 AppointmentData.appointment = customerData;

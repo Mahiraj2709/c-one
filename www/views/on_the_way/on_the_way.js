@@ -2,7 +2,7 @@
  * Created by Mahiraj Singh on 1/20/2017.
  */
 angular.module('starter')
-    .controller('OnTheWayCtrl', function ($scope, popups, AppointmentData, $ionicPopup, LocationData, CONSTANTS, ChatMessages, OnTheWayService, services, $location) {
+    .controller('OnTheWayCtrl', function ($scope,$rootScope, popups, AppointmentData, $ionicPopup, LocationData, CONSTANTS, ChatMessages, OnTheWayService, services, $location) {
 
         services.getCustomerFeedback(AppointmentData.appointment.customer_id, function (response) {
                 if (response.response_status == '1') {
@@ -15,6 +15,7 @@ angular.module('starter')
             var markerB = new google.maps.MarkerImage('img/mapcar-icon.png',
                 new google.maps.Size(40, 40));
             $scope.appointmentDetail = AppointmentData.appointment
+            $rootScope.messages = []
             OnTheWayService.getDistanceMatrix(new google.maps.LatLng(LocationData.latitude, LocationData.longitude),
                 new google.maps.LatLng(AppointmentData.appointment.customer_latitude, AppointmentData.appointment.customer_longitude),
                 function (response) {
@@ -166,6 +167,20 @@ angular.module('starter')
                 navigator.geolocation.clearWatch(watchID);
 
                 if (arrived) {
+
+
+                    services.payBill({
+                            app_appointment_id:AppointmentData.appointment.app_appointment_id,
+                        confirm_price:AppointmentData.appointment.confirm_price
+                    }, function (response) {
+                        if (response.response_status == '1') {
+                            $location.url('/bill');
+                        }
+                        /*
+                         $ionicHistory.clearCache().then(function () {
+                         })
+                         */
+                    })
                     services.completeRide(AppointmentData.appointment, function (response) {
                         if (response.response_status == '1') {
                             $location.url('/bill');

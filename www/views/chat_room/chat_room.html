@@ -23,7 +23,7 @@
 
             <aside class="chat_footer">
                 <div class="footer_txt_sec">
-                    <div class="fifteen send"><img src="img/smile.png" width="20" height="20" alt=""></div>
+                    <div class="fifteen send"><img src="img/smile.png" ng-hide="true" width="20" height="20" alt=""></div>
                     <div class="seventy"><input type="text" placeholder="Type your message" class="footer_input"
                                                 on-return="sendMessage();closeKeyboard()"
                                                 ng-model="data.message" on-focus="inputUp()" on-blur="inputDown()">

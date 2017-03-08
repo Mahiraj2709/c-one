@@ -7,7 +7,8 @@
 
         <section class="bg-main">
             <div class="main">
-                <p class="his-request"><span class="btns black_btn popup_rwr_btn"> Request ID - {{historyDetail.app_appointment_id}} </span></p>
+                <p class="his-request"><span class="btns black_btn popup_rwr_btn"> Request ID - {{historyDetail.app_appointment_id}} </span>
+                </p>
                 <span> <small> {{historyDetail.appointment_date | date}} </small> </span>
 
                 <aside class="his-req-price">
@@ -15,12 +16,13 @@
                     <span>Clean Time - {{historyDetail.duration}} Mins </span>
                 </aside>
                 <div class="map_field_sec">
-                <div id="googleMap" data-tap-disabled="true"></div>
+                    <div id="serviceDetailMap" data-tap-disabled="true"></div>
                 </div>
 
                 <aside class="his-req-add">
-                   <div class="half"><p><strong> Location </strong>{{historyDetail.customer_address}} </p> </div>
-                    <div class="half"><p style="text-align: right"><strong> Your Need </strong> {{historyDetail.property_type_id | property}} </p> </div>
+                    <div class="half"><p><strong> Location </strong>{{historyDetail.customer_address}} </p></div>
+                    <div class="half"><p style="text-align: right"><strong> Your Need </strong>
+                        {{historyDetail.property_type_id | property}} </p></div>
 
 
                 </aside>
@@ -35,7 +37,8 @@
                 <aside class="his-req-add">
                     <p style="text-align: center; padding-bottom: 12px">{{historyDetail.review}}</p>
                 </aside>
-                <div class="full" ng-click="generateBill()" ng-hide="true"><span class="btns pink_btn"> Add Review </span></div>
+                <div class="full" ng-click="generateBill()" ng-hide="true"><span
+                        class="btns pink_btn"> Add Review </span></div>
             </div>
         </section>
 

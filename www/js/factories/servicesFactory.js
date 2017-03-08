@@ -467,6 +467,40 @@ angular.module('starter')
                 });
         }
 
+        function payBill(userData,callback) {
+            $ionicLoading.show({
+                template: 'Loading...'
+            });
+            var formdata = new FormData();
+            formdata.append("device_type", CONSTANTS.deviceType());
+            formdata.append("language", "en");
+            formdata.append('session_token', window.localStorage.getItem("sess_tok"));
+            formdata.append("app_appointment_id", userData.app_appointment_id);
+            formdata.append("confirm_price", userData.confirm_price);
+
+            var request = {
+                method: 'POST',
+                url: CONSTANTS.BASE_URL + 'paybill',
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                },
+                data: formdata,
+                headers: {
+                    'Content-Type': undefined
+                }
+            };
+            // SEND THE FILES.
+            $http(request)
+                .success(function (d) {
+                    $ionicLoading.hide();
+                    console.log(d)
+                    callback(d)
+                })
+                .error(function (err) {
+                    $ionicLoading.hide();
+                });
+        }
+
         return {
             logout: logout,
             getNearbyCustomer:getNearbyCustomer,
@@ -481,6 +515,7 @@ angular.module('starter')
             sendfeedback:sendfeedback,
             getRating:getRating,
             getCustomerFeedback:getCustomerFeedback,
-            socialLogin:socialLogin
+            socialLogin:socialLogin,
+            payBill:payBill
         }
     });
