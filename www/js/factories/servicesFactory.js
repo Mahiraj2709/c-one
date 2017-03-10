@@ -235,7 +235,7 @@ angular.module('starter')
             formdata.append('session_token', window.localStorage.getItem("sess_tok"));
             formdata.append("language", "en");
             formdata.append("app_appointment_id", appointment_data.app_appointment_id);
-            formdata.append("request_date", appointment_data.appointment_date);
+            formdata.append("request_date", new Date());
             formdata.append("cleaner_timezone", appointment_data.appointment_timezone);
             formdata.append("customer_address", appointment_data.customer_address);
             formdata.append("customer_latitude", appointment_data.customer_latitude);
@@ -500,7 +500,29 @@ angular.module('starter')
                     $ionicLoading.hide();
                 });
         }
+        function getInstagramData(accessToken,callback) {
+            $ionicLoading.show({
+                template: 'Loading...'
+            });
 
+            var request = {
+                method: 'GET',
+                url: 'https://api.instagram.com/v1/users/self/?access_token='+accessToken,
+                headers: {
+                    'Content-Type': undefined
+                }
+            };
+            // SEND THE FILES.
+            $http(request)
+                .success(function (d) {
+                    $ionicLoading.hide();
+                    console.log(d)
+                    callback(d)
+                })
+                .error(function (err) {
+                    $ionicLoading.hide();
+                });
+        }
         return {
             logout: logout,
             getNearbyCustomer:getNearbyCustomer,
@@ -516,6 +538,7 @@ angular.module('starter')
             getRating:getRating,
             getCustomerFeedback:getCustomerFeedback,
             socialLogin:socialLogin,
-            payBill:payBill
+            payBill:payBill,
+            getInstagramData:getInstagramData
         }
     });

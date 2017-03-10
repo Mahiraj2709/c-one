@@ -96,10 +96,7 @@ angular.module('starter')
         //twitter login 
         //twitter(string consumerKey, string consumerSecretKey, object options);
         $scope.twitterLogin = function () {
-            if (1 == 1) {
-                $scope.showAlert("Comming soon!");
-                return;
-            }
+
             $cordovaOauth.twitter("F10TwLSYjuahegNC3T10FB75N", "paCiWQE8TXO9n1gq3jLFIgAmyJP1fj1BtaQsdCuAaAJpyVaZnY").then(function (result) {
                 $scope.showAlert(JSON.stringify(result));
 
@@ -120,10 +117,7 @@ angular.module('starter')
         };
         //instagram login
         $scope.instaLogin = function () {
-            if (1 == 1) {
-                $scope.showAlert("Comming soon!");
-                return;
-            }
+
             $cordovaOauth.instagram("06aa6a6fa2a1492d90cec199676c5420", ["basic", "comments", "relationships"]).then(function (result) {
                 $scope.showAlert(JSON.stringify(result));
             }, function (error) {

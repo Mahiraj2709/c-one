@@ -167,20 +167,6 @@ angular.module('starter')
                 navigator.geolocation.clearWatch(watchID);
 
                 if (arrived) {
-
-
-                    services.payBill({
-                            app_appointment_id:AppointmentData.appointment.app_appointment_id,
-                        confirm_price:AppointmentData.appointment.confirm_price
-                    }, function (response) {
-                        if (response.response_status == '1') {
-                            $location.url('/bill');
-                        }
-                        /*
-                         $ionicHistory.clearCache().then(function () {
-                         })
-                         */
-                    })
                     services.completeRide(AppointmentData.appointment, function (response) {
                         if (response.response_status == '1') {
                             $location.url('/bill');
@@ -219,7 +205,7 @@ angular.module('starter')
         formdata.append('session_token', window.localStorage.getItem("sess_tok"));
         formdata.append("language", "en");
         formdata.append("app_appointment_id", appointment_data.app_appointment_id);
-        formdata.append("request_date", new Date().toISOString().split('T')[0]);
+        formdata.append("request_date", new Date());
         formdata.append("cleaner_timezone", appointment_data.appointment_timezone);
         formdata.append("distance", "34");
         formdata.append("cleaner_address", appointment_data.customer_address);

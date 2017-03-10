@@ -12,6 +12,7 @@
   "dependencies": {
     "ionic-service-core": "^0.1.10",
     "ionic-service-push": "^0.1.13",
-    "ionic-platform-web-client": "^0.7.1"
+    "ionic-platform-web-client": "^0.7.1",
+    "ng-twitter-api": "^0.1.5"
   }
 }

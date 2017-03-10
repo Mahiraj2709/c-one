@@ -124,8 +124,8 @@ input[type="text"],input[type="number"],input[type="password"],input[type="tel"]
 .request_sec ul li span{ display:block; font-size:13px;}
 .profile_about{width:100%; float:left; border-bottom:1px solid #d8d8d8; border-top:1px solid #d8d8d8; text-align:left; }
 .photos_sec{width:100%; float:left;}
-.message_popup{ max-width:100%; margin:auto; position:absolute; top:0; right:0; bottom:0; left:0; background:#fff; height:200px;border-radius:4px 4px 0 0;}
 .appointment_popup{ max-width:100%; margin:auto; position:absolute; top:0; right:0; bottom:0; left:0; background:#fff; height:394px;border-radius:4px 4px 0 0;}
+.message_popup{ max-width:100%; margin:auto; position:absolute; top:0; right:0; bottom:0; left:0; background:#fff; height:200px;border-radius:4px 4px 0 0;}
 .message_popup_head{ background:#ff2f92; height:45px; color:#fff; text-align:center; position:relative;border-radius:4px 4px 0 0; line-height:45px; font-size:18px; }
 .message_popup_head .cross_popup {color: #fff; font-size: 26px; position: absolute; right: 8px; top: 2px; cursor:pointer;}
 .message_pop_btn_set{ margin:25px auto; width:80%;}

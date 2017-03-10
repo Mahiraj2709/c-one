@@ -11,7 +11,8 @@ angular.module('starter',
         'starter.services',
         'ngCordova',
         'ngCordovaOauth',
-        'ionic.cloud'
+        'ionic.cloud',
+        'ngTwitter'
     ]
 )
     .run(function ($ionicPlatform, $location, $ionicPopup, $ionicHistory) {
